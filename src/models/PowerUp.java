@@ -3,6 +3,7 @@ package models;
 public abstract class PowerUp {
 	
 	protected int[] position;
+	protected PowerUps type;
 	
 	public int[] getPosition() {
 		return position;
@@ -17,6 +18,10 @@ public abstract class PowerUp {
 		}
 		
 		this.position = position;
+	}
+	
+	public void getType() {
+		return type;
 	}
 	
 	public abstract void onUse(Player player);
