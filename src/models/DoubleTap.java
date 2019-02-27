@@ -4,7 +4,7 @@ public class DoubleTap extends PowerUp{
 
 	@Override
 	public void onUse(Player player) {
-		
+		player.setCurrentPowerUp(this);
 	}
 
 }
