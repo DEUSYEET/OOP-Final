@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package models;
 
 public abstract class PowerUp {
@@ -22,3 +23,14 @@ public abstract class PowerUp {
 	public abstract void onUse(Player player);
 
 }
+=======
+package models;
+
+public abstract class PowerUp {
+	
+	protected int[] position;
+	
+	public abstract void onUse(Player player);
+
+}
+>>>>>>> 252294cfe31356878ceb684437eed40ed23b9f97
