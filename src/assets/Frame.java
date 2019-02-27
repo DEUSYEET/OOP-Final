@@ -6,6 +6,9 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
+
 public class Frame {
 	private static BufferedImage sheet=null;
 	private static final int size = 32;
@@ -20,15 +23,15 @@ public class Frame {
 
         return sheet;
     }
-	public static BufferedImage getSprite(int index) {
+	public static Image getSprite(int index) {
 		
 		if (sheet == null) {
 			loadSprite("Null");
 		}
-		BufferedImage sub = sheet.getSubimage(0,size*index,size,size);
+		BufferedImage sub = sheet.getSubimage(0,size*(index/2),size,size);
+		Image sprite = SwingFXUtils.toFXImage(sub, null);
 		
-		
-		return  sub;
+		return  sprite;
 	}
     
     
