@@ -1,5 +1,7 @@
 package models;
 
+import enums.PowerUps;
+
 public class Freeze extends PowerUp{
 
 	public Freeze(int x, int y) {

@@ -1,5 +1,7 @@
 package models;
 
+import enums.PowerUps;
+
 public class LightSpeed extends PowerUp{
 	
 	public LightSpeed(int x, int y) {

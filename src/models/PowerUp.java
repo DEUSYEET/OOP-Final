@@ -1,5 +1,7 @@
 package models;
 
+import enums.PowerUps;
+
 public abstract class PowerUp {
 	
 	protected int[] position;
@@ -20,7 +22,7 @@ public abstract class PowerUp {
 		this.position = position;
 	}
 	
-	public void getType() {
+	public PowerUps getType() {
 		return type;
 	}
 	

@@ -1,5 +1,7 @@
 package models;
 
+import enums.PowerUps;
+
 public class ExplosiveShot extends PowerUp{
 
 	public ExplosiveShot(int x, int y) {

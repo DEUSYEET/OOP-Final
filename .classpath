@@ -1,16 +1,6 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="build.fxbuild"/>
-	<classpathentry kind="lib" path="src/application/Main.java"/>
-	<classpathentry kind="lib" path="src/application/application.css"/>
-	<classpathentry kind="output" path="bin"/>
-</classpath>
-=======
-<?xml version="1.0" encoding="UTF-8"?>
-<classpath>
+	<classpathentry excluding="application/" kind="src" path="src"/>
 	<classpathentry kind="lib" path="build.fxbuild"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
->>>>>>> 879f815da569d318dfb637a30fe5bd8fc7e11bcf

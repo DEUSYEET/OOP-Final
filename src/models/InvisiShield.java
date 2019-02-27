@@ -1,5 +1,7 @@
 package models;
 
+import enums.PowerUps;
+
 public class InvisiShield extends PowerUp{
 
 	public InvisiShield(int x, int y) {

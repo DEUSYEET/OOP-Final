@@ -1,5 +1,7 @@
 package models;
 
+import enums.PowerUps;
+
 public class DoubleTap extends PowerUp{
 
 	public DoubleTap(int x, int y) {
