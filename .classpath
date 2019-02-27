@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry excluding="application/" kind="src" path="src"/>
-	<classpathentry kind="lib" path="build.fxbuild"/>
+	<classpathentry exported="true" kind="lib" path="build.fxbuild"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
