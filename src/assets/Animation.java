@@ -16,9 +16,10 @@ public class Animation {
 
 	private void loadFrames(String file) {
 		Frame.loadSprite(file);
-		for (int i = 0; i<frameCount-1; i++) {
-			frames[i] = Frame.getSprite(i);
+		for (int i = 1; i<frameCount; i++) {
+			frames[i-1] = Frame.getSprite(i);
 		}
+		frames[7] = Frame.getSprite(9);
 	}
 
 	public Image[] getFrames() {

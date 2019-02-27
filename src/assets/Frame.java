@@ -18,7 +18,11 @@ public class Frame {
         try {
             sheet = ImageIO.read(new File("assets/" + file + ".png"));
         } catch (IOException e) {
-            e.printStackTrace();
+        	try {
+				sheet = ImageIO.read(new File("assets/Null.png"));
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
         }
 
         return sheet;
