@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package models;
 
 public class InvisiShield extends PowerUp{
@@ -9,15 +8,3 @@ public class InvisiShield extends PowerUp{
 	}
 
 }
-=======
-package models;
-
-public class InvisiShield extends PowerUp{
-
-	@Override
-	public void onUse(Player player) {
-		
-	}
-
-}
->>>>>>> 252294cfe31356878ceb684437eed40ed23b9f97

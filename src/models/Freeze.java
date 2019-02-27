@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package models;
 
 public class Freeze extends PowerUp{
@@ -9,16 +8,3 @@ public class Freeze extends PowerUp{
 	}
 
 }
-=======
-package models;
-
-public class Freeze extends PowerUp{
-
-	@Override
-	public void onUse(Player player)) {
-		
-		
-	}
-
-}
->>>>>>> 252294cfe31356878ceb684437eed40ed23b9f97
