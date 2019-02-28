@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
 	BorderPane root;
-	Sprite s = new Sprite(100, 100, 32, 32, "Player", "idle");
+	Sprite s = new Sprite(100, 100, "Player", "idle");
 	double t = 0;
 
 	@Override
@@ -21,6 +21,7 @@ public class Main extends Application {
 
 			root = new BorderPane();
 			Scene scene = new Scene(root, 400, 400);
+		
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
 			root.getChildren().add(s);

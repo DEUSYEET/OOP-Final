@@ -8,7 +8,7 @@ class Sprite extends ImageView{
 	final String type;
 	Animation animation;
 	
-	Sprite(int x, int y, int w, int h, String type, String SpriteFile) {
+	Sprite(int x, int y, String type, String SpriteFile) {
 		super();
 		this.type = type;
 		animation = new Animation(SpriteFile);
