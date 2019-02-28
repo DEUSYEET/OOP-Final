@@ -27,12 +27,34 @@ public class Main extends Application {
 
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			
+			controls(scene);
+			
+			
+			
 
 			timer.start();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void controls(Scene scene) {
+		scene.setOnKeyPressed(e -> {
+			switch (e.getCode()) {
+			case A:
+				s.moveLeft();
+				break;
+			case D:
+				s.moveRight();
+				break;
+			case SPACE:
+				break;
+			default:
+				break;
+			}
+		});		
 	}
 
 	public static void main(String[] args) {
