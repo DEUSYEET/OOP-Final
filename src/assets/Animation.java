@@ -19,7 +19,7 @@ public class Animation {
 		for (int i = 1; i<frameCount; i++) {
 			frames[i-1] = Frame.getSprite(i);
 		}
-		frames[7] = Frame.getSprite(9);
+		frames[7] = Frame.getSprite(8);
 	}
 
 	public Image[] getFrames() {

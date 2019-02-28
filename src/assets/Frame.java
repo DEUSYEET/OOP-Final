@@ -32,7 +32,7 @@ public class Frame {
 		if (sheet == null) {
 			loadSprite("Null");
 		}
-		BufferedImage sub = sheet.getSubimage(0,size*(index/2),size,size);
+		BufferedImage sub = sheet.getSubimage(0,size*(index-1),size,size);
 		Image sprite = SwingFXUtils.toFXImage(sub, null);
 		
 		return  sprite;
