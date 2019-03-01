@@ -9,7 +9,15 @@ public class Player {
 	private int[] position;
 	private boolean isAlive;
 
-	public Player() {
+	public Player(int playerNumber) {
+		
+		setPlayerNumber(playerNumber);
+		setLives(3);
+		setCurrentPowerUp(null);
+		setScore(0);
+		int[] pos = {0,0};
+		setPosition(pos);
+		setAlive(true);
 
 	}
 
