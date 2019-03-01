@@ -1,64 +1,89 @@
+
 package application;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 public class Main extends Application {
-	private Label bulb = new Label();
-	private boolean isOn = false;
-	private final String ON = "-fx-background-color: firebrick";
-	private final String OFF = "-fx-background-color: dodgerblue";
+
+	BorderPane root;
+	Sprite s = new Sprite(100, 100, "Player", "test");
+	double t = 0;
 
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 
-			VBox root = new VBox();
-			root.setAlignment(Pos.CENTER);
-
-			bulb.setMinSize(340, 240);
-			bulb.setStyle(OFF);
-
-			Button lightSwitch = new Button("Don't Touch");
-			lightSwitch.setOnAction(new EventHandler<ActionEvent>() {
-
-				@Override
-				public void handle(ActionEvent event) {
-					isOn = !isOn;
-
-					bulb.setStyle(isOn ? ON : OFF);
-				}
-
-			});
-
-			VBox switchBox = new VBox();
-			switchBox.setAlignment(Pos.CENTER);
-			switchBox.setPadding(new Insets(20, 80, 20, 80));
-			switchBox.getChildren().add(lightSwitch);
-
-			root.getChildren().addAll(bulb, switchBox);
-
+			root = new BorderPane();
 			Scene scene = new Scene(root, 400, 400);
+		
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
+			root.getChildren().add(s);
+
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("Deme");
-			primaryStage.setResizable(false);
 			primaryStage.show();
+			
+			controls(scene);
+			
+			
+			
+
+			timer.start();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	private void controls(Scene scene) {
+		scene.setOnKeyPressed(e -> {
+			switch (e.getCode()) {
+			case A:
+				s.moveLeft();
+				break;
+			case D:
+				s.moveRight();
+				break;
+			case SPACE:
+				break;
+			default:
+				break;
+			}
+		});		
+	}
+
 	public static void main(String[] args) {
 		launch(args);
 	}
+
+	private List<Sprite> sprites() {
+		return root.getChildren().stream().map(n -> (Sprite) n).collect(Collectors.toList());
+	}
+
+	private void update() {
+		t++;
+		if (t > 2) {
+			for (Sprite s : sprites()) {
+				s.update();
+			}
+			
+			t=0;
+		}
+
+	}
+
+	AnimationTimer timer = new AnimationTimer() {
+		@Override
+		public void handle(long now) {
+			update();
+		}
+	};
 }
+
