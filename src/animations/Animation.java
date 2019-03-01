@@ -1,4 +1,4 @@
-package assets;
+package animations;
 
 import javafx.scene.image.Image;
 
