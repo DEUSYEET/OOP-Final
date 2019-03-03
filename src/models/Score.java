@@ -4,12 +4,17 @@ import java.io.Serializable;
 
 public class Score implements Serializable {
 
+	
+	private static final long serialVersionUID = 1L;
 	private int score;
 	private String name;
-	private static Score[] highscores;
+	private static Score[] highscores = new Score[10];
 
-	public Score() {
-
+	public Score(String name) {
+		
+		setScore(0);
+		setName(name);
+		
 	}
 
 	public int getScore() {
@@ -17,6 +22,10 @@ public class Score implements Serializable {
 	}
 
 	public void setScore(int score) {
+		if (score < 0) {
+			throw new IllegalArgumentException("you cant have a negitive score boi");
+		}
+		
 		this.score = score;
 	}
 
@@ -25,15 +34,14 @@ public class Score implements Serializable {
 	}
 
 	public void setName(String name) {
+		if (name.trim().isEmpty()) {
+			throw new IllegalArgumentException("you cant have a blank name boi");
+		}
 		this.name = name;
 	}
 
 	public static Score[] getHighscores() {
 		return highscores;
-	}
-
-	public static void setHighscores(Score[] highscores) {
-		Score.highscores = highscores;
 	}
 
 }
