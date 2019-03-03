@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
 	BorderPane root;
-	Sprite s = new Sprite(100, 100, "Player", "enemy2");
+	Sprite s = new Sprite(100, 100, "Player", "test");
 	double t = 0;
 
 	@Override
