@@ -21,6 +21,14 @@ public class SpaceInvaders {
 	}
 
 	public void update() {
+		
+		//set position of enemies
+		
+		//set position of player(s)
+		
+		//set position of laser
+		
+		//check if anything has been hit by anything
 
 	}
 
