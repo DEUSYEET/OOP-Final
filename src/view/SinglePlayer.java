@@ -35,6 +35,7 @@ public class SinglePlayer {
 
 		return scene;
 	}
+	
 
 	private static void initStage(Stage whoIs) {
 
@@ -105,7 +106,7 @@ public class SinglePlayer {
 			for (Sprite s : sprites()) {
 				s.update();
 			}
-
+			
 			t = 0;
 		}
 
