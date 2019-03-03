@@ -4,6 +4,7 @@ package application;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import animations.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -14,7 +15,9 @@ import veiw.MainMenu;
 public class Main extends Application {
 
 	BorderPane root;
+
 	Sprite s = new Sprite(50, 550, "Player", "idle");
+
 	double t = 0;
 
 	@Override
@@ -24,6 +27,7 @@ public class Main extends Application {
 			Scene mainMenu = MainMenu.getScene(primaryStage);
 
 			primaryStage.setScene(mainMenu);
+
 			primaryStage.show();
 			
 
