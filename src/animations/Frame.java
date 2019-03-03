@@ -10,35 +10,32 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
 public class Frame {
-	private static BufferedImage sheet=null;
-	private static final int size = 32;
-	
-    public static BufferedImage loadSprite(String file) {
+	private static BufferedImage sheet = null;
 
-        try {
-            sheet = ImageIO.read(new File("src/assets/" + file + ".png"));
-        } catch (IOException e) {
-        	try {
+	public static BufferedImage loadSprite(String file) {
+
+		try {
+			sheet = ImageIO.read(new File("src/assets/" + file + ".png"));
+		} catch (IOException e) {
+			try {
 				sheet = ImageIO.read(new File("src/assets/Null.png"));
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-        }
+		}
 
-        return sheet;
-    }
-	public static Image getSprite(int index) {
-		
+		return sheet;
+	}
+
+	public static Image getSprite(int index, int w, int h) {
+
 		if (sheet == null) {
 			loadSprite("Null");
 		}
-		BufferedImage sub = sheet.getSubimage(0,size*(index-1),size,size);
+		BufferedImage sub = sheet.getSubimage(0, h * (index - 1), w, h);
 		Image sprite = SwingFXUtils.toFXImage(sub, null);
-		
-		return  sprite;
+
+		return sprite;
 	}
-    
-    
-    
-    
+
 }
