@@ -38,8 +38,6 @@ public class SpaceInvaders {
 		
 		// if something has reached the end of the animation stop animation
 		
-		
-		
 	}
 
 	public static void startApp(String[] args) {
