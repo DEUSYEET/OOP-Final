@@ -1,4 +1,4 @@
-package veiw;
+package view;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -29,7 +29,6 @@ public class MainMenu {
 		
 		mainStage = whoIs;
 		root.setAlignment(Pos.CENTER);
-		SinglePlayerBoardLayout newGame = new SinglePlayerBoardLayout(whoIs);
 		
 		Button singlePlayer = new Button("Single Player");
 		singlePlayer.setOnAction(new EventHandler<ActionEvent>() {
