@@ -36,7 +36,8 @@ public class MainMenu {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				mainStage.setScene(newGame.getScene(whoIs));
+
+				mainStage.setScene(SinglePlayer.getScene(whoIs));
 			}
 			
 		});

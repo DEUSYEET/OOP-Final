@@ -3,18 +3,20 @@ package application;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import animations.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import veiw.MainMenu;
+import view.MainMenu;
 
 public class Main extends Application {
 
 	BorderPane root;
-	
-	Sprite s = new Sprite(50,550,"player", "idle", 32,32);
+
+	Sprite s = new Sprite(50, 550, "Player", "idle", 32, 32, 8);
 
 	double t = 0;
 
@@ -48,7 +50,7 @@ public class Main extends Application {
 			default:
 				break;
 			}
-		});		
+		});
 	}
 
 	public static void main(String[] args) {
@@ -65,8 +67,8 @@ public class Main extends Application {
 			for (Sprite s : sprites()) {
 				s.update();
 			}
-			
-			t=0;
+
+			t = 0;
 		}
 
 	}
@@ -78,4 +80,3 @@ public class Main extends Application {
 		}
 	};
 }
-
