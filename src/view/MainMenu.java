@@ -1,4 +1,4 @@
-package veiw;
+package view;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -30,25 +30,23 @@ public class MainMenu {
 		mainStage = whoIs;
 		root.setAlignment(Pos.CENTER);
 		
-		VBox testRoot = new VBox();
-		Scene test = new Scene(testRoot , 600, 600);
-		
 		Button singlePlayer = new Button("Single Player");
 		singlePlayer.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent arg0) {
+
 				mainStage.setScene(SinglePlayer.getScene(whoIs));
 			}
 			
 		});
 		
-		VBox switchBox = new VBox();
-		switchBox.setAlignment(Pos.CENTER);
-		switchBox.setPadding(new Insets(20, 80, 20, 80));
-		switchBox.getChildren().add(singlePlayer);
+		VBox optionsBox = new VBox();
+		optionsBox.setAlignment(Pos.CENTER);
+		optionsBox.setPadding(new Insets(20, 80, 20, 80));
+		optionsBox.getChildren().add(singlePlayer);
 		
-		root.getChildren().addAll(switchBox);
+		root.getChildren().addAll(optionsBox);
 		
 		
 		isInited = true;
