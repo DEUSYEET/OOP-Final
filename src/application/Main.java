@@ -50,7 +50,7 @@ public class Main extends Application {
 			default:
 				break;
 			}
-		});		
+		});
 	}
 
 	public static void main(String[] args) {
@@ -67,8 +67,8 @@ public class Main extends Application {
 			for (Sprite s : sprites()) {
 				s.update();
 			}
-			
-			t=0;
+
+			t = 0;
 		}
 
 	}
@@ -80,4 +80,3 @@ public class Main extends Application {
 		}
 	};
 }
-
