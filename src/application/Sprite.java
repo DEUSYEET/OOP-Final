@@ -7,16 +7,31 @@ class Sprite extends ImageView{
 	private boolean oofed = false;
 	private final String type;
 	private Animation animation;
+	private int W;
+	private int H;
+	private String spriteFile;
 	
-	Sprite(int x, int y, String type, String SpriteFile) {
+	
+	Sprite(int x, int y, String type, String SpriteFile, int W, int H) {
 		this.type = type;
-		setAnimation(new Animation(SpriteFile));
+		setW(W);
+		setH(H);
+		spriteFile = SpriteFile;
+		createAnimation();
 		setTranslateX(x);
 		setTranslateY(y);
 		setImage(animation.getCurrentFrame());
 	}
 
 	
+
+	private void createAnimation() {
+		Animation a = new Animation(spriteFile, W, H);
+		animation = a;
+		
+	}
+
+
 
 	public boolean isOofed() {
 		return oofed;
@@ -67,5 +82,29 @@ class Sprite extends ImageView{
 
 	public void moveDown() {
 		setTranslateY(getTranslateY() + 5);
+	}
+
+
+
+	public int getW() {
+		return W;
+	}
+
+
+
+	public void setW(int w) {
+		W = w;
+	}
+
+
+
+	public int getH() {
+		return H;
+	}
+
+
+
+	public void setH(int h) {
+		H = h;
 	}
 }

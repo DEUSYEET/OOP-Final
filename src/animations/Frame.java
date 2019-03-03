@@ -11,7 +11,6 @@ import javafx.scene.image.Image;
 
 public class Frame {
 	private static BufferedImage sheet=null;
-	private static final int size = 32;
 	
     public static BufferedImage loadSprite(String file) {
 
@@ -27,12 +26,13 @@ public class Frame {
 
         return sheet;
     }
-	public static Image getSprite(int index) {
+	public static Image getSprite(int index, int w, int h) {
+		
 		
 		if (sheet == null) {
 			loadSprite("Null");
 		}
-		BufferedImage sub = sheet.getSubimage(0,size*(index-1),size,size);
+		BufferedImage sub = sheet.getSubimage(0,h*(index-1),w,h);
 		Image sprite = SwingFXUtils.toFXImage(sub, null);
 		
 		return  sprite;

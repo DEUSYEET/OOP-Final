@@ -4,6 +4,7 @@ package application;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import animations.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -13,8 +14,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
 	BorderPane root;
-	Sprite s = new Sprite(100, 100, "Player", "idle");
-	Sprite button1 = new Sprite(250, 200, "Button 1", "test");
+	Sprite s = new Sprite(100, 100, "Player", "idle",32,32);
+	Sprite button1 = new Sprite(250, 200, "Button 1", "test",100,32);
 	double t = 0;
 
 	@Override
