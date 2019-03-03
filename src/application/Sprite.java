@@ -3,7 +3,7 @@ package application;
 import animations.Animation;
 import javafx.scene.image.ImageView;
 
-class Sprite extends ImageView {
+public class Sprite extends ImageView {
 	private boolean oofed = false;
 	private final String type;
 	private Animation animation;
@@ -12,7 +12,7 @@ class Sprite extends ImageView {
 	private String spriteFile;
 	private int frameCount;
 
-	Sprite(int x, int y, String type, String SpriteFile, int W, int H, int frameCount) {
+	public Sprite(int x, int y, String type, String SpriteFile, int W, int H, int frameCount) {
 		this.type = type;
 		setW(W);
 		setH(H);
