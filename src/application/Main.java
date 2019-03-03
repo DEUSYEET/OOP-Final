@@ -4,40 +4,32 @@ package application;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import animations.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import veiw.MainMenu;
 
 public class Main extends Application {
 
 	BorderPane root;
-	Sprite s = new Sprite(100, 100, "Player", "idle");
-	Sprite button1 = new Sprite(250, 200, "Button 1", "test");
+
+	Sprite s = new Sprite(50, 550, "Player", "idle");
+
 	double t = 0;
 
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			
+			Scene mainMenu = MainMenu.getScene(primaryStage);
 
-			root = new BorderPane();
-			Scene scene = new Scene(root, 600, 600);
-		
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setScene(mainMenu);
 
-			root.getChildren().add(s);
-			root.getChildren().add(button1);
-
-			primaryStage.setScene(scene);
 			primaryStage.show();
 			
-			controls(scene);
-			
-			
-			
-
-			timer.start();
 
 		} catch (Exception e) {
 			e.printStackTrace();
