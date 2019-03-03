@@ -21,6 +21,17 @@ public class SpaceInvaders {
 	}
 
 	public void update() {
+		
+		//set position of enemies
+		
+		//set position of player(s)
+		
+		//set position of laser
+		
+		//check if anything has been hit by anything
+		//if laser hits enemy = dead
+		//if laser hits player = lose a life out of 3
+		//if laser hits barricade = breaks
 
 	}
 
