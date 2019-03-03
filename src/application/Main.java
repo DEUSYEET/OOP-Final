@@ -14,8 +14,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
 	BorderPane root;
-	Sprite s = new Sprite(100, 100, "Player", "idle",32,32);
-	Sprite button1 = new Sprite(250, 200, "Button 1", "test",100,32);
+	Sprite s = new Sprite(100, 100, "Player", "idle", 32, 32, 8);
+	Sprite button1 = new Sprite(250, 200, "Button 1", "test", 100, 100, 1);
 	double t = 0;
 
 	@Override
@@ -24,7 +24,7 @@ public class Main extends Application {
 
 			root = new BorderPane();
 			Scene scene = new Scene(root, 600, 600);
-		
+
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
 			root.getChildren().add(s);
@@ -32,11 +32,8 @@ public class Main extends Application {
 
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			
+
 			controls(scene);
-			
-			
-			
 
 			timer.start();
 
@@ -59,7 +56,7 @@ public class Main extends Application {
 			default:
 				break;
 			}
-		});		
+		});
 	}
 
 	public static void main(String[] args) {
@@ -76,8 +73,8 @@ public class Main extends Application {
 			for (Sprite s : sprites()) {
 				s.update();
 			}
-			
-			t=0;
+
+			t = 0;
 		}
 
 	}
@@ -89,4 +86,3 @@ public class Main extends Application {
 		}
 	};
 }
-
