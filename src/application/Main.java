@@ -9,13 +9,13 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import veiw.MainMenu;
+import view.MainMenu;
 
 public class Main extends Application {
 
 	BorderPane root;
 
-	Sprite s = new Sprite(50, 550, "Player", "idle", 32,32,8);
+	Sprite s = new Sprite(50, 550, "Player", "idle", 32, 32, 8);
 
 	double t = 0;
 
