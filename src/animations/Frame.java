@@ -16,7 +16,7 @@ public class Frame {
     public static BufferedImage loadSprite(String file) {
 
         try {
-            sheet = ImageIO.read(new File("assets/" + file + ".png"));
+            sheet = ImageIO.read(new File("src/assets/" + file + ".png"));
         } catch (IOException e) {
         	try {
 				sheet = ImageIO.read(new File("src/assets/Null.png"));
