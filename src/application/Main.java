@@ -3,8 +3,6 @@ package application;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import animations.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -15,8 +13,8 @@ import veiw.MainMenu;
 public class Main extends Application {
 
 	BorderPane root;
-
-	Sprite s = new Sprite(50, 550, "Player", "idle");
+	
+	Sprite s = new Sprite(50,550,"player", "idle", 32,32);
 
 	double t = 0;
 
