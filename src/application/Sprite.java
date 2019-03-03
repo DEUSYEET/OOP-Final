@@ -1,6 +1,6 @@
 package application;
 
-import assets.Animation;
+import animations.Animation;
 import javafx.scene.image.ImageView;
 
 class Sprite extends ImageView{
