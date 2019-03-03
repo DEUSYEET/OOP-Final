@@ -1,4 +1,4 @@
-package view;
+package veiw;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -38,7 +38,7 @@ public class MainMenu {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				mainStage.setScene(test);
+				mainStage.setScene(SinglePlayer.getScene(whoIs));
 			}
 			
 		});
