@@ -16,7 +16,7 @@ public class Main extends Application {
 
 	BorderPane root;
 
-	Sprite s = new Sprite(50, 550, "Player", "idle");
+	Sprite s = new Sprite(50, 550, "Player", "idle", 32,32,8);
 
 	double t = 0;
 
