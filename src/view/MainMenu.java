@@ -1,5 +1,8 @@
 package view;
 
+import java.awt.Graphics;
+import java.awt.Image;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -11,6 +14,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class MainMenu {
@@ -45,6 +49,7 @@ public class MainMenu {
 			
 		});
 		
+        
 		BackgroundFill background = new BackgroundFill(Color.BLACK, new CornerRadii(1), null);
 		VBox optionsBox = new VBox();
 	
