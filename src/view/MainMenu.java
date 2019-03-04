@@ -45,13 +45,15 @@ public class MainMenu {
 			
 		});
 		
+		BackgroundFill background = new BackgroundFill(Color.BLACK, new CornerRadii(1), null);
 		VBox optionsBox = new VBox();
+	
 		optionsBox.setAlignment(Pos.CENTER);
 		optionsBox.setPadding(new Insets(20, 80, 20, 80));
 		optionsBox.getChildren().add(singlePlayer);
-		BackgroundFill background = new BackgroundFill(Color.BLACK, new CornerRadii(1), null);
 		optionsBox.setBackground(new Background(background));
-		optionsBox.setMinHeight(600);
+		optionsBox.setMinHeight(100000000);
+		
 		root.getChildren().addAll(optionsBox);
 		
 		
