@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import application.Sprite;
+import controllers.SpaceInvaders;
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,6 +15,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import models.Player;
 
 public class CoOP {
 
@@ -21,8 +23,8 @@ public class CoOP {
 	private static Scene scene = new Scene(root, 600, 600);
 	private static Stage mainStage;
 	private static boolean isInited = false;
-	private static Sprite player = new Sprite(5, 620, "player", "cursed1", 221, 221, 8);
-	private static Sprite player2 = new Sprite(300, 720, "player2", "cursed1", 221, 221, 8);
+	private static Player player = new Player(1);
+	private static Sprite playerSprite = player.getSprite();
 	private static ArrayList<Sprite> enemies = new ArrayList<>();
 	private static ArrayList<Sprite> shields = new ArrayList<>();
 	private static VBox switchBox;
@@ -37,18 +39,133 @@ public class CoOP {
 		return scene;
 	}
 	
+	
+
+	public static VBox getRoot() {
+		return root;
+	}
+
+
+
+	public static void setRoot(VBox root) {
+		CoOP.root = root;
+	}
+
+
+
+	public static Scene getScene() {
+		return scene;
+	}
+
+
+
+	public static void setScene(Scene scene) {
+		CoOP.scene = scene;
+	}
+
+
+
+	public static Stage getMainStage() {
+		return mainStage;
+	}
+
+
+
+	public static void setMainStage(Stage mainStage) {
+		CoOP.mainStage = mainStage;
+	}
+
+
+
+	public static boolean isInited() {
+		return isInited;
+	}
+
+
+
+	public static void setInited(boolean isInited) {
+		CoOP.isInited = isInited;
+	}
+
+
+
+	public static Player getPlayer() {
+		return player;
+	}
+
+
+
+	public static ArrayList<Sprite> getEnemies() {
+		return enemies;
+	}
+
+
+
+	public static void setEnemies(ArrayList<Sprite> enemies) {
+		CoOP.enemies = enemies;
+	}
+
+
+
+	public static ArrayList<Sprite> getShields() {
+		return shields;
+	}
+
+
+
+	public static void setShields(ArrayList<Sprite> shields) {
+		CoOP.shields = shields;
+	}
+
+
+
+	public static VBox getSwitchBox() {
+		return switchBox;
+	}
+
+
+
+	public static void setSwitchBox(VBox switchBox) {
+		CoOP.switchBox = switchBox;
+	}
+
+
+
+	public static int getT() {
+		return t;
+	}
+
+
+
+	public static void setT(int t) {
+		CoOP.t = t;
+	}
+
+
+
+	public static AnimationTimer getTimer() {
+		return timer;
+	}
+
+
+
+	public static void setTimer(AnimationTimer timer) {
+		CoOP.timer = timer;
+	}
+
+
 
 	private static void initStage(Stage whoIs) {
 
 		mainStage = whoIs;
+		whoIs.setResizable(false);
 		root.setAlignment(Pos.CENTER);
 		VBox testRoot = new VBox();
 		Scene scene = new Scene(testRoot, 600, 600);
 		switchBox = new VBox();
 		switchBox.setMinHeight(600);
 
-		switchBox.getChildren().add(player);
-		switchBox.getChildren().add(player2);
+		switchBox.getChildren().add(playerSprite);
 		populateShields();
 		populateEnemies();
 
@@ -65,8 +182,8 @@ public class CoOP {
 		int posX = 50;
 		int posY = 400;
 
-		for (int i = 0; i < 8; i++) {
-			Sprite s = new Sprite(posX, posY - i * 64, "shield", "Shield", 64, 64, 1);
+		for (int i = 0; i < 4; i++) {
+			Sprite s = new Sprite(posX, posY - i * 41, "shield", "Shield", 64, 41, 1);
 			shields.add(s);
 			switchBox.getChildren().add(s);
 			posX += 140;
@@ -76,19 +193,21 @@ public class CoOP {
 
 	private static void populateEnemies() {
 		int posX = 5;
-		int posY = -400;
+		int posY = -180;
 		int count = 0;
 		String sprites[] = { "enemy1", "enemy2", "enemy3", "enemy4" };
+		int X[] = {20,24,18,28};
+//		int Y[] = {22,25,25,22};
 		int file = 3;
 
-		for (int i = 0; i < 80; i++) {
-			if (count >= 20) {
+		for (int i = 0; i < 40; i++) {
+			if (count >= 10) {
 				posY += 50;
 				posX = 5;
 				count = 0;
 				file--;
 			}
-			Sprite s = new Sprite(posX, posY - i * 32, "enemy", sprites[file], 32, 32, 8);
+			Sprite s = new Sprite(posX, posY - i * 32, "enemy", sprites[file], X[file], 32, 8);
 			enemies.add(s);
 			switchBox.getChildren().add(s);
 			posX += 40;
@@ -102,22 +221,16 @@ public class CoOP {
 		return switchBox.getChildren().stream().map(n -> (Sprite) n).collect(Collectors.toList());
 	}
 
-	private static void update() {
-		t++;
-		if (t > 4) {
-			for (Sprite s : sprites()) {
-				s.update();
-			}
-			
-			t = 0;
-		}
-
+	public static List<Sprite> getSprites() {
+		return sprites();
 	}
+	
+	
 
 	private static AnimationTimer timer = new AnimationTimer() {
 		@Override
 		public void handle(long now) {
-			update();
+			SpaceInvaders.update();
 		}
 	};
 }
