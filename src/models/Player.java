@@ -22,7 +22,7 @@ public class Player {
 		int[] pos = {0,0};
 		setPosition(pos);
 		setAlive(true);
-		this.sprite = new Sprite(5, 520, "player", "idle", 32, 32, 8);
+		this.sprite = new Sprite(5, 520, "player", "idle", 32, 24, 8);
 
 	}
 	
