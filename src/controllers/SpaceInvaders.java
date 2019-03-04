@@ -162,7 +162,7 @@ public class SpaceInvaders {
 				if (frameLastShot > 110) {
 					int[] pos = {(int) SinglePlayer.getPlayer().getSprite().getTranslateX(),0};
 					Laser laser = new Laser(pos, LaserType.NORMAL, 1, new Sprite(pos[0], 0, "laser", "PlayerLaser", 4, 32, 8));
-					laser.getSprite().setTranslateY(-1090 - (playerShots * 32));
+					laser.getSprite().setTranslateY(-982 - (playerShots * 32));
 					lasers.add(laser);
 					SinglePlayer.getSwitchBox().getChildren().add(laser.getSprite());
 					playerShots++;
