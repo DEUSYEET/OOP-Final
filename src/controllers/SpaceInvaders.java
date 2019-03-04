@@ -126,7 +126,7 @@ public class SpaceInvaders {
 					kaboomed.add(s);
 					howFarOffScreen++;
 				}
-				if ( l.getSprite().getTranslateY() < -1600 - (30 * howFarOffScreen)) {
+				if ( l.getSprite().getTranslateY() < -1500 - (32 * howFarOffScreen)) {
 					System.out.println("Off");
 					offed.add(l);
 					howFarOffScreen++;
@@ -161,8 +161,8 @@ public class SpaceInvaders {
 			case SPACE:
 				if (frameLastShot > 110) {
 					int[] pos = {(int) SinglePlayer.getPlayer().getSprite().getTranslateX(),0};
-					Laser laser = new Laser(pos, LaserType.NORMAL, 1, new Sprite(pos[0], 0, "laser", "PlayerLaser", 4, 32, 8));
-					laser.getSprite().setTranslateY(-1090 - (playerShots * 32));
+					Laser laser = new Laser(pos, LaserType.NORMAL, 1, new Sprite(pos[0] + 14, 0, "laser", "PlayerLaser", 4, 32, 8));
+					laser.getSprite().setTranslateY(-980 - (playerShots * 32));
 					lasers.add(laser);
 					SinglePlayer.getSwitchBox().getChildren().add(laser.getSprite());
 					playerShots++;
