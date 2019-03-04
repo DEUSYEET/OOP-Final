@@ -16,12 +16,13 @@ public class Main extends Application {
 		try {
 			
 			Scene mainMenu = MainMenu.getScene(primaryStage);
-
+			primaryStage.setTitle("Space Invaders");
 			primaryStage.setScene(mainMenu);
+			primaryStage.setResizable(false);
 			primaryStage.setTitle("Space Invaders Battle");
 			primaryStage.show();
 			
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

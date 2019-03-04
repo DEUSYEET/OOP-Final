@@ -158,6 +158,7 @@ public class SinglePlayer {
 	private static void initStage(Stage whoIs) {
 
 		mainStage = whoIs;
+		whoIs.setResizable(false);
 		root.setAlignment(Pos.CENTER);
 		VBox testRoot = new VBox();
 		Scene scene = new Scene(testRoot, 600, 600);
