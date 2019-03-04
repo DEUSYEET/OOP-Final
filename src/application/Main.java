@@ -1,10 +1,10 @@
 
 package application;
 
+import java.awt.Frame;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import animations.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -25,12 +25,12 @@ public class Main extends Application {
 		try {
 			
 			Scene mainMenu = MainMenu.getScene(primaryStage);
-
+			primaryStage.setTitle("Space Invaders");
 			primaryStage.setScene(mainMenu);
-
+			primaryStage.setResizable(false);
 			primaryStage.show();
 			
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
