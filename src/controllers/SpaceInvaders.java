@@ -118,7 +118,7 @@ public class SpaceInvaders {
 				break;
 			case SPACE:
 				int[] pos = {(int) SinglePlayer.getPlayer().getSprite().getTranslateX(),(int) SinglePlayer.getPlayer().getSprite().getTranslateY()};
-				Laser laser = new Laser(pos, LaserType.NORMAL, 10, new Sprite(pos[0], pos[1], "laser", "PlayerLaser", 32, 32, 8));
+				Laser laser = new Laser(pos, LaserType.NORMAL, 10, new Sprite(pos[0], pos[1], "laser", "PlayerLaser", 4, 32, 8));
 				lasers.add(laser);
 				SinglePlayer.getSwitchBox().getChildren().add(laser.getSprite());
 				break;
