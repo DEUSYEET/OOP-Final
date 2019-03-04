@@ -4,5 +4,6 @@ public enum LaserType {
 	NORMAL,
 	DOUBLETAP,
 	EXPLOSIVE,
-	ALIEN
+	ALIEN,
+	SPECIALLASER
 }

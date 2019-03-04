@@ -11,6 +11,7 @@ public class Sprite extends ImageView {
 	private int H;
 	private String spriteFile;
 	private int frameCount;
+	
 
 	public Sprite(int x, int y, String type, String SpriteFile, int W, int H, int frameCount) {
 		this.type = type;
