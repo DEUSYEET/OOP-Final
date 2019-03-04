@@ -1,0 +1,13 @@
+Default size-32x32
+
+
+Player-32x24
+enemy1-20x22
+enemy2-24x25
+enemy3-18x25
+enemy4-28x22
+EnemyLaser-18x32
+motherShip-32x11
+PlayerLaser-4x32
+Shield-64x41
+SpecialLaser-7x32
