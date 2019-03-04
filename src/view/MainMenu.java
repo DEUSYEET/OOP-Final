@@ -1,20 +1,12 @@
 package view;
 
-import java.awt.Graphics;
-import java.awt.Image;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class MainMenu {
@@ -68,11 +60,13 @@ public class MainMenu {
 		singlePlayer.setMinHeight(32);
 		singlePlayer.setMinWidth(100);
 		optionsBox.getChildren().add(singlePlayer);
+
 		multiPlayer.setMinHeight(32);
 		multiPlayer.setMinWidth(100);
 		optionsBox.getChildren().add(multiPlayer);
 		optionsBox.setBackground(new Background(background));
 		optionsBox.setMinHeight(100000000);
+
 
 		root.getChildren().addAll(optionsBox);
 
