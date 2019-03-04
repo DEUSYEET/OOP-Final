@@ -1,5 +1,6 @@
 package models;
 
+import application.Sprite;
 import enums.LaserType;
 
 public class Laser {
@@ -7,12 +8,14 @@ public class Laser {
 	private LaserType type;
 	private int[] position;
 	private int speed;
+	private Sprite sprite;
 	
-	public Laser(int[] pos, LaserType type, int speed) {
+	public Laser(int[] pos, LaserType type, int speed, Sprite sprite) {
 		
 		setType(type);
 		setPosition(pos);
 		setSpeed(speed);
+		this.sprite = sprite;
 		
 	}
 	
@@ -35,6 +38,11 @@ public class Laser {
 		
 		this.position = position;
 	}
+	
+	public Sprite getSprite() {
+		return sprite;
+	}
+
 	public int getSpeed() {
 		return speed;
 	}
