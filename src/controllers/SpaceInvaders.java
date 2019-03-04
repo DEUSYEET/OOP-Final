@@ -18,10 +18,8 @@ public class SpaceInvaders {
 	private static boolean playerMoving = false;
 	private static boolean moveRight = true;
 	private static ArrayList<Laser> lasers = new ArrayList<Laser>();
-
-	public void startGame(GameModes gameMode) {
-
-	}
+	private static int playerShots = 0;
+	private static int frameLastShot = 120;
 
 	public void gameLoop() {
 		
@@ -89,6 +87,8 @@ public class SpaceInvaders {
 			}
 		}
 		
+		checkIfLaserTouchesAnything();
+		
 		//set position of enemies
 		
 		//set position of player(s)
@@ -102,9 +102,35 @@ public class SpaceInvaders {
 			//if enemy hits block = breaks sections that are touched
 		
 		frame++;
+		frameLastShot++;
 		
 	}
 	
+	private static void checkIfLaserTouchesAnything() {
+		
+		ArrayList<Laser> offed = new ArrayList<Laser>();
+		
+		for (Laser l : lasers) {
+			for (Sprite s : SinglePlayer.getSprites()) {
+				
+				if (l.getSprite().getBoundsInParent().intersects(s.getBoundsInParent()) && !l.getSprite().equals(s)) {
+					// kaboom
+					System.out.println("hit");
+					frameLastShot = 120;
+					offed.add(l);
+					
+				}
+				
+			}
+		}
+		for (Laser l : offed) {
+			l.getSprite().setTranslateY(42069);
+			lasers.remove(l);
+			SinglePlayer.getSprites().remove(l.getSprite());
+		}
+		
+	}
+
 	private static void controls(Scene scene) {
 		scene.setOnKeyPressed(e -> {
 			switch (e.getCode()) {
@@ -117,10 +143,16 @@ public class SpaceInvaders {
 				playerMoving = true;
 				break;
 			case SPACE:
-				int[] pos = {(int) SinglePlayer.getPlayer().getSprite().getTranslateX(),(int) SinglePlayer.getPlayer().getSprite().getTranslateY()};
-				Laser laser = new Laser(pos, LaserType.NORMAL, 10, new Sprite(pos[0], pos[1], "laser", "PlayerLaser", 32, 32, 8));
-				lasers.add(laser);
-				SinglePlayer.getSwitchBox().getChildren().add(laser.getSprite());
+				if (frameLastShot > 110) {
+					int[] pos = {(int) SinglePlayer.getPlayer().getSprite().getTranslateX(),0};
+					Laser laser = new Laser(pos, LaserType.NORMAL, 1, new Sprite(pos[0], 0, "laser", "PlayerLaser", 32, 32, 8));
+					laser.getSprite().setTranslateY(-1090 - (playerShots * 32));
+					lasers.add(laser);
+					SinglePlayer.getSwitchBox().getChildren().add(laser.getSprite());
+					playerShots++;
+					System.out.println(frameLastShot);
+					frameLastShot = 0;
+				}
 				break;
 			default:
 				break;
