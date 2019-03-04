@@ -1,6 +1,7 @@
 
 package application;
 
+import java.awt.Frame;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,7 +25,7 @@ public class Main extends Application {
 		try {
 			
 			Scene mainMenu = MainMenu.getScene(primaryStage);
-
+			primaryStage.setTitle("Space Invaders");
 			primaryStage.setScene(mainMenu);
 			primaryStage.setResizable(false);
 			primaryStage.show();
