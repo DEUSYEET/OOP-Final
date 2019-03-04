@@ -15,13 +15,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class SinglePlayer {
+public class CoOP {
 
 	private static VBox root = new VBox();
 	private static Scene scene = new Scene(root, 600, 600);
 	private static Stage mainStage;
 	private static boolean isInited = false;
-	private static Sprite player = new Sprite(5, 720, "player", "cursed1", 221, 221, 8);
+	private static Sprite player = new Sprite(5, 620, "player", "cursed1", 221, 221, 8);
+	private static Sprite player2 = new Sprite(300, 720, "player2", "cursed1", 221, 221, 8);
 	private static ArrayList<Sprite> enemies = new ArrayList<>();
 	private static ArrayList<Sprite> shields = new ArrayList<>();
 	private static VBox switchBox;
@@ -47,6 +48,7 @@ public class SinglePlayer {
 		switchBox.setMinHeight(600);
 
 		switchBox.getChildren().add(player);
+		switchBox.getChildren().add(player2);
 		populateShields();
 		populateEnemies();
 
@@ -63,7 +65,7 @@ public class SinglePlayer {
 		int posX = 50;
 		int posY = 400;
 
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 8; i++) {
 			Sprite s = new Sprite(posX, posY - i * 64, "shield", "Shield", 64, 64, 1);
 			shields.add(s);
 			switchBox.getChildren().add(s);
@@ -74,13 +76,13 @@ public class SinglePlayer {
 
 	private static void populateEnemies() {
 		int posX = 5;
-		int posY = -200;
+		int posY = -400;
 		int count = 0;
 		String sprites[] = { "enemy1", "enemy2", "enemy3", "enemy4" };
 		int file = 3;
 
-		for (int i = 0; i < 40; i++) {
-			if (count >= 10) {
+		for (int i = 0; i < 80; i++) {
+			if (count >= 20) {
 				posY += 50;
 				posX = 5;
 				count = 0;

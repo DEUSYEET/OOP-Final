@@ -36,7 +36,7 @@ public class MainMenu {
 			@Override
 			public void handle(ActionEvent arg0) {
 
-				mainStage.setScene(SinglePlayer.getScene(whoIs));
+				mainStage.setScene(CoOP.getScene(whoIs));
 			}
 			
 		});
