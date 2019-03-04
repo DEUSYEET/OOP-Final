@@ -88,6 +88,16 @@ public class MultiPlayerMenu {
 			}
 
 		});
+		Button back = new Button("Return To Main Menu");
+		back.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+
+				mainStage.setScene(MainMenu.getScene(whoIs));
+			}
+
+		});
 
 		BackgroundFill background = new BackgroundFill(Color.BLACK, new CornerRadii(1), null);
 		VBox optionsBox = new VBox(20);
@@ -109,6 +119,9 @@ public class MultiPlayerMenu {
 		battle.setMinHeight(32);
 		battle.setMinWidth(200);
 		optionsBox.getChildren().add(battle);
+		back.setMinHeight(32);
+		back.setMinWidth(200);
+		optionsBox.getChildren().add(back);
 		optionsBox.setBackground(new Background(background));
 		optionsBox.setMinHeight(100000000);
 
