@@ -10,26 +10,26 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class MainMenu {
-	
+
 	private static VBox root = new VBox();
-	private static Scene scene = new Scene(root , 600, 600);
+	private static Scene scene = new Scene(root, 600, 600);
 	private static Stage mainStage;
 	private static boolean isInited = false;
-	
+
 	public static Scene getScene(Stage whoIs) {
-		
+
 		if (!isInited) {
 			initMainMenu(whoIs);
 		}
-		
+
 		return scene;
 	}
 
 	private static void initMainMenu(Stage whoIs) {
-		
+
 		mainStage = whoIs;
 		root.setAlignment(Pos.CENTER);
-		
+
 		Button singlePlayer = new Button("Single Player");
 		singlePlayer.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -38,18 +38,39 @@ public class MainMenu {
 
 				mainStage.setScene(SinglePlayer.getScene(whoIs));
 			}
-			
+
 		});
-		
-		VBox optionsBox = new VBox();
+
+		Button multiPlayer = new Button("MultiPlayer");
+		multiPlayer.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+
+				mainStage.setScene(MultiPlayerMenu.getScene(whoIs));
+			}
+
+		});
+
+		BackgroundFill background = new BackgroundFill(Color.BLACK, new CornerRadii(1), null);
+		VBox optionsBox = new VBox(20);
+
 		optionsBox.setAlignment(Pos.CENTER);
 		optionsBox.setPadding(new Insets(20, 80, 20, 80));
+		singlePlayer.setMinHeight(32);
+		singlePlayer.setMinWidth(100);
 		optionsBox.getChildren().add(singlePlayer);
 
+		multiPlayer.setMinHeight(32);
+		multiPlayer.setMinWidth(100);
+		optionsBox.getChildren().add(multiPlayer);
+		optionsBox.setBackground(new Background(background));
+		optionsBox.setMinHeight(100000000);
+
+
 		root.getChildren().addAll(optionsBox);
-		
-		
+
 		isInited = true;
-		
+
 	}
 }
