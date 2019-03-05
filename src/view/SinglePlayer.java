@@ -32,7 +32,7 @@ public class SinglePlayer {
 	private static int t;
 
 	public static Scene getScene(Stage whoIs) {
-
+		
 		if (!isInited) {
 			initStage(whoIs);
 		}

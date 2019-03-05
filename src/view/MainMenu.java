@@ -47,15 +47,8 @@ public class MainMenu {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-
-				optionsBox2.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(1), null)));
-				root.getChildren().add(optionsBox2);
-				for(int i = 0; i <500000;i++) {
-					System.out.println(i);					
-				}
-
+				SpaceInvaders.gameRunning = true;
 				mainStage.setScene(SinglePlayer.getScene(whoIs));
-
 			}
 
 		});
@@ -92,3 +85,5 @@ public class MainMenu {
 
 	}
 }
+
+
