@@ -1,11 +1,13 @@
 package view;
 
+import controllers.SpaceInvaders;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -14,7 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class MainMenu {
-	
+
 	private static VBox root = new VBox();
 	private static Scene scene = new Scene(root, 600, 600);
 	private static Stage mainStage;
@@ -28,9 +30,12 @@ public class MainMenu {
 
 		return scene;
 	}
+	
+	public static Stage getStage() {
+		return mainStage;
+	}
 
 	private static void initMainMenu(Stage whoIs) {
-		
 
 		mainStage = whoIs;
 		root.setAlignment(Pos.CENTER);
@@ -40,6 +45,7 @@ public class MainMenu {
 
 			@Override
 			public void handle(ActionEvent arg0) {
+				SpaceInvaders.gameRunning = true;
 				mainStage.setScene(SinglePlayer.getScene(whoIs));
 			}
 

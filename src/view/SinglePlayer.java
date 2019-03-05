@@ -38,8 +38,6 @@ public class SinglePlayer {
 
 		return scene;
 	}
-	
-	
 
 	public static VBox getRoot() {
 		return root;
@@ -155,8 +153,8 @@ public class SinglePlayer {
 
 
 
-	private static void initStage(Stage whoIs) {
-
+	public static void initStage(Stage whoIs) {
+		
 		mainStage = whoIs;
 		whoIs.setResizable(false);
 		root.setAlignment(Pos.CENTER);
@@ -191,7 +189,7 @@ public class SinglePlayer {
 
 	}
 
-	private static void populateEnemies() {
+	public static void populateEnemies() {
 		int posX = 5;
 		int posY = -180;
 		int count = 0;
