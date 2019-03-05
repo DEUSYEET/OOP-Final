@@ -11,6 +11,7 @@ public class Sprite extends ImageView {
 	private int H;
 	private String spriteFile;
 	private int frameCount;
+	private int howLongBeenOofed = -1;
 	
 
 	public Sprite(int x, int y, String type, String SpriteFile, int W, int H, int frameCount) {
@@ -24,6 +25,12 @@ public class Sprite extends ImageView {
 		setTranslateY(y);
 		setImage(animation.getCurrentFrame());
 	}
+	
+	public void setSpriteFile(String spriteFile) {
+		createAnimation();
+		setImage(animation.getCurrentFrame());
+		this.spriteFile = spriteFile;
+	}
 
 	private void createAnimation() {
 		Animation a = new Animation(spriteFile, W, H, frameCount);
@@ -34,8 +41,22 @@ public class Sprite extends ImageView {
 	public boolean isOofed() {
 		return oofed;
 	}
+	
+	public void updateHowLongBeenOofed() {
+		howLongBeenOofed++;
+	}
+	
+	public int getHLBO() {
+		return howLongBeenOofed;
+	}
+	
+	public void setHLBO(int hlbo) {
+		this.howLongBeenOofed = hlbo;
+	}
 
 	public void setOofed(boolean oofed) {
+		setHLBO(-1);
+		updateHowLongBeenOofed();
 		this.oofed = oofed;
 	}
 
