@@ -14,7 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class MainMenu {
-
+	
 	private static VBox root = new VBox();
 	private static Scene scene = new Scene(root, 600, 600);
 	private static Stage mainStage;
@@ -30,6 +30,7 @@ public class MainMenu {
 	}
 
 	private static void initMainMenu(Stage whoIs) {
+		
 
 		mainStage = whoIs;
 		root.setAlignment(Pos.CENTER);
@@ -39,7 +40,6 @@ public class MainMenu {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-
 				mainStage.setScene(SinglePlayer.getScene(whoIs));
 			}
 
