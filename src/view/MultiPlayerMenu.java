@@ -67,7 +67,7 @@ public class MultiPlayerMenu {
 
 		});
 		
-		Button dlc = new Button("Dlc Co-Op");
+		Button dlc = new Button("Teletubbies Co-Op");
 		dlc.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
