@@ -11,6 +11,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class MainMenu {
@@ -33,14 +34,20 @@ public class MainMenu {
 
 		mainStage = whoIs;
 		root.setAlignment(Pos.CENTER);
+		VBox optionsBox2 = new VBox(20);
 
 		Button singlePlayer = new Button("Single Player");
 		singlePlayer.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-
+				optionsBox2.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(1), null)));
+				root.getChildren().add(optionsBox2);
+				for(int i = 0; i <500000;i++) {
+					System.out.println(i);					
+				}
 				mainStage.setScene(SinglePlayer.getScene(whoIs));
+
 			}
 
 		});
@@ -56,8 +63,8 @@ public class MainMenu {
 
 		});
 
-		BackgroundFill background = new BackgroundFill(Color.BLACK, new CornerRadii(1), null);
 		VBox optionsBox = new VBox(20);
+		BackgroundFill background = new BackgroundFill(Color.BLACK, new CornerRadii(1), null);
 
 		optionsBox.setAlignment(Pos.CENTER);
 		optionsBox.setPadding(new Insets(20, 80, 20, 80));

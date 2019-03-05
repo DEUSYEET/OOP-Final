@@ -14,6 +14,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import models.Player;
 
@@ -153,10 +154,11 @@ public class SinglePlayer {
 		SinglePlayer.timer = timer;
 	}
 
-
+	
 
 	private static void initStage(Stage whoIs) {
-
+		
+		
 		mainStage = whoIs;
 		whoIs.setResizable(false);
 		root.setAlignment(Pos.CENTER);
@@ -175,6 +177,8 @@ public class SinglePlayer {
 		
 		timer.start();
 		isInited = true;
+
+		
 		
 	}
 
