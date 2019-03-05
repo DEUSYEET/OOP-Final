@@ -7,11 +7,12 @@ import application.Sprite;
 import enums.LaserType;
 import javafx.scene.Scene;
 import models.Laser;
+import view.MainMenu;
 import view.SinglePlayer;
 
 public class SpaceInvaders {
 	
-	public boolean gameRunning = false;
+	public static boolean gameRunning = false;
 	private static int frame = 0;
 	private static int enemySpeed = 100;
 	private static boolean playerMoving = false;
@@ -20,106 +21,104 @@ public class SpaceInvaders {
 	private static int playerShots = 0;
 	private static int frameLastShot = 120;
 
-	public void gameLoop() {
-		
-		while (gameRunning) {
-			update();
-		}
-
-	}
-
 	public static void update() {
 		
-		SinglePlayer.setT(SinglePlayer.getT() + 1);
-		if (SinglePlayer.getT() > 2) {
-			for (Sprite s : SinglePlayer.getSprites()) {
-				if (s.isOofed()) {
-					s.updateHowLongBeenOofed();
+		if (gameRunning) {
+			SinglePlayer.setT(SinglePlayer.getT() + 1);
+			if (SinglePlayer.getT() > 2) {
+				for (Sprite s : SinglePlayer.getSprites()) {
+					if (s.isOofed()) {
+						s.updateHowLongBeenOofed();
+					}
+					if (s.getHLBO() < 1 || !s.isOofed()) {					
+						s.update();
+					}
+					else if (s.getHLBO() > 10 && s.isOofed()) {
+						System.out.println(s.getHLBO());
+						s.setTranslateY(42069);
+						SinglePlayer.getSprites().remove(s);
+					}
+					else {
+						s.setSpriteFile("explosion");
+						s.setH(32);
+						s.setW(16);
+					}
+					
 				}
-				if (s.getHLBO() < 1 || !s.isOofed()) {					
-					s.update();
-				}
-				else if (s.getHLBO() > 10 && s.isOofed()) {
-					System.out.println(s.getHLBO());
-					s.setTranslateY(42069);
-					SinglePlayer.getSprites().remove(s);
+	
+				SinglePlayer.setT(0);
+			}
+			
+			controls(SinglePlayer.getScene());
+			SinglePlayer.getPlayer().movePlayer();
+			if (playerMoving) {
+				enemySpeed -= 20;
+			}
+			
+			if (frame % enemySpeed == 0) {
+				if (moveRight) {
+					for (Sprite e : SinglePlayer.getEnemies()) {
+						e.moveRight();
+					}
 				}
 				else {
-					s.setSpriteFile("explosion");
-					s.setH(32);
-					s.setW(16);
+					for (Sprite e : SinglePlayer.getEnemies()) {
+						e.moveLeft();
+					}
+				}
+			}
+			if (playerMoving) {
+				enemySpeed += 20;
+			}
+			
+			for (Sprite e : SinglePlayer.getEnemies()) {
+				
+				if (!e.isOofed() && (e.getTranslateX() < 0 || e.getTranslateX() > 570)) {
+					moveRight = !moveRight;
+					if (e.getTranslateX() < 0) {
+						for (Sprite es : SinglePlayer.getEnemies()) {
+							es.moveDown();
+							es.moveRight();
+						}
+					}
+					else {
+						for (Sprite es : SinglePlayer.getEnemies()) {
+							es.moveDown();
+							es.moveLeft();
+						}
+					}
+					break;
 				}
 				
 			}
-
-			SinglePlayer.setT(0);
-		}
-		
-		controls(SinglePlayer.getScene());
-		SinglePlayer.getPlayer().movePlayer();
-		if (playerMoving) {
-			enemySpeed -= 20;
-		}
-		
-		if (frame % enemySpeed == 0) {
-			if (moveRight) {
-				for (Sprite e : SinglePlayer.getEnemies()) {
-					e.moveRight();
-				}
-			}
-			else {
-				for (Sprite e : SinglePlayer.getEnemies()) {
-					e.moveLeft();
-				}
-			}
-		}
-		if (playerMoving) {
-			enemySpeed += 20;
-		}
-		
-		for (Sprite e : SinglePlayer.getEnemies()) {
 			
-			if (!e.isOofed() && (e.getTranslateX() < 0 || e.getTranslateX() > 570)) {
-				moveRight = !moveRight;
-				if (e.getTranslateX() < 0) {
-					for (Sprite es : SinglePlayer.getEnemies()) {
-						es.moveDown();
-						es.moveRight();
-					}
+			for (Laser l: lasers) {
+				if (frame % l.getSpeed() == 0) {
+					l.getSprite().moveUp();
 				}
-				else {
-					for (Sprite es : SinglePlayer.getEnemies()) {
-						es.moveDown();
-						es.moveLeft();
-					}
-				}
-				break;
 			}
 			
-		}
-		
-		for (Laser l: lasers) {
-			if (frame % l.getSpeed() == 0) {
-				l.getSprite().moveUp();
+			checkIfLaserTouchesAnything();
+			
+			if (SinglePlayer.getEnemies().isEmpty()) {
+				SinglePlayer.populateEnemies();
 			}
+			
+			//set position of enemies
+			
+			//set position of player(s)
+			
+			//set position of laser
+			
+			//check if anything has been hit by anything
+				//if laser hits enemy = dead
+				//if laser hits player = lose a life out of 3
+				//if laser hits barricade = breaks
+				//if enemy hits block = breaks sections that are touched
+			
+			frame++;
+			frameLastShot++;
 		}
-		
-		checkIfLaserTouchesAnything();
-		
-		//set position of enemies
-		
-		//set position of player(s)
-		
-		//set position of laser
-		
-		//check if anything has been hit by anything
-			//if laser hits enemy = dead
-			//if laser hits player = lose a life out of 3
-			//if laser hits barricade = breaks
-			//if enemy hits block = breaks sections that are touched
-		
-		frame++;
-		frameLastShot++;
 		
 	}
 	
@@ -155,8 +154,18 @@ public class SpaceInvaders {
 			lasers.remove(l);
 			SinglePlayer.getSprites().remove(l.getSprite());
 		}
+		boolean zoomUp = false;
 		for (Sprite s : kaboomed) {
 			s.setOofed(true);
+			if (s.getType().equals("enemy")) {
+				SinglePlayer.getEnemies().remove(s);
+				zoomUp = true;
+			}
+		}
+		if (zoomUp) {
+			for (Sprite e : SinglePlayer.getEnemies()) {
+				e.setZoom(e.getZoom() + 1);
+			}
 		}
 		
 	}
@@ -184,6 +193,9 @@ public class SpaceInvaders {
 					frameLastShot = 0;
 				}
 				break;
+			case ESCAPE:
+				gameRunning = false;
+				MainMenu.getStage().setScene(MainMenu.getScene(MainMenu.getStage()));
 			default:
 				break;
 			}
