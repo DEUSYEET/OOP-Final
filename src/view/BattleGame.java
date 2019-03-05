@@ -17,8 +17,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import models.Player;
 
-public class SinglePlayer {
-
+public class BattleGame {
+	
 	private static VBox root = new VBox();
 	private static Scene scene = new Scene(root, 600, 600);
 	private static Stage mainStage;
@@ -48,7 +48,7 @@ public class SinglePlayer {
 
 
 	public static void setRoot(VBox root) {
-		SinglePlayer.root = root;
+		BattleGame.root = root;
 	}
 
 
@@ -60,7 +60,7 @@ public class SinglePlayer {
 
 
 	public static void setScene(Scene scene) {
-		SinglePlayer.scene = scene;
+		BattleGame.scene = scene;
 	}
 
 
@@ -72,7 +72,7 @@ public class SinglePlayer {
 
 
 	public static void setMainStage(Stage mainStage) {
-		SinglePlayer.mainStage = mainStage;
+		BattleGame.mainStage = mainStage;
 	}
 
 
@@ -84,7 +84,7 @@ public class SinglePlayer {
 
 
 	public static void setInited(boolean isInited) {
-		SinglePlayer.isInited = isInited;
+		BattleGame.isInited = isInited;
 	}
 
 
@@ -102,7 +102,7 @@ public class SinglePlayer {
 
 
 	public static void setEnemies(ArrayList<Sprite> enemies) {
-		SinglePlayer.enemies = enemies;
+		BattleGame.enemies = enemies;
 	}
 
 
@@ -114,7 +114,7 @@ public class SinglePlayer {
 
 
 	public static void setShields(ArrayList<Sprite> shields) {
-		SinglePlayer.shields = shields;
+		BattleGame.shields = shields;
 	}
 
 
@@ -126,7 +126,7 @@ public class SinglePlayer {
 
 
 	public static void setSwitchBox(VBox switchBox) {
-		SinglePlayer.switchBox = switchBox;
+		BattleGame.switchBox = switchBox;
 	}
 
 
@@ -138,7 +138,7 @@ public class SinglePlayer {
 
 
 	public static void setT(int t) {
-		SinglePlayer.t = t;
+		BattleGame.t = t;
 	}
 
 
@@ -150,7 +150,7 @@ public class SinglePlayer {
 
 
 	public static void setTimer(AnimationTimer timer) {
-		SinglePlayer.timer = timer;
+		BattleGame.timer = timer;
 	}
 
 
@@ -183,7 +183,7 @@ public class SinglePlayer {
 		int posY = 400;
 
 		for (int i = 0; i < 4; i++) {
-			Sprite s = new Sprite(posX, posY - i * 41, "shield", "Shield", 64, 41, 1);
+			Sprite s = new Sprite(posX, posY - i * 64, "shield", "Shield", 64, 64, 1);
 			shields.add(s);
 			switchBox.getChildren().add(s);
 			posX += 140;
@@ -193,11 +193,9 @@ public class SinglePlayer {
 
 	private static void populateEnemies() {
 		int posX = 5;
-		int posY = -180;
+		int posY = -200;
 		int count = 0;
 		String sprites[] = { "enemy1", "enemy2", "enemy3", "enemy4" };
-		int X[] = {20,24,18,28};
-//		int Y[] = {22,25,25,22};
 		int file = 3;
 
 		for (int i = 0; i < 40; i++) {
@@ -207,7 +205,7 @@ public class SinglePlayer {
 				count = 0;
 				file--;
 			}
-			Sprite s = new Sprite(posX, posY - i * 32, "enemy", sprites[file], X[file], 32, 8);
+			Sprite s = new Sprite(posX, posY - i * 32, "enemy", sprites[file], 32, 32, 8);
 			enemies.add(s);
 			switchBox.getChildren().add(s);
 			posX += 40;
