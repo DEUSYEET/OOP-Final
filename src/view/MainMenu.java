@@ -64,7 +64,6 @@ public class MainMenu {
 		singlePlayer.setMinHeight(32);
 		singlePlayer.setMinWidth(100);
 		optionsBox.getChildren().add(singlePlayer);
-
 		multiPlayer.setMinHeight(32);
 		multiPlayer.setMinWidth(100);
 		optionsBox.getChildren().add(multiPlayer);
