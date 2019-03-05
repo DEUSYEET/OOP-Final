@@ -12,6 +12,7 @@ public class Sprite extends ImageView {
 	private String spriteFile;
 	private int frameCount;
 	private int howLongBeenOofed = -1;
+	private int zoom = 5;
 	
 
 	public Sprite(int x, int y, String type, String SpriteFile, int W, int H, int frameCount) {
@@ -78,19 +79,19 @@ public class Sprite extends ImageView {
 	}
 
 	public void moveLeft() {
-		setTranslateX(getTranslateX() - 5);
+		setTranslateX(getTranslateX() - zoom);
 	}
 
 	public void moveRight() {
-		setTranslateX(getTranslateX() + 5);
+		setTranslateX(getTranslateX() + zoom);
 	}
 
 	public void moveUp() {
-		setTranslateY(getTranslateY() - 5);
+		setTranslateY(getTranslateY() - zoom);
 	}
 
 	public void moveDown() {
-		setTranslateY(getTranslateY() + 5);
+		setTranslateY(getTranslateY() + zoom);
 	}
 
 	public int getW() {
@@ -108,4 +109,13 @@ public class Sprite extends ImageView {
 	public void setH(int h) {
 		H = h;
 	}
+
+	public int getZoom() {
+		return zoom;
+	}
+
+	public void setZoom(int zoom) {
+		this.zoom = zoom;
+	}
+	
 }
