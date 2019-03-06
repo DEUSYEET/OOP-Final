@@ -6,6 +6,7 @@ import application.Main;
 import application.Sprite;
 import javafx.scene.Scene;
 import models.Laser;
+import view.GameOverMenu;
 import view.MainMenu;
 import view.SinglePlayer;
 
@@ -130,6 +131,7 @@ public class SpaceInvaders {
 		if(gameOver){
 			System.out.println("GAME OVER");
 			gameOver = false;
+			MainMenu.getStage().setScene(GameOverMenu.getScene(MainMenu.getStage()));
 		}
 	}
 	
