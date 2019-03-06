@@ -179,7 +179,7 @@ public class SinglePlayer {
 		int posY = 400;
 
 		for (int i = 0; i < 4; i++) {
-			Sprite s = new Sprite(posX, posY - i * 41, "shield", "Shield", 64, 41, 1);
+			Sprite s = new Sprite(posX, posY - i * 41, "shield", "Shield", 64, 41, 10);
 			shields.add(s);
 			switchBox.getChildren().add(s);
 			posX += 140;
@@ -188,7 +188,7 @@ public class SinglePlayer {
 	}
 	
 	private static void populateLives() {
-		int posX = 470;
+		int posX = 400;
 		int posY = -23;
 
 		for (int i = 0; i < player.getLives(); i++) {
