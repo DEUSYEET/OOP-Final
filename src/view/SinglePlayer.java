@@ -243,11 +243,10 @@ public class SinglePlayer {
 	public static void removeLife() {
 		scoreBox.getChildren().remove(lives.remove(lives.size()-1));
 	}
-
 	private static AnimationTimer timer = new AnimationTimer() {
 		@Override
 		public void handle(long now) {
-			SpaceInvaders.update();
+				SpaceInvaders.update();
 		}
 	};
 
