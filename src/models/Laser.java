@@ -10,7 +10,7 @@ public class Laser {
 	private int speed;
 	private Sprite sprite;
 	
-	public Laser(int[] pos, LaserType type, int speed, Sprite sprite) {
+	public Laser(int[] pos, int speed, Sprite sprite) {
 		
 		setType(type);
 		setPosition(pos);
