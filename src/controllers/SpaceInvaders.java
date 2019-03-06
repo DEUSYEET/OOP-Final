@@ -11,7 +11,7 @@ import view.SinglePlayer;
 
 public class SpaceInvaders {
 	
-	public static boolean gameRunning = false;
+	public static boolean gameRunning = false, gameOver = false;
 	private static int frame = 0;
 	private static int enemySpeed = 100;
 	private static boolean playerMoving = false;
@@ -48,6 +48,11 @@ public class SpaceInvaders {
 				}
 				
 				SinglePlayer.setT(0);
+			}
+			
+			if(SinglePlayer.getLives().size() == 0) {
+				gameRunning = false;
+				gameOver = true;
 			}
 		
 		
@@ -121,6 +126,10 @@ public class SpaceInvaders {
 			
 			frame++;
 			frameLastShot++;
+		}
+		if(gameOver){
+			System.out.println("GAME OVER");
+			gameOver = false;
 		}
 	}
 	
@@ -198,6 +207,11 @@ public class SpaceInvaders {
 			case ESCAPE:
 				gameRunning = false;
 				MainMenu.getStage().setScene(MainMenu.getScene(MainMenu.getStage()));
+				break;
+			case L:
+				if(SinglePlayer.getLives().size() > 0) {
+					SinglePlayer.removeLife();
+				}
 			default:
 				break;
 			}
