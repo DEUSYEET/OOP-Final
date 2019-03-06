@@ -21,7 +21,6 @@ public class SpaceInvaders {
 	private static int frameLastShot = 120;
 
 	public static void update() {
-		
 		if (gameRunning) {
 			SinglePlayer.setT(SinglePlayer.getT() + 1);
 			if (SinglePlayer.getT() > 2) {
@@ -29,50 +28,40 @@ public class SpaceInvaders {
 					if (s.isOofed()) {
 						s.updateHowLongBeenOofed();
 					}
-					if (s.getHLBO() < 1 || !s.isOofed()) {					
+					if (s.getHLBO() < 1 || (!s.isOofed())) {					
 						s.update();
 					}
+				
 					else if (s.getHLBO() > 10 && s.isOofed()) {
-						System.out.println(s.getHLBO());
+						//System.out.println(s.getHLBO());
 						s.setTranslateY(42069);
 						SinglePlayer.getSprites().remove(s);
+			
 					}
 					else {
 						s.setSpriteFile("explosion");
+						SinglePlayer.addScore(10);
+						System.out.println(SinglePlayer.getScore());
 						s.setH(32);
 						s.setW(16);
 					}
-					
-				}
-				else if (s.getHLBO() > 10 && s.isOofed()) {
-					//System.out.println(s.getHLBO());
-					s.setTranslateY(42069);
-					SinglePlayer.getSprites().remove(s);
-		
-				}
-				else {
-					s.setSpriteFile("explosion");
-					SinglePlayer.addScore(10);
-					System.out.println(SinglePlayer.getScore());
-					s.setH(32);
-					s.setW(16);
 				}
 				
+				SinglePlayer.setT(0);
 			}
-
-			SinglePlayer.setT(0);
-		}
 		
-		controls(SinglePlayer.getScene());
-		SinglePlayer.getPlayer().movePlayer();
-		if (playerMoving) {
-			enemySpeed -= 20;
-		}
 		
-		if (frame % enemySpeed == 0) {
-			if (moveRight) {
-				for (Sprite e : SinglePlayer.getEnemies()) {
-					e.moveRight();
+			controls(SinglePlayer.getScene());
+			SinglePlayer.getPlayer().movePlayer();
+			if (playerMoving) {
+				enemySpeed -= 20;
+			}
+		
+			if (frame % enemySpeed == 0) {
+				if (moveRight) {
+					for (Sprite e : SinglePlayer.getEnemies()) {
+						e.moveRight();
+					}
 				}
 			}
 			if (playerMoving) {
@@ -127,7 +116,6 @@ public class SpaceInvaders {
 			frame++;
 			frameLastShot++;
 		}
-		
 	}
 	
 	private static int howFarOffScreen = 0;
