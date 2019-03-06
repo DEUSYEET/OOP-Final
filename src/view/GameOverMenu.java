@@ -29,12 +29,60 @@ public class GameOverMenu {
 
 		return scene;
 	}
-	
+
 	public static Stage getStage() {
 		return mainStage;
 	}
+  
+  private static void initGameOverMenu(Stage whoIs) {
+
+	}
+}
 
 	private static void initGameOverMenu(Stage whoIs) {
+
+		mainStage = whoIs;
+		root.setAlignment(Pos.CENTER);
+
+		Button playAgain = new Button("Play Again");
+		playAgain.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				SpaceInvaders.gameRunning = true;
+				mainStage.setScene(SinglePlayer.getScene(whoIs));
+			}
+
+		});
+
+		Button mainMenu = new Button("Main Menu");
+		mainMenu.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+
+				mainStage.setScene(MainMenu.getScene(whoIs));
+			}
+
+		});
+
+		BackgroundFill background = new BackgroundFill(Color.BLACK, new CornerRadii(1), null);
+		VBox optionsBox = new VBox(20);
+
+		optionsBox.setAlignment(Pos.CENTER);
+		optionsBox.setPadding(new Insets(20, 80, 20, 80));
+		playAgain.setMinHeight(32);
+		playAgain.setMinWidth(100);
+		optionsBox.getChildren().add(playAgain);
+		mainMenu.setMinHeight(32);
+		mainMenu.setMinWidth(100);
+		optionsBox.getChildren().add(mainMenu);
+		optionsBox.setBackground(new Background(background));
+		optionsBox.setMinHeight(100000000);
+
+		root.getChildren().addAll(optionsBox);
+
+		isInited = true;
 
 	}
 }
