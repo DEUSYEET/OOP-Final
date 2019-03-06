@@ -18,9 +18,9 @@ import javafx.stage.Stage;
 import models.Player;
 
 public class CoOpGame {
-	
+
 	private static VBox root = new VBox();
-	private static Scene scene = new Scene(root, 600, 600);
+	private static Scene scene = new Scene(root, 1200, 600);
 	private static Stage mainStage;
 	private static boolean isInited = false;
 	private static Player player = new Player(1);
@@ -182,8 +182,8 @@ public class CoOpGame {
 		int posX = 50;
 		int posY = 400;
 
-		for (int i = 0; i < 4; i++) {
-			Sprite s = new Sprite(posX, posY - i * 64, "shield", "Shield", 64, 64, 1);
+		for (int i = 0; i < 8; i++) {
+			Sprite s = new Sprite(posX, posY - i * 41, "shield", "Shield", 64, 41, 1);
 			shields.add(s);
 			switchBox.getChildren().add(s);
 			posX += 140;
@@ -193,19 +193,21 @@ public class CoOpGame {
 
 	private static void populateEnemies() {
 		int posX = 5;
-		int posY = -200;
+		int posY = -180;
 		int count = 0;
 		String sprites[] = { "enemy1", "enemy2", "enemy3", "enemy4" };
+		int X[] = {20,24,18,28};
+//		int Y[] = {22,25,25,22};
 		int file = 3;
 
-		for (int i = 0; i < 40; i++) {
-			if (count >= 10) {
+		for (int i = 0; i < 80; i++) {
+			if (count >= 20) {
 				posY += 50;
 				posX = 5;
 				count = 0;
 				file--;
 			}
-			Sprite s = new Sprite(posX, posY - i * 32, "enemy", sprites[file], 32, 32, 8);
+			Sprite s = new Sprite(posX, posY - i * 32, "enemy", sprites[file], X[file], 32, 8);
 			enemies.add(s);
 			switchBox.getChildren().add(s);
 			posX += 40;
