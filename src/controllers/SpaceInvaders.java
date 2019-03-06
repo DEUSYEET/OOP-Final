@@ -68,6 +68,11 @@ public class SpaceInvaders {
 						e.moveRight();
 					}
 				}
+				else {
+					for (Sprite e : SinglePlayer.getEnemies()) {
+						e.moveLeft();
+					}
+				}
 			}
 			if (playerMoving) {
 				enemySpeed += 20;
@@ -77,6 +82,7 @@ public class SpaceInvaders {
 				
 				if (!e.isOofed() && (e.getTranslateX() < 0 || e.getTranslateX() > 570)) {
 					moveRight = !moveRight;
+					System.out.println(e.getTranslateX());
 					if (e.getTranslateX() < 0) {
 						for (Sprite es : SinglePlayer.getEnemies()) {
 							es.moveDown();
