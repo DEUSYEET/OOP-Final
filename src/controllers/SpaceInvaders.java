@@ -10,7 +10,7 @@ import view.MainMenu;
 import view.SinglePlayer;
 
 public class SpaceInvaders {
-	
+
 	public static boolean gameRunning = false;
 	private static int frame = 0;
 	private static int enemySpeed = 100;
@@ -32,18 +32,9 @@ public class SpaceInvaders {
 					if (s.getHLBO() < 1 || !s.isOofed()) {					
 						s.update();
 					}
-					else if (s.getHLBO() > 10 && s.isOofed()) {
-						System.out.println(s.getHLBO());
-						s.setTranslateY(42069);
-						SinglePlayer.getSprites().remove(s);
-					}
-					else {
-						s.setSpriteFile("explosion");
-						s.setH(32);
-						s.setW(16);
-					}
+				
 					
-				}
+				
 				else if (s.getHLBO() > 10 && s.isOofed()) {
 					//System.out.println(s.getHLBO());
 					s.setTranslateY(42069);
@@ -61,6 +52,7 @@ public class SpaceInvaders {
 			}
 
 			SinglePlayer.setT(0);
+		
 		}
 		
 		controls(SinglePlayer.getScene());
@@ -126,35 +118,37 @@ public class SpaceInvaders {
 			
 			frame++;
 			frameLastShot++;
+			}
 		}
-		
+
 	}
-	
+
 	private static int howFarOffScreen = 0;
-	
+
 	private static void checkIfLaserTouchesAnything() {
-		
+
 		ArrayList<Laser> offed = new ArrayList<Laser>();
 		ArrayList<Sprite> kaboomed = new ArrayList<Sprite>();
-		
+
 		for (Laser l : lasers) {
 			for (Sprite s : SinglePlayer.getSprites()) {
-				
-				if (l.getSprite().getBoundsInParent().intersects(s.getBoundsInParent()) && !l.getSprite().equals(s) && !s.isOofed()) {
+
+				if (l.getSprite().getBoundsInParent().intersects(s.getBoundsInParent()) && !l.getSprite().equals(s)
+						&& !s.isOofed()) {
 					// kaboom
 					System.out.println("hit");
 					frameLastShot = 120;
 					offed.add(l);
 					kaboomed.add(s);
 					howFarOffScreen++;
-					
+
 				}
-				if ( l.getSprite().getTranslateY() < -1500 - (32 * howFarOffScreen)) {
+				if (l.getSprite().getTranslateY() < -1500 - (32 * howFarOffScreen)) {
 					System.out.println("Off");
 					offed.add(l);
 					howFarOffScreen++;
 				}
-				
+
 			}
 		}
 		for (Laser l : offed) {
@@ -175,7 +169,7 @@ public class SpaceInvaders {
 				e.setZoom(e.getZoom() + 1);
 			}
 		}
-		
+
 	}
 
 	private static void controls(Scene scene) {
@@ -191,10 +185,9 @@ public class SpaceInvaders {
 				break;
 			case SPACE:
 				SinglePlayer.removeLife();
-				
-				
+
 				if (frameLastShot > 110) {
-					int[] pos = {(int) SinglePlayer.getPlayer().getSprite().getTranslateX(),0};
+					int[] pos = { (int) SinglePlayer.getPlayer().getSprite().getTranslateX(), 0 };
 					Laser laser = new Laser(pos, 1, new Sprite(pos[0] + 14, 0, "laser", "PlayerLaser", 4, 32, 8));
 					laser.getSprite().setTranslateY(-980 - (playerShots * 32));
 					lasers.add(laser);
@@ -229,9 +222,8 @@ public class SpaceInvaders {
 		}));
 	}
 
-
 	public static void startApp(String[] args) {
-		
+
 		Main.main(args);
 
 	}
