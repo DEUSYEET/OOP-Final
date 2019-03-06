@@ -63,6 +63,11 @@ public class SpaceInvaders {
 						e.moveRight();
 					}
 				}
+				else {
+					for (Sprite e : SinglePlayer.getEnemies()) {
+						e.moveLeft();
+					}
+				}
 			}
 			if (playerMoving) {
 				enemySpeed += 20;
@@ -72,6 +77,7 @@ public class SpaceInvaders {
 				
 				if (!e.isOofed() && (e.getTranslateX() < 0 || e.getTranslateX() > 570)) {
 					moveRight = !moveRight;
+					System.out.println(e.getTranslateX());
 					if (e.getTranslateX() < 0) {
 						for (Sprite es : SinglePlayer.getEnemies()) {
 							es.moveDown();
@@ -178,9 +184,6 @@ public class SpaceInvaders {
 				playerMoving = true;
 				break;
 			case SPACE:
-				SinglePlayer.removeLife();
-				
-				
 				if (frameLastShot > 110) {
 					int[] pos = {(int) SinglePlayer.getPlayer().getSprite().getTranslateX(),0};
 					Laser laser = new Laser(pos, 1, new Sprite(pos[0] + 14, 0, "laser", "PlayerLaser", 4, 32, 8));
