@@ -19,6 +19,7 @@ public class SpaceInvaders {
 	private static ArrayList<Laser> lasers = new ArrayList<Laser>();
 	private static int playerShots = 0;
 	private static int frameLastShot = 120;
+	private static int howFarOffScreen = 0;
 
 	public static void update() {
 		
@@ -123,7 +124,6 @@ public class SpaceInvaders {
 
 	}
 
-	private static int howFarOffScreen = 0;
 
 	private static void checkIfLaserTouchesAnything() {
 
