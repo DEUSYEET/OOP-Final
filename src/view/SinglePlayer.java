@@ -188,7 +188,7 @@ public class SinglePlayer {
 	}
 	
 	private static void populateLives() {
-		int posX = 400;
+		int posX = 470;
 		int posY = -23;
 
 		for (int i = 0; i < player.getLives(); i++) {

@@ -12,7 +12,7 @@ import view.SinglePlayer;
 public class SpaceInvaders {
 
 	public static boolean gameRunning = false;
-	private static int frame = 0;
+	private static int frame = 10;
 	private static int enemySpeed = 100;
 	private static boolean playerMoving = false;
 	private static boolean moveRight = true;
