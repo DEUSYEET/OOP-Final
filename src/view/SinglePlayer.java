@@ -241,9 +241,7 @@ public class SinglePlayer {
 	public static void removeLife() {
 		scoreBox.getChildren().remove(lives.remove(lives.size()-1));
 	}
-	public static void addLives() {
-//		scoreBox.getChildren().set(lives.add(3, getLives().get(1)));
-	}
+	
 	private static AnimationTimer timer = new AnimationTimer() {
 		@Override
 		public void handle(long now) {
