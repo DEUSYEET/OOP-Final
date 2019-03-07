@@ -23,6 +23,7 @@ public class SpaceInvaders {
 	private static int playerShots = 0;
 	private static int frameLastShot = 120;
 	private static int howFarOffScreen = 0;
+	public static int timesSnapped = 0;
 
 	public static void update() {
 		if (gameRunning) {
@@ -108,6 +109,9 @@ public class SpaceInvaders {
 				if (!e.isOofed() && (e.getTranslateX() < 0 || e.getTranslateX() > 570)) {
 					moveRight = !moveRight;
 					System.out.println(e.getTranslateX());
+					if (e.getTranslateY() < 0) {
+						gameOver = true;
+					}
 					if (e.getTranslateX() < 0) {
 						for (Sprite es : SinglePlayer.getEnemies()) {
 							es.moveDown();
@@ -139,18 +143,6 @@ public class SpaceInvaders {
 			if (SinglePlayer.getEnemies().isEmpty()) {
 				SinglePlayer.populateEnemies();
 			}
-
-			// set position of enemies
-
-			// set position of player(s)
-
-			// set position of laser
-
-			// check if anything has been hit by anything
-			// if laser hits enemy = dead
-			// if laser hits player = lose a life out of 3
-			// if laser hits barricade = breaks
-			// if enemy hits block = breaks sections that are touched
 
 			frame++;
 			frameLastShot++;
@@ -253,7 +245,7 @@ public class SpaceInvaders {
 				if (frameLastShot > 110) {
 					int[] pos = {(int) SinglePlayer.getPlayer().getSprite().getTranslateX(),0};
 					Laser laser = new Laser(pos, 1,LaserType.NORMAL, new Sprite(pos[0] + 14, 0, "laser", "PlayerLaser", 4, 32, 8));
-					laser.getSprite().setTranslateY(-980 - (playerShots * 32));
+					laser.getSprite().setTranslateY(-980 - (playerShots * 32) - (timesSnapped * 9000));
 					lasers.add(laser);
 					SinglePlayer.getSwitchBox().getChildren().add(laser.getSprite());
 					playerShots++;
