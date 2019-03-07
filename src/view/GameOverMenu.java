@@ -33,8 +33,7 @@ public class GameOverMenu {
 	public static Stage getStage() {
 		return mainStage;
 	}
-  
-  
+
 
 	private static void initGameOverMenu(Stage whoIs) {
 
