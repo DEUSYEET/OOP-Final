@@ -34,10 +34,10 @@ public class GameOverMenu {
 		return mainStage;
 	}
   
-  private static void initGameOverMenu(Stage whoIs) {
+ // private static void initGameOverMenu(Stage whoIs) {
 
-	}
-}
+//	}
+
 
 	private static void initGameOverMenu(Stage whoIs) {
 
