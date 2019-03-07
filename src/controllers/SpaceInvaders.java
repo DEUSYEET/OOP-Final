@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import application.Main;
 import application.Sprite;
+import enums.LaserType;
 import javafx.scene.Scene;
 import models.Laser;
 import view.MainMenu;
@@ -34,13 +35,23 @@ public class SpaceInvaders {
 				
 					else if (s.getHLBO() > 10 && s.isOofed()) {
 						//System.out.println(s.getHLBO());
+						if (s.getType().equals("player")) {
+							s.setSpriteFile("idle");
+							s.setH(24);
+							s.setW(32);
+							s.setOofed(false);
+							s.setHLBO(-1);
+							continue;
+						}
 						s.setTranslateY(42069);
 						SinglePlayer.getSprites().remove(s);
 			
 					}
 					else {
 						s.setSpriteFile("explosion");
-						SinglePlayer.addScore(10);
+						if (!s.getType().equals("player")) {
+							SinglePlayer.addScore(10);
+						}
 						System.out.println(SinglePlayer.getScore());
 						s.setH(32);
 						s.setW(16);
@@ -58,7 +69,14 @@ public class SpaceInvaders {
 			}
 		
 			if (frame % enemySpeed == 0) {
+				// make the enemy shoot not the player
+				int[] pos = {(int) SinglePlayer.getPlayer().getSprite().getTranslateX(),0};
+				Laser laser = new Laser(pos, 1,LaserType.ALIEN, new Sprite(pos[0] + 14, 0, "laser", "EnemyLaser", 4, 32, 8));
+				laser.getSprite().setTranslateY(-980 - (playerShots * 32));
+				lasers.add(laser);
+				SinglePlayer.getSwitchBox().getChildren().add(laser.getSprite());
 				if (moveRight) {
+					System.out.println(frameLastShot);
 					for (Sprite e : SinglePlayer.getEnemies()) {
 						e.moveRight();
 					}
@@ -96,8 +114,11 @@ public class SpaceInvaders {
 			}
 			
 			for (Laser l: lasers) {
-				if (frame % l.getSpeed() == 0) {
+				if (frame % l.getSpeed() == 0 && l.getType().equals(LaserType.NORMAL)) {
 					l.getSprite().moveUp();
+				}
+				else if (frame % l.getSpeed() == 0 && l.getType().equals(LaserType.ALIEN)) {
+					l.getSprite().moveDown();
 				}
 			}
 			
@@ -158,6 +179,9 @@ public class SpaceInvaders {
 		}
 		boolean zoomUp = false;
 		for (Sprite s : kaboomed) {
+			if (s.getType().equals("player")) {
+				SinglePlayer.removeLife();
+			}
 			s.setOofed(true);
 			if (s.getType().equals("enemy")) {
 				SinglePlayer.getEnemies().remove(s);
@@ -186,7 +210,7 @@ public class SpaceInvaders {
 			case SPACE:
 				if (frameLastShot > 110) {
 					int[] pos = {(int) SinglePlayer.getPlayer().getSprite().getTranslateX(),0};
-					Laser laser = new Laser(pos, 1, new Sprite(pos[0] + 14, 0, "laser", "PlayerLaser", 4, 32, 8));
+					Laser laser = new Laser(pos, 1,LaserType.NORMAL, new Sprite(pos[0] + 14, 0, "laser", "PlayerLaser", 4, 32, 8));
 					laser.getSprite().setTranslateY(-980 - (playerShots * 32));
 					lasers.add(laser);
 					SinglePlayer.getSwitchBox().getChildren().add(laser.getSprite());
