@@ -11,6 +11,7 @@ public class Sprite extends ImageView {
 	private int H;
 	private String spriteFile;
 	private int frameCount;
+	private int currentFrame=1;
 	private int howLongBeenOofed = -1;
 	private int zoom = 5;
 	
@@ -76,6 +77,11 @@ public class Sprite extends ImageView {
 	public void update() {
 		animation.nextFrame();
 		setImage(animation.getCurrentFrame());
+//		if (currentFrame>=frameCount) {
+//			currentFrame=0;
+//		}else {
+			currentFrame++;
+//		}
 	}
 
 	public void moveLeft() {
@@ -116,6 +122,14 @@ public class Sprite extends ImageView {
 
 	public void setZoom(int zoom) {
 		this.zoom = zoom;
+	}
+
+	public int getCurrentFrame() {
+		return currentFrame;
+	}
+
+	public void setCurrentFrame(int currentFrame) {
+		this.currentFrame = currentFrame;
 	}
 	
 }
