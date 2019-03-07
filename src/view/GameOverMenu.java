@@ -46,8 +46,10 @@ public class GameOverMenu {
 			@Override
 			public void handle(ActionEvent arg0) {
 				SpaceInvaders.gameRunning = true;
+				SinglePlayer.getRoot().getChildren().removeAll(SinglePlayer.getRoot().getChildren());
 				SinglePlayer.setInited(false);
 				mainStage.setScene(SinglePlayer.getScene(whoIs));
+				
 			}
 
 		});
@@ -61,6 +63,9 @@ public class GameOverMenu {
 				mainStage.setScene(MainMenu.getScene(whoIs));
 			}
 
+			
+			
+			
 		});
 
 		BackgroundFill background = new BackgroundFill(Color.BLACK, new CornerRadii(1), null);
