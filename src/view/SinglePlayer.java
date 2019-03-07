@@ -23,7 +23,8 @@ import javafx.stage.Stage;
 import models.Player;
 
 public class SinglePlayer {
-
+	
+	private static boolean beenRan = false;
 	private static VBox root = new VBox();
 	private static Scene scene = new Scene(root, 600, 600);
 	private static Stage mainStage;
@@ -41,6 +42,8 @@ public class SinglePlayer {
 	private static Text scoreText = new Text(0, 0, "Score: " + Integer.toString(score));
 
 	public static Scene getScene(Stage whoIs) {
+		
+		setBeenRan(true);
 		
 		if (!isInited) {
 			initStage(whoIs);
@@ -252,6 +255,14 @@ public class SinglePlayer {
 	public static void snap() {
 		//perfectly balanced, as all things should be
 			root.getChildren().removeAll(root.getChildren());
+	}
+
+	public static boolean isBeenRan() {
+		return beenRan;
+	}
+
+	public static void setBeenRan(boolean beenRan) {
+		SinglePlayer.beenRan = beenRan;
 	}
 
 
