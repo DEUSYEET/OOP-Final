@@ -253,7 +253,9 @@ public class SinglePlayer {
 
 	public static void snap() {
 		//perfectly balanced, as all things should be
-			root.getChildren().removeAll(root.getChildren());
+		int perserve = SpaceInvaders.timesSnapped;
+		root.getChildren().removeAll(root.getChildren());
+		SpaceInvaders.timesSnapped = perserve;
 	}
 
 
