@@ -136,8 +136,6 @@ public class SinglePlayer {
 
 
 	public static void initStage(Stage whoIs) {
-
-		
 		mainStage = whoIs;
 		whoIs.setResizable(false);
 		root.setAlignment(Pos.CENTER);
@@ -179,7 +177,7 @@ public class SinglePlayer {
 		int posY = 400;
 
 		for (int i = 0; i < 4; i++) {
-			Sprite s = new Sprite(posX, posY - i * 41, "shield", "Shield", 64, 41, 1);
+			Sprite s = new Sprite(posX, posY - i * 41, "shield", "Shield", 64, 41, 10);
 			shields.add(s);
 			switchBox.getChildren().add(s);
 			posX += 140;
@@ -243,11 +241,13 @@ public class SinglePlayer {
 	public static void removeLife() {
 		scoreBox.getChildren().remove(lives.remove(lives.size()-1));
 	}
-
+	public static void addLives() {
+//		scoreBox.getChildren().set(lives.add(3, getLives().get(1)));
+	}
 	private static AnimationTimer timer = new AnimationTimer() {
 		@Override
 		public void handle(long now) {
-			SpaceInvaders.update();
+				SpaceInvaders.update();
 		}
 	};
 
