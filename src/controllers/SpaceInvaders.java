@@ -5,12 +5,9 @@ import java.util.ArrayList;
 import application.Main;
 import application.Sprite;
 import enums.LaserType;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import models.Laser;
-import view.GameOverMenu;
-import view.MainMenu;
-import view.SinglePlayer;
+import view.*;
 
 public class SpaceInvaders {
 	
@@ -255,7 +252,7 @@ public class SpaceInvaders {
 				break;
 			case ESCAPE:
 				gameRunning = false;
-//				MainMenu.getStage().setScene(Pause.getScene(MainMenu.getStage()));
+				MainMenu.getStage().setScene(Pause.getScene(MainMenu.getStage()));
 				break;
 			case L:
 				if(SinglePlayer.getLives().size() > 0) {
