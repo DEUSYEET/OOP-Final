@@ -255,21 +255,6 @@ public class SinglePlayer {
 	public static void snap() {
 		//perfectly balanced, as all things should be
 			root.getChildren().removeAll(root.getChildren());
-<<<<<<< HEAD
-			score = 0;
-		int perserve = SpaceInvaders.timesSnapped;
-		root.getChildren().removeAll(root.getChildren());
-		SpaceInvaders.timesSnapped = perserve;
-	}
-
-	public static boolean isBeenRan() {
-		return beenRan;
-	}
-
-	public static void setBeenRan(boolean beenRan) {
-		SinglePlayer.beenRan = beenRan;
-=======
->>>>>>> parent of 18b7581... Enemy Lasers
 	}
 
 
