@@ -314,7 +314,7 @@ public class SpaceInvaders {
 			case SPACE:
 				if (frameLastShot > 110) {
 					int[] pos = { (int) SinglePlayer.getPlayer().getSprite().getTranslateX(), 0 };
-					Laser laser = new Laser(pos, 1, LaserType.NORMAL,
+					Laser laser = new Laser(1, LaserType.NORMAL,
 							new Sprite(pos[0] + 14, 0, "laser", "PlayerLaser", 4, 32, 8));
 					laser.getSprite().setTranslateY(-980 - (playerShots * 32) - (timesSnapped * 9000));
 					lasers.add(laser);

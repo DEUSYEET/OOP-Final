@@ -45,10 +45,9 @@ public class GameOverMenu {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				SpaceInvaders.reset();
 				SinglePlayer.addScore(-SinglePlayer.getScore());
 				SpaceInvaders.gameRunning = true;
-				SinglePlayer.snap();
+				//SinglePlayer.snap();
 				SinglePlayer.setInited(false);
 				mainStage.setScene(SinglePlayer.getScene(whoIs));
 				
