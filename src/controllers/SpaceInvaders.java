@@ -18,7 +18,7 @@ public class SpaceInvaders {
 	public static int countToBottom;
 	public static boolean gameRunning = false, gameOver = false;
 	private static int frame = 0;
-	private static int enemySpeed = 10;
+	private static int enemySpeed = 100;
 	private static boolean playerMoving = false;
 	private static boolean moveRight = true;
 	private static ArrayList<Laser> lasers = new ArrayList<Laser>();
@@ -49,7 +49,7 @@ public class SpaceInvaders {
 									shoot(s);
 								}
 							} else {
-								if (rng.nextInt() % 10 == 0) {
+								if (rng.nextInt() % 1000 == 0) {
 
 									shoot(s);
 								}
@@ -344,3 +344,4 @@ public class SpaceInvaders {
 
 	}
 }
+
