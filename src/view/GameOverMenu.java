@@ -1,5 +1,6 @@
 package view;
 
+import application.Sprite;
 import controllers.SpaceInvaders;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -47,10 +48,14 @@ public class GameOverMenu {
 
 			@Override
 			public void handle(ActionEvent arg0) {
+				for (Sprite e : SinglePlayer.getEnemies()) {
+
+					e.setTranslateX(5);
+				}
 				SpaceInvaders.setEnemySpeed(100);
 				SinglePlayer.addScore(-SinglePlayer.getScore());
 				SpaceInvaders.gameRunning = true;
-				SinglePlayer.snap();
+				//SinglePlayer.snap();
 				SinglePlayer.setInited(false);
 				mainStage.setScene(SinglePlayer.getScene(whoIs));
 				
