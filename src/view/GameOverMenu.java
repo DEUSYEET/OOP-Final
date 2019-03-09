@@ -49,6 +49,7 @@ public class GameOverMenu {
 			@Override
 			public void handle(ActionEvent arg0) {
 				for (Sprite e : SinglePlayer.getEnemies()) {
+
 					e.setTranslateX(5);
 				}
 				SpaceInvaders.setEnemySpeed(100);
