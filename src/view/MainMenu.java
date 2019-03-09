@@ -47,6 +47,7 @@ public class MainMenu {
 			public void handle(ActionEvent arg0) {
 				SpaceInvaders.gameRunning = true;
 				if (SinglePlayer.isBeenRan()) {
+					SpaceInvaders.setEnemySpeed(100);
 					SinglePlayer.snap();
 					SinglePlayer.setInited(false);
 					SinglePlayer.addScore(-SinglePlayer.getScore());
