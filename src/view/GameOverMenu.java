@@ -1,5 +1,6 @@
 package view;
 
+import application.Sprite;
 import controllers.SpaceInvaders;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -45,14 +46,12 @@ public class GameOverMenu {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-<<<<<<< HEAD
+				for (Sprite e : SinglePlayer.getEnemies()) {
+					e.setTranslateX(5);
+				}
 				SinglePlayer.addScore(-SinglePlayer.getScore());
 				SpaceInvaders.gameRunning = true;
 				//SinglePlayer.snap();
-=======
-				SpaceInvaders.gameRunning = true;
-				SinglePlayer.getRoot().getChildren().removeAll(SinglePlayer.getRoot().getChildren());
->>>>>>> parent of 18b7581... Enemy Lasers
 				SinglePlayer.setInited(false);
 				mainStage.setScene(SinglePlayer.getScene(whoIs));
 				

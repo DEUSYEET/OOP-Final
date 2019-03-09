@@ -38,6 +38,7 @@ public class SinglePlayer {
 	private static VBox scoreBox;
 	private static int t;
 	private static int score = 0;
+	private static int livesCount;
 	
 	private static Text scoreText = new Text(0, 0, "Score: " + Integer.toString(score));
 
@@ -197,6 +198,7 @@ public class SinglePlayer {
 			lives.add(s);
 			scoreBox.getChildren().add(lives.get(i));
 			posX += 40;
+			livesCount++;
 		}
 
 	}
@@ -243,6 +245,7 @@ public class SinglePlayer {
 	}
 	public static void removeLife() {
 		scoreBox.getChildren().remove(lives.remove(lives.size()-1));
+		livesCount--;
 	}
 	
 	private static AnimationTimer timer = new AnimationTimer() {
@@ -255,6 +258,25 @@ public class SinglePlayer {
 	public static void snap() {
 		//perfectly balanced, as all things should be
 			root.getChildren().removeAll(root.getChildren());
+
+			score = 0;
+		int perserve = SpaceInvaders.timesSnapped;
+		root.getChildren().removeAll(root.getChildren());
+		SpaceInvaders.timesSnapped = perserve;
+		SpaceInvaders.reset();
+		
+	}
+
+	public static boolean isBeenRan() {
+		return beenRan;
+	}
+
+	public static void setBeenRan(boolean beenRan) {
+		SinglePlayer.beenRan = beenRan;
+	}
+
+	public static int getLivesCount() {
+		return livesCount;
 	}
 
 
