@@ -1,6 +1,6 @@
 package models;
 
-import application.Sprite;
+import models.Sprite;
 
 public class Player {
 
@@ -19,7 +19,7 @@ public class Player {
 		setLives(3);
 		setCurrentPowerUp(null);
 		setScore(0);
-		int[] pos = {0,0};
+		int[] pos = {5,520};
 		setPosition(pos);
 		setAlive(true);
 		this.sprite = new Sprite(5, 520, "player", "idle", 32, 24, 8);
@@ -28,16 +28,19 @@ public class Player {
 	
 	public void movePlayer() {
 		
-		if (sprite.getTranslateX() >= 570) {
+		if (position[0] >= 570) {
 			setSpeed(0);
+			position[0] = 569;
 			sprite.setTranslateX(569);
 		}
-		if (sprite.getTranslateX() <= 0) {
+		if (position[0] <= 0) {
 			setSpeed(0);
+			position[0] = 1;
 			sprite.setTranslateX(1);
 		}
 		
 		sprite.setTranslateX(sprite.getTranslateX() + getSpeed());
+		position[0] += getSpeed();
 		
 	}
 	public int getSpeed() {

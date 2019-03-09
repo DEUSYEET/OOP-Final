@@ -2,21 +2,17 @@
 package application;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import view.MainMenu;
 
 public class Main extends Application {
 
-	BorderPane root;
-
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			MainMenu mainMenu = new MainMenu(primaryStage);
 			
-			Scene mainMenu = MainMenu.getScene(primaryStage);
-			primaryStage.setScene(mainMenu);
+			primaryStage.setScene(mainMenu.getScene());
 			primaryStage.setResizable(false);
 			primaryStage.setTitle("Space Invaders Battle");
 			primaryStage.show();

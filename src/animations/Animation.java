@@ -2,7 +2,7 @@ package animations;
 
 import javafx.scene.image.Image;
 
-public class Animation {
+public class Animation{
 	int frameCount;
 	Image frames[];
 	Image currentFrame;
@@ -37,6 +37,7 @@ public class Animation {
 
 	public void nextFrame() {
 		if (frameCount > 1) {
+			
 			if (frameNum >= frameCount - 1) {
 				frameNum = 0;
 			}

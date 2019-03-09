@@ -29,9 +29,9 @@ public class Sprite extends ImageView {
 	}
 	
 	public void setSpriteFile(String spriteFile) {
+		this.spriteFile = spriteFile;
 		createAnimation();
 		setImage(animation.getCurrentFrame());
-		this.spriteFile = spriteFile;
 	}
 
 	private void createAnimation() {
@@ -77,11 +77,7 @@ public class Sprite extends ImageView {
 	public void update() {
 		animation.nextFrame();
 		setImage(animation.getCurrentFrame());
-//		if (currentFrame>=frameCount) {
-//			currentFrame=0;
-//		}else {
-			currentFrame++;
-//		}
+		currentFrame++;
 	}
 
 	public void moveLeft() {

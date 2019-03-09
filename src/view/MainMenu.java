@@ -1,7 +1,6 @@
 
 package view;
 
-import controllers.SpaceInvaders;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -16,81 +15,54 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class MainMenu {
-
-	private static VBox root = new VBox();
-	private static Scene scene = new Scene(root, 600, 600);
-	private static Stage mainStage;
-	private static boolean isInited = false;
-
-	public static Scene getScene(Stage whoIs) {
-
-		if (!isInited) {
-			initMainMenu(whoIs);
-		}
-
-		return scene;
+	
+	private VBox root;
+	private Scene mainMenu;
+	private Button singlePlayer = new Button("Single Player");
+	private Button multiPlayer = new Button("MultiPlayer");
+	private Stage inside;
+	
+	public MainMenu(Stage inside) {
+		
+		root = new VBox();
+		mainMenu = new Scene(root, 600,600);
+		this.inside = inside;
+		
+		initMainMenu();
+		
+	}
+	
+	public Scene getScene() {
+		return mainMenu;
 	}
 
-	public static Stage getStage() {
-		return mainStage;
-	}
-
-	private static void initMainMenu(Stage whoIs) {
-
-		mainStage = whoIs;
+	private void initMainMenu() {
+		
+		BackgroundFill background = new BackgroundFill(Color.BLACK, new CornerRadii(1), null);
+		SinglePlayer sInglePlayer = new SinglePlayer();
+		
 		root.setAlignment(Pos.CENTER);
-
-		Button singlePlayer = new Button("Single Player");
+		root.setPadding(new Insets(20, 80, 20, 80));
+		singlePlayer.setMinHeight(32);
+		singlePlayer.setMinWidth(200);
 		singlePlayer.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				SpaceInvaders.gameRunning = true;
-				if (SinglePlayer.isBeenRan()) {
-					SinglePlayer.snap();
-					SinglePlayer.setInited(false);
-					SinglePlayer.addScore(-SinglePlayer.getScore());
-					if (SinglePlayer.getLives().size()>0) {
-						for (int i = 0; i < SinglePlayer.getLives().size(); i++) {
-							SinglePlayer.removeLife();
-						}
-					}
-						SpaceInvaders.gameRunning = true;
-					
-				}
-				mainStage.setScene(SinglePlayer.getScene(whoIs));
+
+				inside.setScene(sInglePlayer.getScene());
+				
 			}
 
 		});
-
-		Button multiPlayer = new Button("MultiPlayer");
-		multiPlayer.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent arg0) {
-
-				mainStage.setScene(MultiPlayerMenu.getScene(whoIs));
-			}
-
-		});
-
-		BackgroundFill background = new BackgroundFill(Color.BLACK, new CornerRadii(1), null);
-		VBox optionsBox = new VBox(20);
-
-		optionsBox.setAlignment(Pos.CENTER);
-		optionsBox.setPadding(new Insets(20, 80, 20, 80));
-		singlePlayer.setMinHeight(32);
-		singlePlayer.setMinWidth(100);
-		optionsBox.getChildren().add(singlePlayer);
 		multiPlayer.setMinHeight(32);
-		multiPlayer.setMinWidth(100);
-		optionsBox.getChildren().add(multiPlayer);
-		optionsBox.setBackground(new Background(background));
-		optionsBox.setMinHeight(100000000);
-
-		root.getChildren().addAll(optionsBox);
-
-		isInited = true;
-
+		multiPlayer.setMinWidth(200);
+		root.setBackground(new Background(background));
+		
+		root.getChildren().add(singlePlayer);
+		root.getChildren().add(multiPlayer);
+		root.setBackground(new Background(background));
+		
 	}
+	
 }
