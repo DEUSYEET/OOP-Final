@@ -16,7 +16,7 @@ import view.Pause;
 import view.SinglePlayer;
 
 public class SpaceInvaders {
-
+	public static int countToBottom;
 	public static boolean gameRunning = false, gameOver = false;
 	private static int frame = 0;
 	private static int enemySpeed = 10;
@@ -124,7 +124,7 @@ public class SpaceInvaders {
 
 				
 				int X= (int) e.getTranslateX();
-				SinglePlayer.getPlayer().getSprite().setTranslateX(X);
+			//	SinglePlayer.getPlayer().getSprite().setTranslateX(X);
 				if (!e.isOofed() && (X < 0 || X > 570)) {
 					moveRight = !moveRight;
 					System.out.println(moveRight);
