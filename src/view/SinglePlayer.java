@@ -23,7 +23,8 @@ import javafx.stage.Stage;
 import models.Player;
 
 public class SinglePlayer {
-
+	
+	private static boolean beenRan = false;
 	private static VBox root = new VBox();
 	private static Scene scene = new Scene(root, 600, 600);
 	private static Stage mainStage;
@@ -37,10 +38,13 @@ public class SinglePlayer {
 	private static VBox scoreBox;
 	private static int t;
 	private static int score = 0;
+	private static int livesCount;
 	
 	private static Text scoreText = new Text(0, 0, "Score: " + Integer.toString(score));
 
 	public static Scene getScene(Stage whoIs) {
+		
+		setBeenRan(true);
 		
 		if (!isInited) {
 			initStage(whoIs);
@@ -194,6 +198,7 @@ public class SinglePlayer {
 			lives.add(s);
 			scoreBox.getChildren().add(lives.get(i));
 			posX += 40;
+			livesCount++;
 		}
 
 	}
@@ -240,10 +245,9 @@ public class SinglePlayer {
 	}
 	public static void removeLife() {
 		scoreBox.getChildren().remove(lives.remove(lives.size()-1));
+		livesCount--;
 	}
-	public static void addLives() {
-//		scoreBox.getChildren().set(lives.add(3, getLives().get(1)));
-	}
+	
 	private static AnimationTimer timer = new AnimationTimer() {
 		@Override
 		public void handle(long now) {
@@ -253,9 +257,27 @@ public class SinglePlayer {
 
 	public static void snap() {
 		//perfectly balanced, as all things should be
+			root.getChildren().removeAll(root.getChildren());
+
+			score = 0;
 		int perserve = SpaceInvaders.timesSnapped;
+		SinglePlayer.getEnemies().clear();
 		root.getChildren().removeAll(root.getChildren());
 		SpaceInvaders.timesSnapped = perserve;
+		SpaceInvaders.reset();
+		
+	}
+
+	public static boolean isBeenRan() {
+		return beenRan;
+	}
+
+	public static void setBeenRan(boolean beenRan) {
+		SinglePlayer.beenRan = beenRan;
+	}
+
+	public static int getLivesCount() {
+		return livesCount;
 	}
 
 

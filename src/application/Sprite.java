@@ -14,7 +14,6 @@ public class Sprite extends ImageView {
 	private int currentFrame=1;
 	private int howLongBeenOofed = -1;
 	private int zoom = 5;
-	
 
 	public Sprite(int x, int y, String type, String SpriteFile, int W, int H, int frameCount) {
 		this.type = type;
@@ -29,9 +28,13 @@ public class Sprite extends ImageView {
 	}
 	
 	public void setSpriteFile(String spriteFile) {
+		this.spriteFile = spriteFile;
 		createAnimation();
 		setImage(animation.getCurrentFrame());
-		this.spriteFile = spriteFile;
+	}
+
+	public String getSpriteFile() {
+		return spriteFile;
 	}
 
 	private void createAnimation() {
