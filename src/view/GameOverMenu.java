@@ -24,6 +24,7 @@ public class GameOverMenu {
 
 	public static Scene getScene(Stage whoIs) {
 
+		
 		if (!isInited) {
 			initGameOverMenu(whoIs);
 		}
@@ -37,7 +38,8 @@ public class GameOverMenu {
 
 
 	private static void initGameOverMenu(Stage whoIs) {
-
+		SpaceInvaders.countToBottom = 0;
+		SinglePlayer.getEnemies().clear();
 		mainStage = whoIs;
 		root.setAlignment(Pos.CENTER);
 
@@ -49,6 +51,7 @@ public class GameOverMenu {
 				for (Sprite e : SinglePlayer.getEnemies()) {
 					e.setTranslateX(5);
 				}
+				SpaceInvaders.setEnemySpeed(100);
 				SinglePlayer.addScore(-SinglePlayer.getScore());
 				SpaceInvaders.gameRunning = true;
 				//SinglePlayer.snap();

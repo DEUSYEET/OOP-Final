@@ -320,6 +320,13 @@ public class SpaceInvaders {
 		Main.main(args);
 
 	}
+	public static int getEnemySpeed() {
+		return enemySpeed;
+	}
+
+	public static void setEnemySpeed(int enemySpeed) {
+		SpaceInvaders.enemySpeed = enemySpeed;
+	}
 
 	public static void reset() {
 		frame = 0;

@@ -261,6 +261,7 @@ public class SinglePlayer {
 
 			score = 0;
 		int perserve = SpaceInvaders.timesSnapped;
+		SinglePlayer.getEnemies().clear();
 		root.getChildren().removeAll(root.getChildren());
 		SpaceInvaders.timesSnapped = perserve;
 		SpaceInvaders.reset();
