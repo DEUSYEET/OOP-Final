@@ -66,27 +66,31 @@ public class SpaceInvaders {
 					}
 
 					else if (s.getHLBO() > 10 && s.isOofed()) {
-						
+
 						if (s.getType().equals("player")) {
 							s.setSpriteFile("idle");
-							s.setH(24);
-							s.setW(32);
 							s.setOofed(false);
 							s.setHLBO(-1);
+							s.update();
+							System.out.println(s.getSpriteFile());
 							continue;
 						}
-						
+
 						s.setTranslateY(42069);
 						SinglePlayer.getSprites().remove(s);
 
 					} else {
-						s.setSpriteFile("explosion");
 						if (!s.getType().equals("player")) {
+							s.setH(32);
+							s.setW(16);
+							s.setSpriteFile("explosion");
 							SinglePlayer.addScore(10);
+						} else if (s.getType().equals("player")) {
+							s.setSpriteFile("playerHit");
+							System.out.println(s.getHLBO());
 						}
-						s.setH(32);
-						s.setW(16);
 					}
+
 				}
 
 				SinglePlayer.setT(0);
