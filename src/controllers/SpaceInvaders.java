@@ -12,7 +12,6 @@ import javafx.scene.paint.Color;
 import models.Laser;
 import view.GameOverMenu;
 import view.MainMenu;
-import view.Pause;
 import view.SinglePlayer;
 
 public class SpaceInvaders {
@@ -285,8 +284,9 @@ public class SpaceInvaders {
 				System.out.println(frameLastShot+"----------------");
 				break;
 			case ESCAPE:
-				gameRunning = false;
-				MainMenu.getStage().setScene(Pause.getScene(MainMenu.getStage()));
+				if(gameRunning = true) {
+					SinglePlayer.getTimer().stop();
+				}
 				break;
 			case L:
 				if (SinglePlayer.getLives().size() > 0) {
