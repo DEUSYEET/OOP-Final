@@ -18,7 +18,7 @@ public class SpaceInvaders {
 	public static int countToBottom;
 	public static boolean gameRunning = false, gameOver = false;
 	private static int frame = 0;
-	private static int enemySpeed = 10;
+	private static int enemySpeed = 100;
 	private static boolean playerMoving = false;
 	private static boolean moveRight = true;
 	private static ArrayList<Laser> lasers = new ArrayList<Laser>();
@@ -66,27 +66,31 @@ public class SpaceInvaders {
 					}
 
 					else if (s.getHLBO() > 10 && s.isOofed()) {
-						
+
 						if (s.getType().equals("player")) {
 							s.setSpriteFile("idle");
-							s.setH(24);
-							s.setW(32);
 							s.setOofed(false);
 							s.setHLBO(-1);
+							s.update();
+							System.out.println(s.getSpriteFile());
 							continue;
 						}
-						
+
 						s.setTranslateY(42069);
 						SinglePlayer.getSprites().remove(s);
 
 					} else {
-						s.setSpriteFile("explosion");
 						if (!s.getType().equals("player")) {
+							s.setH(32);
+							s.setW(16);
+							s.setSpriteFile("explosion");
 							SinglePlayer.addScore(10);
+						} else if (s.getType().equals("player")) {
+							s.setSpriteFile("playerHit");
+							System.out.println(s.getHLBO());
 						}
-						s.setH(32);
-						s.setW(16);
 					}
+
 				}
 
 				SinglePlayer.setT(0);
@@ -340,3 +344,4 @@ public class SpaceInvaders {
 
 	}
 }
+
