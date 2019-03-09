@@ -49,7 +49,7 @@ public class SpaceInvaders {
 									shoot(s);
 								}
 							} else {
-								if (rng.nextInt() % 10 == 0) {
+								if (rng.nextInt() % 1000 == 0) {
 
 									shoot(s);
 								}
