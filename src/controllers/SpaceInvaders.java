@@ -20,7 +20,7 @@ public class SpaceInvaders {
 	public static int countToBottom = 0;
 	public static int timesSnapped = 0;
 	private static int frame = 0;
-	private static int enemySpeed = 100;
+	private static int enemySpeed = 1;
 	private static boolean playerMoving = false;
 	private static boolean moveRight = true;
 	private static ArrayList<Laser> lasers = new ArrayList<Laser>();
@@ -104,7 +104,7 @@ public class SpaceInvaders {
 			if (playerMoving) {
 				enemySpeed += 20;
 			}
-
+			
 			for (Sprite e : SinglePlayer.getEnemies()) {
 				
 				if (!e.isOofed() && (e.getTranslateX() < 0 || e.getTranslateX() > 570)) {
@@ -151,6 +151,7 @@ public class SpaceInvaders {
 			frameLastShot += 20;
 		}
 		if (gameOver) {
+			countToBottom = 0;
 			System.out.println("GAME OVER");
 			gameOver = false;
 			SinglePlayer.snap();
