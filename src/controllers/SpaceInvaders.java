@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import application.Main;
 import application.Sprite;
 import enums.LaserType;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import models.Laser;
 import view.GameOverMenu;
@@ -16,6 +17,8 @@ import view.SinglePlayer;
 public class SpaceInvaders {
 
 	public static boolean gameRunning = false, gameOver = false;
+	public static int countToBottom = 0;
+	public static int timesSnapped = 0;
 	private static int frame = 0;
 	private static int enemySpeed = 100;
 	private static boolean playerMoving = false;
@@ -24,7 +27,6 @@ public class SpaceInvaders {
 	private static int playerShots = 0;
 	private static int frameLastShot = 120;
 	private static int howFarOffScreen = 0;
-	public static int timesSnapped = 0;
 
 	public static void update() {
 		if (gameRunning) {
@@ -89,7 +91,7 @@ public class SpaceInvaders {
 //				lasers.add(laser);
 //				SinglePlayer.getSwitchBox().getChildren().add(laser.getSprite());
 				if (moveRight) {
-					System.out.println(frameLastShot);
+//					System.out.println(frameLastShot);
 					for (Sprite e : SinglePlayer.getEnemies()) {
 						e.moveRight();
 					}
@@ -104,18 +106,22 @@ public class SpaceInvaders {
 			}
 
 			for (Sprite e : SinglePlayer.getEnemies()) {
-
+				
 				if (!e.isOofed() && (e.getTranslateX() < 0 || e.getTranslateX() > 570)) {
 					moveRight = !moveRight;
 					System.out.println(e.getTranslateX());
-					if (e.getTranslateY() < 0) {
+					if (countToBottom <= 275000 && countToBottom >= 17817) {
 						gameOver = true;
+						setEnemySpeed(Integer.MAX_VALUE - 1);
 					}
+					
 					if (e.getTranslateX() < 0) {
 						for (Sprite es : SinglePlayer.getEnemies()) {
 							es.moveDown();
 							es.moveRight();
+							
 						}
+
 					} else {
 						for (Sprite es : SinglePlayer.getEnemies()) {
 							es.moveDown();
@@ -124,9 +130,7 @@ public class SpaceInvaders {
 					}
 					break;
 				}
-
 			}
-
 			for (Laser l : lasers) {
 				if (frame % l.getSpeed() == 0 && l.getType().equals(LaserType.NORMAL)) {
 
@@ -141,15 +145,16 @@ public class SpaceInvaders {
 			if (SinglePlayer.getEnemies().isEmpty()) {
 				SinglePlayer.populateEnemies();
 			}
-
+			
+			countToBottom++;
 			frame++;
-			frameLastShot++;
+			frameLastShot += 20;
 		}
 		if (gameOver) {
 			System.out.println("GAME OVER");
 			gameOver = false;
 			SinglePlayer.snap();
-
+			SinglePlayer.getEnemies().clear();
 			MainMenu.getStage().setScene(GameOverMenu.getScene(MainMenu.getStage()));
 		}
 	}
@@ -173,9 +178,7 @@ public class SpaceInvaders {
 							frameLastShot = 120;
 							offed.add(l);
 							howFarOffScreen++;
-						} else {
-
-						}
+						} 
 
 					} else {
 						kaboomed.add(s);
@@ -281,8 +284,17 @@ public class SpaceInvaders {
 		}));
 	}
 
+	public static int getEnemySpeed() {
+		return enemySpeed;
+	}
+
+	public static void setEnemySpeed(int enemySpeed) {
+		SpaceInvaders.enemySpeed = enemySpeed;
+	}
+
 	public static void startApp(String[] args) {
 
 		Main.main(args);
 
 	}
+}
