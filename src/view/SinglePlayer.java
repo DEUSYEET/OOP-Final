@@ -259,7 +259,7 @@ public class SinglePlayer {
 		//perfectly balanced, as all things should be
 			root.getChildren().removeAll(root.getChildren());
 
-			score = 0;
+			//score = 0;
 		int perserve = SpaceInvaders.timesSnapped;
 		SinglePlayer.getEnemies().clear();
 		root.getChildren().removeAll(root.getChildren());
