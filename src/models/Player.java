@@ -12,6 +12,9 @@ public class Player {
 	private boolean isAlive;
 	private Sprite sprite;
 	private int speed;
+	private int rightBoundary;
+	private int leftBoundary;
+	
 
 	public Player(int playerNumber) {
 
@@ -23,32 +26,29 @@ public class Player {
 		setPosition(pos);
 		setAlive(true);
 		this.sprite = new Sprite(5, 520, "player" + playerNumber, "idle" + playerNumber, 32, 24, 8);
+		
+		if (playerNumber == 3) {
+			setRightBoundary(1170);
+			setLeftBoundary(600);
+		}
+		else {
+			setRightBoundary(600);
+			setLeftBoundary(0);
+		}
 
 	}
 
 	public void movePlayer() {
-		if (playerNumber == 3) {
-				if (sprite.getTranslateX() >= 1170) {
-					setSpeed(0);
-					sprite.setTranslateX(1169);
-				}
-				if (sprite.getTranslateX() <= 600) {
-					setSpeed(0);
-					sprite.setTranslateX(601);
-				}
-				
-			
+		
+		if (sprite.getTranslateX() >= getRightBoundary()) {
+			setSpeed(0);
+			sprite.setTranslateX(getRightBoundary() - 1);
 		}
-			else if (playerNumber <= 2) {
-			if (sprite.getTranslateX() >= 570) {
-				setSpeed(0);
-				sprite.setTranslateX(569);
-			}
-			if (sprite.getTranslateX() <= 0) {
-				setSpeed(0);
-				sprite.setTranslateX(1);
-			}
-			}
+		if (sprite.getTranslateX() <= getLeftBoundary()) {
+			setSpeed(0);
+			sprite.setTranslateX(getLeftBoundary() + 1);
+		}
+
 		sprite.setTranslateX(sprite.getTranslateX() + getSpeed());
 
 	}
@@ -63,6 +63,24 @@ public class Player {
 
 	public Sprite getSprite() {
 		return sprite;
+	}
+	
+	
+
+	public int getRightBoundary() {
+		return rightBoundary;
+	}
+
+	public void setRightBoundary(int rightBoundary) {
+		this.rightBoundary = rightBoundary;
+	}
+
+	public int getLeftBoundary() {
+		return leftBoundary;
+	}
+
+	public void setLeftBoundary(int leftBoundary) {
+		this.leftBoundary = leftBoundary;
 	}
 
 	public int getPlayerNumber() {

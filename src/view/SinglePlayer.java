@@ -138,7 +138,8 @@ public class SinglePlayer {
 		root.setAlignment(Pos.CENTER);
 		switchBox = new VBox();
 		switchBox.setMinHeight(600);
-
+		
+		player.setRightBoundary(570);
 		switchBox.getChildren().add(getPlayerSprite());
 		populateShields();
 		populateEnemies();

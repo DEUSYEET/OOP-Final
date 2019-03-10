@@ -27,6 +27,7 @@ public class CoOpControler {
 	private  ArrayList<Laser> lasers = new ArrayList<Laser>();
 	private  int playerShots = 0;
 	private  int frameLastShot = 120;
+	private  int frameLastShot2 = 120;
 	private  Random rng = new Random();
 	private  int shootRow=-1280;
 	public   int timesSnapped = 0;
@@ -96,10 +97,10 @@ public class CoOpControler {
 						s.update();
 						System.out.println(s.getSpriteFile());
 						continue;
-					} else if (s.getType().equals("player2")) {
+					} else if (s.getType().equals("player3")) {
 						s.setH(24);
 						s.setW(32);
-						s.setSpriteFile("idle2");
+						s.setSpriteFile("idle3");
 						s.setOofed(false);
 						s.setHLBO(-1);
 						s.update();
@@ -114,11 +115,11 @@ public class CoOpControler {
 					 if (s.getType().equals("player1")) {
 							s.setSpriteFile("playerHit");
 							System.out.println(s.getHLBO());
-						} else if (s.getType().equals("player2")) {
+						} else if (s.getType().equals("player3")) {
 							s.setSpriteFile("playerHit2");
 							System.out.println(s.getHLBO());
 						}
-					 else if (!s.getType().equals("player1")||!s.getType().equals("player2")) {
+					 else if (!s.getType().equals("player1")||!s.getType().equals("player3")) {
 							//System.out.println(s.getType());
 							s.setH(32);
 							s.setW(16);
@@ -139,6 +140,10 @@ public class CoOpControler {
 		}
 
 		currentLevel.getPlayer1().movePlayer();
+		currentLevel.getPlayer2().movePlayer();
+		currentLevel.getPlayer1().setRightBoundary((int)currentLevel.getPlayer2().getSprite().getTranslateX() - 32); 
+		currentLevel.getPlayer2().setLeftBoundary((int)currentLevel.getPlayer1().getSprite().getTranslateX() + 32); 
+
 		if (playerMoving) {
 			enemySpeed -= 20;
 		}
@@ -222,6 +227,7 @@ public class CoOpControler {
 			lasers = new ArrayList<Laser>();
 			playerShots = 0;
 			frameLastShot = 120;
+			frameLastShot2 = 120;
 			timesSnapped = 0;
 			timeSinceBonusEnemy = 0;
 			howManyBonusEnemys = 0;
@@ -237,6 +243,7 @@ public class CoOpControler {
 		timeSinceBonusEnemy++;
 		frame++;
 		frameLastShot++;
+		frameLastShot2++;
 	
 		if (gameOver) {
 			System.out.println("GAME OVER");
@@ -251,7 +258,7 @@ public class CoOpControler {
 
 	
 		Laser laser = new Laser(1, LaserType.ALIEN, new Sprite(pos[0] + 14, 0, "laser", "EnemyLaser", 4, 32, 8));
-		laser.getSprite().setTranslateY(shootRow - (playerShots * 32));
+		laser.getSprite().setTranslateY(shootRow - 1500 - (playerShots * 32));
 		lasers.add(laser);
 		currentLevel.getSwitchBox().getChildren().add(laser.getSprite());
 		playerShots++;
@@ -304,6 +311,7 @@ public class CoOpControler {
 						if (s.getCurrentFrame() <= 8) {
 							s.update();
 							frameLastShot = 120;
+							frameLastShot2 = 120;
 							offed.add(l);
 						} else {
 
@@ -312,6 +320,7 @@ public class CoOpControler {
 					} else {
 						kaboomed.add(s);
 						frameLastShot = 120;
+						frameLastShot2 = 120;
 						offed.add(l);
 					}
 
@@ -326,7 +335,7 @@ public class CoOpControler {
 		}
 		boolean zoomUp = false;
 		for (Sprite s : kaboomed) {
-			if (s.getType().equals("player"+1) || s.getType().equals("player"+2)) {
+			if (s.getType().equals("player"+1) || s.getType().equals("player"+3)) {
 				currentLevel.removeLife();
 				System.out.println("oof");
 			}
@@ -359,17 +368,44 @@ public class CoOpControler {
 					playerMoving = true;
 				}
 				break;
-			case SPACE:
+			case LEFT:
+				if (gameRunning) {
+					currentLevel.getPlayer2().setSpeed(-5);
+					playerMoving = true;
+				}
+				break;
+			case RIGHT:
+				if (gameRunning) {
+					currentLevel.getPlayer2().setSpeed(5);
+					playerMoving = true;
+				}
+				break;
+			case W:
 				if (gameRunning) {
 					if (frameLastShot > 110) {
 						int[] pos = { (int) currentLevel.getPlayer1().getSprite().getTranslateX(), 0 };
 						Laser laser = new Laser(1, LaserType.NORMAL,
 								new Sprite(pos[0] + 14, 0, "laser", "PlayerLaser", 4, 32, 8));
-						laser.getSprite().setTranslateY(-980 - (playerShots * 32) - (timesSnapped * 9000));
+						laser.getSprite().setTranslateY(-2450 - (playerShots * 32) - (timesSnapped * 9000));
 						lasers.add(laser);
 						currentLevel.getSwitchBox().getChildren().add(laser.getSprite());
 						playerShots++;
 						frameLastShot = 0;
+					}
+					System.out.println(frameLastShot + "----------------");
+				}
+				break;
+			case UP:
+				if (gameRunning) {
+					if (frameLastShot2 > 110) {
+						int[] pos = { (int) currentLevel.getPlayer2().getSprite().getTranslateX(), 0 };
+						Laser laser = new Laser(1, LaserType.NORMAL,
+								new Sprite(pos[0] + 14, 0, "laser", "PlayerLaser", 4, 32, 8));
+						laser.getSprite().setTranslateY(-2450 - (playerShots * 32) - (timesSnapped * 9000));
+						lasers.add(laser);
+						currentLevel.getSwitchBox().getChildren().add(laser.getSprite());
+						playerShots++;
+						frameLastShot2 = 0;
 					}
 					System.out.println(frameLastShot + "----------------");
 				}
@@ -396,6 +432,7 @@ public class CoOpControler {
 					currentLevel.getSwitchBox().getChildren().add(laser.getSprite());
 					playerShots++;
 					frameLastShot = 0;
+					frameLastShot2 = 0;
 				}
 			default:
 				break;
@@ -413,6 +450,18 @@ public class CoOpControler {
 				if (gameRunning) {
 					currentLevel.getPlayer1().setSpeed(0);
 					playerMoving = false;
+				}
+				break;
+			case LEFT:
+				if (gameRunning) {
+					currentLevel.getPlayer2().setSpeed(0);
+					playerMoving = true;
+				}
+				break;
+			case RIGHT:
+				if (gameRunning) {
+					currentLevel.getPlayer2().setSpeed(0);
+					playerMoving = true;
 				}
 				break;
 			default:
@@ -442,6 +491,7 @@ public class CoOpControler {
 		moveRight = true;
 		playerShots = 0;
 		frameLastShot = 120;
+		frameLastShot2 = 120;
 		gameOver = false;
 
 	}
