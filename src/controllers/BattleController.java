@@ -27,7 +27,7 @@ public class BattleController {
 	private static int enemyShots;
 	private static int frameLastShot2;
 	private static int howFarOffScreen = 0;
-	private static int shootRow=-1280;
+	private static int shootRow=-1800;
 	private static Random rng = new Random();
 	public static int timesSnapped = 0;
 	
@@ -91,8 +91,11 @@ public class BattleController {
 						BattleGame.getSprites().remove(s);
 
 					} else {
-						 if (s.getType().equals("player1")||s.getType().equals("player2")) {
+						 if (s.getType().equals("player1")) {
 								s.setSpriteFile("playerHit");
+								System.out.println(s.getHLBO());
+							} else if (s.getType().equals("player2")) {
+								s.setSpriteFile("playerHit2");
 								System.out.println(s.getHLBO());
 							}
 						 else if (!s.getType().equals("player1")||!s.getType().equals("player2")) {
@@ -189,7 +192,11 @@ public class BattleController {
 						l.getSprite().moveDown();
 					}
 				} else if (frame % l.getSpeed() == 0 && l.getType().equals(LaserType.ALIEN)) {
+				 if (l.getSprite().getType().equals("elaser1")) {
 					l.getSprite().moveDown();
+				 } else {
+					 l.getSprite().moveUp();
+				 }
 				}
 			}
 
@@ -219,16 +226,27 @@ public class BattleController {
 	
 	
 	
+	private static boolean flip = true;
 	private static void shoot(Sprite s) {
 		int rand = rng.nextInt(100) + 1;
 		int[] pos = { (int) s.getTranslateX(), (int) s.getTranslateY() };
-
-	
-		Laser laser = new Laser(1, LaserType.ALIEN, new Sprite(pos[0] + 14, 0, "laser", "EnemyLaser", 4, 32, 8));
-		laser.getSprite().setTranslateY(shootRow - (playerShots * 32));
-		lasers.add(laser);
-		BattleGame.getSwitchBox().getChildren().add(laser.getSprite());
-		playerShots++;
+		System.out.println(pos[1]);
+		//System.out.println(flip);
+		if (flip) {
+			Laser laser = new Laser(1, LaserType.ALIEN, new Sprite(pos[0] + 14, 0, "elaser1", "EnemyLaser", 4, 32, 8));
+			laser.getSprite().setTranslateY(shootRow - (playerShots * 32));
+			lasers.add(laser);
+			BattleGame.getSwitchBox().getChildren().add(laser.getSprite());
+			playerShots++;
+			flip = !flip;
+		} else {
+			Laser laser = new Laser(1, LaserType.ALIEN, new Sprite(pos[0] + 14, 0, "elaser2", "EnemyLaser", 4, 32, 8));
+			laser.getSprite().setTranslateY(shootRow - (playerShots * 32));
+			lasers.add(laser);
+			BattleGame.getSwitchBox().getChildren().add(laser.getSprite());
+			playerShots++;
+			flip = !flip;
+		}
 	}
 
 	private static void checkIfLaserTouchesAnything() {
