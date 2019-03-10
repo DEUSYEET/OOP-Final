@@ -1,5 +1,7 @@
 package view;
 
+import controllers.BattleController;
+import controllers.SpaceInvaders;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -61,10 +63,21 @@ public class MultiPlayerMenu {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-
+				BattleController.gameRunning = true;
+				if (BattleGame.isBeenRan()) {
+					BattleController.setEnemySpeed(100);
+					BattleGame.snap();
+					BattleGame.setInited(false);
+					if (BattleGame.getLives(1).size()>0) {
+						for (int i = 0; i < BattleGame.getLives(1).size(); i++) {
+							BattleGame.removeLife(1);
+						}
+					}
+						BattleController.gameRunning = true;
+					
+				}
 				mainStage.setScene(BattleGame.getScene(whoIs));
 			}
-
 		});
 		
 		Button dlc = new Button("Teletubbies Co-Op");

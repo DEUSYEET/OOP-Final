@@ -45,21 +45,10 @@ public class MainMenu {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				SpaceInvaders.gameRunning = true;
-				if (SinglePlayer.isBeenRan()) {
-					SpaceInvaders.setEnemySpeed(100);
-					SinglePlayer.snap();
-					SinglePlayer.setInited(false);
-					SinglePlayer.addScore(-SinglePlayer.getScore());
-					if (SinglePlayer.getLives().size()>0) {
-						for (int i = 0; i < SinglePlayer.getLives().size(); i++) {
-							SinglePlayer.removeLife();
-						}
-					}
-						SpaceInvaders.gameRunning = true;
-					
-				}
-				mainStage.setScene(SinglePlayer.getScene(whoIs));
+				SpaceInvaders newGame = new SpaceInvaders();
+				newGame.stage = whoIs;
+				newGame.start();
+				mainStage.setScene(newGame.getLevel().getScene());
 			}
 
 		});
