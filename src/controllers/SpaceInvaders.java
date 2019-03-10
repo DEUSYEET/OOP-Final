@@ -11,9 +11,11 @@ import javafx.stage.Stage;
 import models.Laser;
 import view.GameOverMenu;
 import view.MainMenu;
+import view.Pause;
 import view.SinglePlayer;
 
 public class SpaceInvaders {
+
 	public   int countToBottom = 0;
 	public   boolean gameRunning = true, gameOver = false;
 	private  int frame = 0;
@@ -67,12 +69,13 @@ public class SpaceInvaders {
 
 								shoot(s);
 							}
+
 						} else {
 							if (rng.nextInt() % 10 == 0) {
-
 								shoot(s);
 							}
 						}
+
 
 					}
 				}
@@ -94,6 +97,7 @@ public class SpaceInvaders {
 						System.out.println(s.getSpriteFile());
 						continue;
 					} else if (s.getType().equals("player2")) {
+
 						s.setH(24);
 						s.setW(32);
 						s.setSpriteFile("idle2");
@@ -122,6 +126,7 @@ public class SpaceInvaders {
 							s.setSpriteFile("explosion");
 							currentLevel.addScore(10);
 						}
+
 				}
 
 			}
@@ -158,7 +163,6 @@ public class SpaceInvaders {
 		boolean down = true;
 		for (Sprite e : currentLevel.getEnemies()) {
 
-
 			int X = (int) e.getTranslateX();
 
 			if (!e.isOofed() && (X < 0 || X > 570)) {
@@ -178,6 +182,7 @@ public class SpaceInvaders {
 						if (down) {
 							shootRow += 10;
 							down = !down;
+
 						}
 					}
 				} else {
@@ -372,9 +377,11 @@ public class SpaceInvaders {
 				}
 				break;
 			case ESCAPE:
+
 				if(!gameOver) {
 					gameRunning = !gameRunning;
 				}
+
 				break;
 			case L:
 				if (gameRunning) {
@@ -443,4 +450,3 @@ public class SpaceInvaders {
 
 	}
 }
-
