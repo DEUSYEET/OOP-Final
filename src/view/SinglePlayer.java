@@ -34,11 +34,12 @@ public class SinglePlayer {
 	private static ArrayList<Sprite> enemies = new ArrayList<>();
 	private static ArrayList<Sprite> shields = new ArrayList<>();
 	private static ArrayList<Sprite> lives = new ArrayList<>();
-	private static VBox switchBox;
+	public static VBox switchBox;
 	private static VBox scoreBox;
 	private static int t;
 	private static int score = 0;
 	private static int livesCount;
+	private static ArrayList<Sprite> motherShips = new ArrayList<Sprite>();
 	
 	private static Text scoreText = new Text(0, 0, "Score: " + Integer.toString(score));
 
@@ -53,6 +54,10 @@ public class SinglePlayer {
 		return scene;
 	}
 
+	public static ArrayList<Sprite> getMotherShips(){
+		return motherShips;
+	}
+	
 	public static VBox getRoot() {
 		return root;
 	}

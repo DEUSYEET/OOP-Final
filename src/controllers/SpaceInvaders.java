@@ -1,6 +1,5 @@
 package controllers;
 
-import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -8,7 +7,6 @@ import application.Main;
 import application.Sprite;
 import enums.LaserType;
 import javafx.scene.Scene;
-import javafx.scene.paint.Color;
 import models.Laser;
 import view.GameOverMenu;
 import view.MainMenu;
@@ -18,7 +16,7 @@ public class SpaceInvaders {
 	public static int countToBottom;
 	public static boolean gameRunning = false, gameOver = false;
 	private static int frame = 0;
-	private static int enemySpeed = 10;
+	private static int enemySpeed = 100;
 	private static boolean playerMoving = false;
 	private static boolean moveRight = true;
 	private static ArrayList<Laser> lasers = new ArrayList<Laser>();
@@ -28,6 +26,8 @@ public class SpaceInvaders {
 	private static int shootRow=-1280;
 	private static Random rng = new Random();
 	public static int timesSnapped = 0;
+	public static int timeSinceBonusEnemy = 0;
+	public static int howManyBonusEnemys = 0;
 	
 
 	public static void update() {
@@ -108,7 +108,6 @@ public class SpaceInvaders {
 			}
 
 			if (frame % enemySpeed == 0) {
-				int[] pos = { (int) SinglePlayer.getPlayer().getSprite().getTranslateX(), 0 };
 				if (moveRight) {
 					for (Sprite e : SinglePlayer.getEnemies()) {
 						e.moveRight();
@@ -170,7 +169,27 @@ public class SpaceInvaders {
 			if (SinglePlayer.getEnemies().isEmpty()) {
 				SinglePlayer.populateEnemies();
 			}
-
+			
+			int chance = rng.nextInt(20);
+			
+			if (chance == 0 && timeSinceBonusEnemy > 2000) {
+				
+				Sprite s = new Sprite(600, -600 - howManyBonusEnemys * 32, "bonusEnemy", "motherShip", 32, 11, 8);
+				SinglePlayer.getMotherShips().add(s);
+				SinglePlayer.switchBox.getChildren().add(s);
+				timeSinceBonusEnemy = 0;
+				howManyBonusEnemys++;
+				System.out.println("mother ship");
+				
+			}
+			
+			for (Sprite e : SinglePlayer.getMotherShips()) {
+				
+				e.moveLeft();
+				
+			}
+			
+			timeSinceBonusEnemy++;
 			frame++;
 			frameLastShot++;
 		}
@@ -183,10 +202,8 @@ public class SpaceInvaders {
 		}
 	}
 
-	private static int enemyShots;
 
 	private static void shoot(Sprite s) {
-		int rand = rng.nextInt(100) + 1;
 		int[] pos = { (int) s.getTranslateX(), (int) s.getTranslateY() };
 
 	
