@@ -1,6 +1,7 @@
 package view;
 
 import controllers.BattleController;
+import controllers.CoOpControler;
 import controllers.SpaceInvaders;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -41,8 +42,10 @@ public class MultiPlayerMenu {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-
-				mainStage.setScene(CoOpGame.getScene(whoIs));
+				CoOpControler newGame = new CoOpControler();
+				newGame.stage = whoIs;
+				newGame.start();
+				mainStage.setScene(newGame.getLevel().getScene());
 			}
 
 		});
