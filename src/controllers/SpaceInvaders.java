@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -19,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
 import models.Laser;
 import view.GameOverMenu;
 import view.MainMenu;
@@ -45,6 +47,8 @@ public class SpaceInvaders {
 	private static Random rng = new Random();
 	public static int timesSnapped = 0;
 	private static int zoomie = 5;
+	public static int timeSinceBonusEnemy = 0;
+	public static int howManyBonusEnemys = 0;
 	
 	public static void update() {
 		if (gameRunning) {
@@ -210,6 +214,30 @@ public class SpaceInvaders {
 			checkIfLaserTouchesAnything();
 
 			countToBottom++;
+			if (SinglePlayer.getEnemies().isEmpty()) {
+				SinglePlayer.populateEnemies();
+			}
+			
+			int chance = rng.nextInt(20);
+			
+			if (chance == 0 && timeSinceBonusEnemy > 2000) {
+				
+				Sprite s = new Sprite(600, -600 - howManyBonusEnemys * 32, "bonusEnemy", "motherShip", 32, 11, 8);
+				SinglePlayer.getMotherShips().add(s);
+				SinglePlayer.switchBox.getChildren().add(s);
+				timeSinceBonusEnemy = 0;
+				howManyBonusEnemys++;
+				System.out.println("mother ship");
+				
+			}
+			
+			for (Sprite e : SinglePlayer.getMotherShips()) {
+				
+				e.moveLeft();
+				
+			}
+			
+			timeSinceBonusEnemy++;
 			frame++;
 			frameLastShot++;
 		}
@@ -339,7 +367,6 @@ public class SpaceInvaders {
 	private static int enemyShots;
 
 	private static void shoot(Sprite s) {
-		int rand = rng.nextInt(100) + 1;
 		int[] pos = { (int) s.getTranslateX(), (int) s.getTranslateY() };
 
 		Laser laser = new Laser(1, LaserType.ALIEN, new Sprite(pos[0] + 14, 0, "laser", "EnemyLaser", 4, 32, 8));
