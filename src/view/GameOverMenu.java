@@ -49,10 +49,9 @@ public class GameOverMenu {
 			@Override
 			public void handle(ActionEvent arg0) {
 				for (Sprite e : SinglePlayer.getEnemies()) {
-
 					e.setTranslateX(5);
 				}
-				SpaceInvaders.setEnemySpeed(100);
+				SpaceInvaders.countToBottom = 0;
 				SinglePlayer.addScore(-SinglePlayer.getScore());
 				SpaceInvaders.gameRunning = true;
 				//SinglePlayer.snap();
