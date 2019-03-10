@@ -17,8 +17,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import models.Player;
 
-public class PowerUpGame {
-	
+public class CoOPDLC {
+
 	private static VBox root = new VBox();
 	private static Scene scene = new Scene(root, 600, 600);
 	private static Stage mainStage;
@@ -48,7 +48,7 @@ public class PowerUpGame {
 
 
 	public static void setRoot(VBox root) {
-		PowerUpGame.root = root;
+		CoOPDLC.root = root;
 	}
 
 
@@ -60,7 +60,7 @@ public class PowerUpGame {
 
 
 	public static void setScene(Scene scene) {
-		PowerUpGame.scene = scene;
+		CoOPDLC.scene = scene;
 	}
 
 
@@ -72,7 +72,7 @@ public class PowerUpGame {
 
 
 	public static void setMainStage(Stage mainStage) {
-		PowerUpGame.mainStage = mainStage;
+		CoOPDLC.mainStage = mainStage;
 	}
 
 
@@ -84,7 +84,7 @@ public class PowerUpGame {
 
 
 	public static void setInited(boolean isInited) {
-		PowerUpGame.isInited = isInited;
+		CoOPDLC.isInited = isInited;
 	}
 
 
@@ -102,7 +102,7 @@ public class PowerUpGame {
 
 
 	public static void setEnemies(ArrayList<Sprite> enemies) {
-		PowerUpGame.enemies = enemies;
+		CoOPDLC.enemies = enemies;
 	}
 
 
@@ -114,7 +114,7 @@ public class PowerUpGame {
 
 
 	public static void setShields(ArrayList<Sprite> shields) {
-		PowerUpGame.shields = shields;
+		CoOPDLC.shields = shields;
 	}
 
 
@@ -126,7 +126,7 @@ public class PowerUpGame {
 
 
 	public static void setSwitchBox(VBox switchBox) {
-		PowerUpGame.switchBox = switchBox;
+		CoOPDLC.switchBox = switchBox;
 	}
 
 
@@ -138,7 +138,7 @@ public class PowerUpGame {
 
 
 	public static void setT(int t) {
-		PowerUpGame.t = t;
+		CoOPDLC.t = t;
 	}
 
 
@@ -150,7 +150,7 @@ public class PowerUpGame {
 
 
 	public static void setTimer(AnimationTimer timer) {
-		PowerUpGame.timer = timer;
+		CoOPDLC.timer = timer;
 	}
 
 
@@ -183,7 +183,7 @@ public class PowerUpGame {
 		int posY = 400;
 
 		for (int i = 0; i < 4; i++) {
-			Sprite s = new Sprite(posX, posY - i * 64, "shield", "Shield", 64, 64, 1);
+			Sprite s = new Sprite(posX, posY - i * 41, "shield", "Shield", 64, 41, 1);
 			shields.add(s);
 			switchBox.getChildren().add(s);
 			posX += 140;
@@ -193,9 +193,11 @@ public class PowerUpGame {
 
 	private static void populateEnemies() {
 		int posX = 5;
-		int posY = -200;
+		int posY = -180;
 		int count = 0;
 		String sprites[] = { "enemy1", "enemy2", "enemy3", "enemy4" };
+		int X[] = {20,24,18,28};
+//		int Y[] = {22,25,25,22};
 		int file = 3;
 
 		for (int i = 0; i < 40; i++) {
@@ -205,7 +207,7 @@ public class PowerUpGame {
 				count = 0;
 				file--;
 			}
-			Sprite s = new Sprite(posX, posY - i * 32, "enemy", sprites[file], 32, 32, 8);
+			Sprite s = new Sprite(posX, posY - i * 32, "enemy", sprites[file], X[file], 32, 8);
 			enemies.add(s);
 			switchBox.getChildren().add(s);
 			posX += 40;
@@ -228,7 +230,7 @@ public class PowerUpGame {
 	private static AnimationTimer timer = new AnimationTimer() {
 		@Override
 		public void handle(long now) {
-		
+			
 		}
 	};
 }

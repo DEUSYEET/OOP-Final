@@ -14,43 +14,52 @@ public class Player {
 	private int speed;
 
 	public Player(int playerNumber) {
-		
+
 		setPlayerNumber(playerNumber);
 		setLives(3);
 		setCurrentPowerUp(null);
 		setScore(0);
-		int[] pos = {0,0};
+		int[] pos = { 0, 0 };
 		setPosition(pos);
 		setAlive(true);
-		this.sprite = new Sprite(5, 520, "player"+playerNumber, "idle"+playerNumber, 32, 24, 8);
+		this.sprite = new Sprite(5, 520, "player" + playerNumber, "idle" + playerNumber, 32, 24, 8);
 
 	}
-	
+
 	public void movePlayer() {
-		
-		if (sprite.getTranslateX() >= 570) {
-			setSpeed(0);
-			sprite.setTranslateX(569);
+		if (playerNumber == 3) {
+				if (sprite.getTranslateX() >= 1170) {
+					setSpeed(0);
+					sprite.setTranslateX(1169);
+				}
+				if (sprite.getTranslateX() <= 600) {
+					setSpeed(0);
+					sprite.setTranslateX(601);
+				}
+				
+			
 		}
-		if (sprite.getTranslateX() <= 0) {
-			setSpeed(0);
-			sprite.setTranslateX(1);
-		}
-		
+			else if (playerNumber <= 2) {
+			if (sprite.getTranslateX() >= 570) {
+				setSpeed(0);
+				sprite.setTranslateX(569);
+			}
+			if (sprite.getTranslateX() <= 0) {
+				setSpeed(0);
+				sprite.setTranslateX(1);
+			}
+			}
 		sprite.setTranslateX(sprite.getTranslateX() + getSpeed());
-		
+
 	}
+
 	public int getSpeed() {
 		return speed;
 	}
 
-
-
 	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
-
-
 
 	public Sprite getSprite() {
 		return sprite;
