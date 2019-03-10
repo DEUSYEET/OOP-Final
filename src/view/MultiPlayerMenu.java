@@ -49,17 +49,17 @@ public class MultiPlayerMenu {
 		
 		});
 		
-		Button powerUp = new Button("Powered-Up Invaders");
-		powerUp.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent arg0) {
-
-				mainStage.setScene(PowerUpGame.getScene(whoIs));
-			}
-
-		});
-		
+//		Button powerUp = new Button("Powered-Up Invaders");
+//		powerUp.setOnAction(new EventHandler<ActionEvent>() {
+//
+//			@Override
+//			public void handle(ActionEvent arg0) {
+//
+//				mainStage.setScene(PowerUpGame.getScene(whoIs));
+//			}
+//
+//		});
+//		
 		Button battle = new Button("Battle");
 		battle.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -93,28 +93,29 @@ public class MultiPlayerMenu {
 
 		});
 		
-		Button competitive = new Button("Competitive");
-		competitive.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent arg0) {
-				CompetetiveController.gameRunning = true;
-				if (CompetetiveGame.isBeenRan()) {
-					CompetetiveController.setEnemySpeed(100);
-					CompetetiveGame.snap();
-					CompetetiveGame.setInited(false);
-					if (CompetetiveGame.getLives(1).size()>0) {
-						for (int i = 0; i <CompetetiveGame.getLives(1).size(); i++) {
-							CompetetiveGame.removeLife(1);
-						}
-					}
-					CompetetiveController.gameRunning = true;
-					
-				}
-				mainStage.setScene(CompetetiveGame.getScene(whoIs));
-			}
-
-		});
+//		Button competitive = new Button("Competitive");
+//		competitive.setOnAction(new EventHandler<ActionEvent>() {
+//
+//			@Override
+//			public void handle(ActionEvent arg0) {
+//				CompetetiveController.gameRunning = true;
+//				if (CompetetiveGame.isBeenRan()) {
+//					CompetetiveController.setEnemySpeed(100);
+//					CompetetiveGame.snap();
+//					CompetetiveGame.setInited(false);
+//					if (CompetetiveGame.getLives(1).size()>0) {
+//						for (int i = 0; i <CompetetiveGame.getLives(1).size(); i++) {
+//							CompetetiveGame.removeLife(1);
+//						}
+//					}
+//					CompetetiveController.gameRunning = true;
+//					
+//				}
+//				mainStage.setScene(CompetetiveGame.getScene(whoIs));
+//				mainStage.setResizable(true);
+//			}
+//
+//		});
 		Button back = new Button("Return To Main Menu");
 		back.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -131,18 +132,18 @@ public class MultiPlayerMenu {
 
 		optionsBox.setAlignment(Pos.CENTER);
 		optionsBox.setPadding(new Insets(20, 80, 20, 80));
-		competitive.setMinHeight(32);
-		competitive.setMinWidth(200);
-		optionsBox.getChildren().add(competitive);
+//		competitive.setMinHeight(32);
+//		competitive.setMinWidth(200);
+//		optionsBox.getChildren().add(competitive);
 		coOp.setMinHeight(32);
 		coOp.setMinWidth(200);
 		optionsBox.getChildren().add(coOp);
 		dlc.setMinHeight(32);
 		dlc.setMinWidth(200);
 		optionsBox.getChildren().add(dlc);
-		powerUp.setMinHeight(32);
-		powerUp.setMinWidth(200);
-		optionsBox.getChildren().add(powerUp);
+//		powerUp.setMinHeight(32);
+//		powerUp.setMinWidth(200);
+//		optionsBox.getChildren().add(powerUp);
 		battle.setMinHeight(32);
 		battle.setMinWidth(200);
 		optionsBox.getChildren().add(battle);
