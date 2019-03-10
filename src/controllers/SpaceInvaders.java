@@ -26,6 +26,7 @@ public class SpaceInvaders {
 	private  int playerShots = 0;
 	private  int frameLastShot = 120;
 	private  Random rng = new Random();
+	private  int shootRow=-1280;
 	public   int timesSnapped = 0;
 	public   int timeSinceBonusEnemy = 0;
 	public   int howManyBonusEnemys = 0;
@@ -163,6 +164,7 @@ public class SpaceInvaders {
 						es.moveDown();
 						es.moveRight();
 						if (down) {
+							shootRow -= 10;
 							down = !down;
 						}
 					}
