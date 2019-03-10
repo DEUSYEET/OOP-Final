@@ -1,6 +1,7 @@
 package view;
 
 import controllers.BattleController;
+import controllers.CompetetiveController;
 import controllers.SpaceInvaders;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -41,10 +42,11 @@ public class MultiPlayerMenu {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-
-				mainStage.setScene(CoOpGame.getScene(whoIs));
+				// TODO Auto-generated method stub
+				
 			}
 
+		
 		});
 		
 		Button powerUp = new Button("Powered-Up Invaders");
@@ -96,8 +98,20 @@ public class MultiPlayerMenu {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-
-				mainStage.setScene(PowerUpGame.getScene(whoIs));
+				CompetetiveController.gameRunning = true;
+				if (CompetetiveGame.isBeenRan()) {
+					CompetetiveController.setEnemySpeed(100);
+					CompetetiveGame.snap();
+					CompetetiveGame.setInited(false);
+					if (CompetetiveGame.getLives(1).size()>0) {
+						for (int i = 0; i <CompetetiveGame.getLives(1).size(); i++) {
+							CompetetiveGame.removeLife(1);
+						}
+					}
+					CompetetiveController.gameRunning = true;
+					
+				}
+				mainStage.setScene(CompetetiveGame.getScene(whoIs));
 			}
 
 		});

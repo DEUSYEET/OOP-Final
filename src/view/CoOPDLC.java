@@ -17,10 +17,10 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import models.Player;
 
-public class CoOpGame {
+public class CoOPDLC {
 
 	private static VBox root = new VBox();
-	private static Scene scene = new Scene(root, 1200, 600);
+	private static Scene scene = new Scene(root, 600, 600);
 	private static Stage mainStage;
 	private static boolean isInited = false;
 	private static Player player = new Player(1);
@@ -48,7 +48,7 @@ public class CoOpGame {
 
 
 	public static void setRoot(VBox root) {
-		CoOpGame.root = root;
+		CoOPDLC.root = root;
 	}
 
 
@@ -60,7 +60,7 @@ public class CoOpGame {
 
 
 	public static void setScene(Scene scene) {
-		CoOpGame.scene = scene;
+		CoOPDLC.scene = scene;
 	}
 
 
@@ -72,7 +72,7 @@ public class CoOpGame {
 
 
 	public static void setMainStage(Stage mainStage) {
-		CoOpGame.mainStage = mainStage;
+		CoOPDLC.mainStage = mainStage;
 	}
 
 
@@ -84,7 +84,7 @@ public class CoOpGame {
 
 
 	public static void setInited(boolean isInited) {
-		CoOpGame.isInited = isInited;
+		CoOPDLC.isInited = isInited;
 	}
 
 
@@ -102,7 +102,7 @@ public class CoOpGame {
 
 
 	public static void setEnemies(ArrayList<Sprite> enemies) {
-		CoOpGame.enemies = enemies;
+		CoOPDLC.enemies = enemies;
 	}
 
 
@@ -114,7 +114,7 @@ public class CoOpGame {
 
 
 	public static void setShields(ArrayList<Sprite> shields) {
-		CoOpGame.shields = shields;
+		CoOPDLC.shields = shields;
 	}
 
 
@@ -126,7 +126,7 @@ public class CoOpGame {
 
 
 	public static void setSwitchBox(VBox switchBox) {
-		CoOpGame.switchBox = switchBox;
+		CoOPDLC.switchBox = switchBox;
 	}
 
 
@@ -138,7 +138,7 @@ public class CoOpGame {
 
 
 	public static void setT(int t) {
-		CoOpGame.t = t;
+		CoOPDLC.t = t;
 	}
 
 
@@ -150,7 +150,7 @@ public class CoOpGame {
 
 
 	public static void setTimer(AnimationTimer timer) {
-		CoOpGame.timer = timer;
+		CoOPDLC.timer = timer;
 	}
 
 
@@ -182,7 +182,7 @@ public class CoOpGame {
 		int posX = 50;
 		int posY = 400;
 
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < 4; i++) {
 			Sprite s = new Sprite(posX, posY - i * 41, "shield", "Shield", 64, 41, 1);
 			shields.add(s);
 			switchBox.getChildren().add(s);
@@ -200,8 +200,8 @@ public class CoOpGame {
 //		int Y[] = {22,25,25,22};
 		int file = 3;
 
-		for (int i = 0; i < 80; i++) {
-			if (count >= 20) {
+		for (int i = 0; i < 40; i++) {
+			if (count >= 10) {
 				posY += 50;
 				posX = 5;
 				count = 0;
@@ -230,7 +230,7 @@ public class CoOpGame {
 	private static AnimationTimer timer = new AnimationTimer() {
 		@Override
 		public void handle(long now) {
-			SpaceInvaders.update();
+			
 		}
 	};
 }
