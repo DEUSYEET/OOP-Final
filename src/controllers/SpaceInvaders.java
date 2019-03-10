@@ -26,6 +26,7 @@ public class SpaceInvaders {
 	private  int playerShots = 0;
 	private  int frameLastShot = 120;
 	private  Random rng = new Random();
+	private  int shootRow=-1280;
 	public   int timesSnapped = 0;
 	public   int timeSinceBonusEnemy = 0;
 	public   int howManyBonusEnemys = 0;
@@ -58,25 +59,25 @@ public class SpaceInvaders {
 					s.updateHowLongBeenOofed();
 				}
 
-//					if (s.getType().equals("enemy")) {
-//						int rand = rng.nextInt(100) % 10;
-//
-//						if (rand == 0) {
-//
-//							if (currentLevel.getEnemies().size() > 20) {
-//								if (rng.nextInt() % 100 == 0) {
-//
-//									shoot(s);
-//								}
-//							} else {
-//								if (rng.nextInt() % 1000 == 0) {
-//
-//									shoot(s);
-//								}
-//							}
-//
-//						}
-//					}
+					if (s.getType().equals("enemy")) {
+						int rand = rng.nextInt(100) % 10;
+
+						if (rand == 0) {
+
+							if (currentLevel.getEnemies().size() > 20) {
+								if (rng.nextInt() % 100 == 0) {
+
+									shoot(s);
+								}
+							} else {
+								if (rng.nextInt() % 1000 == 0) {
+
+									shoot(s);
+								}
+							}
+
+						}
+					}
 
 				if (s.getHLBO() < 1 || (!s.isOofed())) {
 
@@ -163,6 +164,7 @@ public class SpaceInvaders {
 						es.moveDown();
 						es.moveRight();
 						if (down) {
+							shootRow += 10;
 							down = !down;
 						}
 					}
@@ -217,25 +219,6 @@ public class SpaceInvaders {
 
 		countToBottom++;
 		
-		int chance = rng.nextInt(20);
-		
-		if (chance == 0 && timeSinceBonusEnemy > 2000) {
-			
-			Sprite s = new Sprite(600, -600 - howManyBonusEnemys * 32, "bonusEnemy", "motherShip", 32, 11, 8);
-			currentLevel.getMotherShips().add(s);
-			currentLevel.getSwitchBox().getChildren().add(s);
-			timeSinceBonusEnemy = 0;
-			howManyBonusEnemys++;
-			System.out.println("mother ship");
-			
-		}
-		
-		for (Sprite e : currentLevel.getMotherShips()) {
-			
-			e.moveLeft();
-			
-		}
-		
 		timeSinceBonusEnemy++;
 		frame++;
 		frameLastShot++;
@@ -248,7 +231,16 @@ public class SpaceInvaders {
 		}
 	}
 	
+	private void shoot(Sprite s) {
+		int[] pos = { (int) s.getTranslateX(), (int) s.getTranslateY() };
+
 	
+		Laser laser = new Laser(1, LaserType.ALIEN, new Sprite(pos[0] + 14, 0, "laser", "EnemyLaser", 4, 32, 8));
+		laser.getSprite().setTranslateY(shootRow - (playerShots * 32));
+		lasers.add(laser);
+		currentLevel.getSwitchBox().getChildren().add(laser.getSprite());
+		playerShots++;
+	}
 	
 	public   void populateEnemies() {
 		int posX = 405;
