@@ -164,7 +164,7 @@ public class SpaceInvaders {
 						es.moveDown();
 						es.moveRight();
 						if (down) {
-							shootRow -= 10;
+							shootRow += 10;
 							down = !down;
 						}
 					}
