@@ -22,10 +22,11 @@ import javafx.stage.Stage;
 import models.Laser;
 import view.GameOverMenu;
 import view.MainMenu;
+import view.Pause;
 import view.SinglePlayer;
 
 public class SpaceInvaders {
-	public static int countToBottom;
+
 	public static boolean gameRunning = false, gameOver = false;
 	public static int countToBottom;
 	private static int frame = 0;
@@ -54,7 +55,6 @@ public class SpaceInvaders {
 					if (s.isOofed()) {
 						s.updateHowLongBeenOofed();
 					}
-
 //					if (s.getType().equals("enemy")) {
 //						int rand = rng.nextInt(100) % 10;
 //
@@ -74,7 +74,6 @@ public class SpaceInvaders {
 //
 //						}
 //					}
-
 					if (s.getHLBO() < 1 || (!s.isOofed())) {
 
 						if (s.getType().equals("shield")) {
@@ -84,21 +83,18 @@ public class SpaceInvaders {
 					}
 
 					else if (s.getHLBO() > 10 && s.isOofed()) {
+
 						s.setTranslateY(42069);
 						SinglePlayer.getSprites().remove(s);
 
 					} else {
+						s.setSpriteFile("explosion");
 						if (!s.getType().equals("player")) {
-							s.setH(32);
-							s.setW(16);
-							s.setSpriteFile("explosion");
 							SinglePlayer.addScore(10);
-						} else if (s.getType().equals("player")) {
-							s.setSpriteFile("playerHit");
-							System.out.println(s.getHLBO());
 						}
+						s.setH(32);
+						s.setW(16);
 					}
-
 					if (s.getType().equals("player")) {
 						s.setSpriteFile("idle");
 						s.setH(24);
@@ -107,7 +103,6 @@ public class SpaceInvaders {
 						s.setHLBO(-1);
 						continue;
 					}
-
 				}
 
 				SinglePlayer.setT(0);
@@ -142,9 +137,7 @@ public class SpaceInvaders {
 			boolean down = true;
 			for (Sprite e : SinglePlayer.getEnemies()) {
 
-
 				int X = (int) e.getTranslateX();
-
 				if (!e.isOofed() && (X < 0 || X > 570)) {
 					moveRight = !moveRight;
 					System.out.println(e.getTranslateY());
@@ -437,9 +430,8 @@ public class SpaceInvaders {
 				System.out.println(frameLastShot + "----------------");
 				break;
 			case ESCAPE:
-				if(gameRunning = true) {
-					SinglePlayer.getTimer().stop();
-				}
+				gameRunning = false;
+				MainMenu.getStage().setScene(Pause.getScene(MainMenu.getStage()));
 				break;
 			case L:
 				if (SinglePlayer.getLives().size() > 0) {
@@ -504,4 +496,3 @@ public class SpaceInvaders {
 
 	}
 }
-
