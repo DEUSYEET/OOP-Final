@@ -220,7 +220,7 @@ public class SinglePlayer {
 		int posY = -23;
 
 		for (int i = 0; i < player.getLives(); i++) {
-			Sprite s = new Sprite(posX, posY - i * 24, "live", "idle", 32, 24, 1);
+			Sprite s = new Sprite(posX, posY - i * 24, "live", "idle1", 32, 24, 1);
 			lives.add(s);
 			getScoreBox().getChildren().add(lives.get(i));
 			posX += 40;

@@ -2,7 +2,6 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.Random;
-
 import application.Main;
 import application.Sprite;
 import enums.LaserType;
@@ -58,29 +57,27 @@ public class SpaceInvaders {
 				if (s.isOofed()) {
 					s.updateHowLongBeenOofed();
 				}
+				if (s.getType().equals("enemy")) {
+					int rand = rng.nextInt(100)% 10;
 
-					if (s.getType().equals("enemy")) {
-						int rand = rng.nextInt(100) % 10;
+					if (rand == 0) {
+					
+						if (currentLevel.getEnemies().size() > 20) {
+							if (rng.nextInt() % 100 == 0) {
 
-						if (rand == 0) {
-
-							if (currentLevel.getEnemies().size() > 20) {
-								if (rng.nextInt() % 100 == 0) {
-
-									shoot(s);
-								}
-							} else {
-								if (rng.nextInt() % 1000 == 0) {
-
-									shoot(s);
-								}
+								shoot(s);
 							}
+						} else {
+							if (rng.nextInt() % 10 == 0) {
 
+								shoot(s);
+							}
 						}
+
 					}
-
+				}
 				if (s.getHLBO() < 1 || (!s.isOofed())) {
-
+					
 					if (s.getType().equals("shield")) {
 					} else {
 						s.update();
@@ -88,28 +85,43 @@ public class SpaceInvaders {
 				}
 
 				else if (s.getHLBO() > 10 && s.isOofed()) {
+
+					if (s.getType().equals("player1")) {
+						s.setSpriteFile("idle1");
+						s.setOofed(false);
+						s.setHLBO(-1);
+						s.update();
+						System.out.println(s.getSpriteFile());
+						continue;
+					} else if (s.getType().equals("player2")) {
+						s.setH(24);
+						s.setW(32);
+						s.setSpriteFile("idle2");
+						s.setOofed(false);
+						s.setHLBO(-1);
+						s.update();
+						System.out.println(s.getSpriteFile());
+						continue;
+					}
+
 					s.setTranslateY(42069);
 					currentLevel.getSprites().remove(s);
 
 				} else {
-					if (!s.getType().equals("player")) {
-						s.setH(32);
-						s.setW(16);
-						s.setSpriteFile("explosion");
-						currentLevel.addScore(10);
-					} else if (s.getType().equals("player")) {
-						s.setSpriteFile("playerHit");
-						System.out.println(s.getHLBO());
-					}
-				}
-
-				if (s.getType().equals("player")) {
-					s.setSpriteFile("idle");
-					s.setH(24);
-					s.setW(32);
-					s.setOofed(false);
-					s.setHLBO(-1);
-					continue;
+					 if (s.getType().equals("player1")) {
+							s.setSpriteFile("playerHit");
+							System.out.println(s.getHLBO());
+						} else if (s.getType().equals("player2")) {
+							s.setSpriteFile("playerHit2");
+							System.out.println(s.getHLBO());
+						}
+					 else if (!s.getType().equals("player1")||!s.getType().equals("player2")) {
+							//System.out.println(s.getType());
+							s.setH(32);
+							s.setW(16);
+							s.setSpriteFile("explosion");
+							currentLevel.addScore(10);
+						}
 				}
 
 			}
@@ -311,7 +323,7 @@ public class SpaceInvaders {
 		}
 		boolean zoomUp = false;
 		for (Sprite s : kaboomed) {
-			if (s.getType().equals("player")) {
+			if (s.getType().equals("player"+1) || s.getType().equals("player"+2)) {
 				currentLevel.removeLife();
 				System.out.println("oof");
 			}
