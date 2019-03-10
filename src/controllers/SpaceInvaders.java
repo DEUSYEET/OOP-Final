@@ -27,7 +27,7 @@ import view.SinglePlayer;
 public class SpaceInvaders {
 	public static int countToBottom;
 	public static boolean gameRunning = false, gameOver = false;
-	public static int countToBottom;
+
 	private static int frame = 0;
 	private static int enemySpeed = 100;
 	private static boolean playerMoving = false;
