@@ -58,25 +58,25 @@ public class SpaceInvaders {
 					s.updateHowLongBeenOofed();
 				}
 
-//					if (s.getType().equals("enemy")) {
-//						int rand = rng.nextInt(100) % 10;
-//
-//						if (rand == 0) {
-//
-//							if (currentLevel.getEnemies().size() > 20) {
-//								if (rng.nextInt() % 100 == 0) {
-//
-//									shoot(s);
-//								}
-//							} else {
-//								if (rng.nextInt() % 1000 == 0) {
-//
-//									shoot(s);
-//								}
-//							}
-//
-//						}
-//					}
+					if (s.getType().equals("enemy")) {
+						int rand = rng.nextInt(100) % 10;
+
+						if (rand == 0) {
+
+							if (currentLevel.getEnemies().size() > 20) {
+								if (rng.nextInt() % 100 == 0) {
+
+									shoot(s);
+								}
+							} else {
+								if (rng.nextInt() % 1000 == 0) {
+
+									shoot(s);
+								}
+							}
+
+						}
+					}
 
 				if (s.getHLBO() < 1 || (!s.isOofed())) {
 
@@ -248,7 +248,17 @@ public class SpaceInvaders {
 		}
 	}
 	
+	private void shoot(Sprite s) {
+		int rand = rng.nextInt(100) + 1;
+		int[] pos = { (int) s.getTranslateX(), (int) s.getTranslateY() };
+
 	
+		Laser laser = new Laser(1, LaserType.ALIEN, new Sprite(pos[0] + 14, 0, "laser", "EnemyLaser", 4, 32, 8));
+		laser.getSprite().setTranslateY(shootRow - (playerShots * 32));
+		lasers.add(laser);
+		currentLevel.getSwitchBox().getChildren().add(laser.getSprite());
+		playerShots++;
+	}
 	
 	public   void populateEnemies() {
 		int posX = 405;
