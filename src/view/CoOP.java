@@ -30,7 +30,7 @@ public class CoOP {
 	private  Stage mainStage;
 	private  boolean isInited = false;
 	private  Player player1 = new Player(1);
-	private  Player player2 = new Player(2);
+	private  Player player2 = new Player(3);
 	private  Sprite player1Sprite = player1.getSprite();
 	private  Sprite player2Sprite = player2.getSprite();
 	private  ArrayList<Sprite> enemies = new ArrayList<>();
@@ -94,6 +94,10 @@ public class CoOP {
 	public  Player getPlayer1() {
 		return player1;
 	}
+	
+	public  Player getPlayer2() {
+		return player2;
+	}
 
 	public  ArrayList<Sprite> getEnemies() {
 		return enemies;
@@ -144,6 +148,8 @@ public class CoOP {
 		switchBox.setMinHeight(600);
 
 		switchBox.getChildren().add(getPlayer1Sprite());
+		player2.getSprite().setTranslateY(player2.getSprite().getTranslateY() - 24);
+		player2.getSprite().setTranslateX(player2.getSprite().getTranslateX() - 32);
 		switchBox.getChildren().add(getPlayer2Sprite());
 		populateShields();
 		populateEnemies();
@@ -180,6 +186,7 @@ public class CoOP {
 		scoreText = new Text(0, 0, "Score: " + Integer.toString(score1));
 
 		switchBox.getChildren().add(getPlayer1Sprite());
+		switchBox.getChildren().add(getPlayer2Sprite());
 		shields = shields2;
 		switchBox.getChildren().addAll(shields);
 		populateEnemies();
@@ -223,7 +230,9 @@ public class CoOP {
 	private  void populateLives() {
 		int posX = 400;
 		int posY = -23;
-
+		
+		player1.setLives(6);
+		
 		for (int i = 0; i < player1.getLives(); i++) {
 			Sprite s = new Sprite(posX, posY - i * 24, "live", "idle1", 32, 24, 1);
 			lives1.add(s);
@@ -236,7 +245,7 @@ public class CoOP {
 
 	public  void populateEnemies() {
 		int posX = 5;
-		int posY = -320;
+		int posY = -352;
 		int count = 0;
 		String sprites[] = { "enemy1", "enemy2", "enemy3", "enemy4" };
 		int X[] = { 20, 24, 18, 28 };

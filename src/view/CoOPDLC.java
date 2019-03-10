@@ -1,5 +1,8 @@
 package view;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,194 +17,245 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import models.Player;
 
 public class CoOPDLC {
+	
 
-	private static VBox root = new VBox();
-	private static Scene scene = new Scene(root, 600, 600);
-	private static Stage mainStage;
-	private static boolean isInited = false;
-	private static Player player = new Player(1);
-	private static Sprite playerSprite = player.getSprite();
-	private static ArrayList<Sprite> enemies = new ArrayList<>();
-	private static ArrayList<Sprite> shields = new ArrayList<>();
-	private static VBox switchBox;
-	private static int t;
+	
+	private  boolean beenRan = false;
+	private  VBox root = new VBox();
+	private  Scene scene = new Scene(root, 1200, 600);
+	private  Stage mainStage;
+	private  boolean isInited = false;
+	private  Player player1 = new Player(1);
+	private  Player player2 = new Player(3);
+	private  Sprite player1Sprite = player1.getSprite();
+	private  Sprite player2Sprite = player2.getSprite();
+	private  ArrayList<Sprite> enemies = new ArrayList<>();
+	private  ArrayList<Sprite> shields = new ArrayList<>();
+	private  ArrayList<Sprite> lives1 = new ArrayList<>();
+	private  VBox switchBox;
+	private  VBox scoreBox;
+	private  int t;
+	private  int score1 = 0;
+	private  int livesCount;
+	private  ArrayList<Sprite> motherShips = new ArrayList<Sprite>();
+	
+	private  Text scoreText = new Text(0, 0, "Score: " + Integer.toString(score1));
+	
+	public CoOPDLC() {
+		initStage();
+	}
 
-	public static Scene getScene(Stage whoIs) {
+	public CoOPDLC(ArrayList<Sprite> shields2, int score2, ArrayList<Sprite> lives2) {
+		
+		initNextLevel(shields2, score2, lives2);
+		
+	}
 
-		if (!isInited) {
-			initStage(whoIs);
-		}
-
-		return scene;
+	public  ArrayList<Sprite> getMotherShips(){
+		return motherShips;
 	}
 	
-	
-
-	public static VBox getRoot() {
+	public  VBox getRoot() {
 		return root;
 	}
 
-
-
-	public static void setRoot(VBox root) {
-		CoOPDLC.root = root;
+	public  void setRoot(VBox root) {
+		this.root = root;
 	}
 
-
-
-	public static Scene getScene() {
+	public  Scene getScene() {
 		return scene;
 	}
 
-
-
-	public static void setScene(Scene scene) {
-		CoOPDLC.scene = scene;
+	public  void setScene(Scene scene) {
+		this.scene = scene;
 	}
 
-
-
-	public static Stage getMainStage() {
+	public  Stage getMainStage() {
 		return mainStage;
 	}
 
-
-
-	public static void setMainStage(Stage mainStage) {
-		CoOPDLC.mainStage = mainStage;
+	public  void setMainStage(Stage mainStage) {
+		this.mainStage = mainStage;
 	}
 
-
-
-	public static boolean isInited() {
+	public  boolean isInited() {
 		return isInited;
 	}
 
-
-
-	public static void setInited(boolean isInited) {
-		CoOPDLC.isInited = isInited;
+	public  void setInited(boolean isInited) {
+		this.isInited = isInited;
 	}
 
-
-
-	public static Player getPlayer() {
-		return player;
+	public  Player getPlayer1() {
+		return player1;
+	}
+	
+	public  Player getPlayer2() {
+		return player2;
 	}
 
-
-
-	public static ArrayList<Sprite> getEnemies() {
+	public  ArrayList<Sprite> getEnemies() {
 		return enemies;
 	}
 
-
-
-	public static void setEnemies(ArrayList<Sprite> enemies) {
-		CoOPDLC.enemies = enemies;
+	public  void setEnemies(ArrayList<Sprite> enemies) {
+		this.enemies = enemies;
 	}
 
-
-
-	public static ArrayList<Sprite> getShields() {
+	public  ArrayList<Sprite> getShields() {
 		return shields;
 	}
 
-
-
-	public static void setShields(ArrayList<Sprite> shields) {
-		CoOPDLC.shields = shields;
+	public  void setShields(ArrayList<Sprite> shields) {
+		this.shields = shields;
 	}
 
-
-
-	public static VBox getSwitchBox() {
+	public  VBox getSwitchBox() {
 		return switchBox;
 	}
 
-
-
-	public static void setSwitchBox(VBox switchBox) {
-		CoOPDLC.switchBox = switchBox;
+	public  void setSwitchBox(VBox switchBox) {
+		this.switchBox = switchBox;
 	}
 
-
-
-	public static int getT() {
+	public  int getT() {
 		return t;
 	}
 
+	public  void setT(int t) {
+		this.t = t;
+	}
 
-
-	public static void setT(int t) {
-		CoOPDLC.t = t;
+	
+	public  void addScore(int addScore) {
+		score1 += addScore;
+		getScoreText().setText("Score: "+Integer.toString(score1));
+	}
+	public  int getScore() {
+		return score1;
 	}
 
 
-
-	public static AnimationTimer getTimer() {
-		return timer;
-	}
-
-
-
-	public static void setTimer(AnimationTimer timer) {
-		CoOPDLC.timer = timer;
-	}
-
-
-
-	private static void initStage(Stage whoIs) {
-
-		mainStage = whoIs;
-		whoIs.setResizable(false);
+	public  void initStage() {
+//		whoIs.setResizable(false);
 		root.setAlignment(Pos.CENTER);
-		VBox testRoot = new VBox();
-		Scene scene = new Scene(testRoot, 600, 600);
 		switchBox = new VBox();
 		switchBox.setMinHeight(600);
 
-		switchBox.getChildren().add(playerSprite);
+		switchBox.getChildren().add(getPlayer1Sprite());
+		player2.getSprite().setTranslateY(player2.getSprite().getTranslateY() - 24);
+		player2.getSprite().setTranslateX(player2.getSprite().getTranslateX() - 32);
+		switchBox.getChildren().add(getPlayer2Sprite());
 		populateShields();
 		populateEnemies();
 
 		BackgroundFill back = new BackgroundFill(Color.BLACK, new CornerRadii(1), null);
 		switchBox.setBackground(new Background(back));
 		root.getChildren().addAll(switchBox);
-		
-		timer.start();
+
+		setScoreBox(new VBox());
+		getScoreBox().setMinHeight(50);
+		getScoreBox().getChildren().add(getScoreText());
+		getScoreText().setFill(Color.WHITE);
+		try {
+			InputStream is = new FileInputStream("src/assets/pixel.ttf");
+			getScoreText().setFont(Font.loadFont(is, 23));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		getScoreBox().setBackground(new Background(back));
+		populateLives();
+
+		root.getChildren().add(getScoreBox());
+
 		isInited = true;
-		
+
+	}
+	
+	public  void initNextLevel(ArrayList<Sprite> shields2, int score2, ArrayList<Sprite> lives2) {
+//		whoIs.setResizable(false);
+		root.setAlignment(Pos.CENTER);
+		switchBox = new VBox();
+		switchBox.setMinHeight(600);
+		score1 = score2;
+		scoreText = new Text(0, 0, "Score: " + Integer.toString(score1));
+
+		switchBox.getChildren().add(getPlayer1Sprite());
+		switchBox.getChildren().add(getPlayer2Sprite());
+		shields = shields2;
+		switchBox.getChildren().addAll(shields);
+		populateEnemies();
+
+		BackgroundFill back = new BackgroundFill(Color.BLACK, new CornerRadii(1), null);
+		switchBox.setBackground(new Background(back));
+		root.getChildren().addAll(switchBox);
+
+		setScoreBox(new VBox());
+		getScoreBox().setMinHeight(50);
+		getScoreBox().getChildren().add(getScoreText());
+		getScoreText().setFill(Color.WHITE);
+		try {
+			InputStream is = new FileInputStream("src/assets/pixel.ttf");
+			getScoreText().setFont(Font.loadFont(is, 23));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		getScoreBox().setBackground(new Background(back));
+		lives1 = lives2;
+		setLivesCount(lives1.size());
+		getScoreBox().getChildren().addAll(lives1);
+
+		root.getChildren().add(getScoreBox());
+
 	}
 
-	private static void populateShields() {
+	private  void populateShields() {
 		int posX = 50;
 		int posY = 400;
 
-		for (int i = 0; i < 4; i++) {
-			Sprite s = new Sprite(posX, posY - i * 41, "shield", "Shield", 64, 41, 1);
+		for (int i = 0; i < 8; i++) {
+			Sprite s = new Sprite(posX, posY - i * 41, "shield", "Shield", 64, 41, 10);
 			shields.add(s);
 			switchBox.getChildren().add(s);
 			posX += 140;
 		}
 
 	}
+	
+	private  void populateLives() {
+		int posX = 400;
+		int posY = -23;
+		
+		player1.setLives(6);
+		
+		for (int i = 0; i < player1.getLives(); i++) {
+			Sprite s = new Sprite(posX, posY - i * 24, "live", "idle1", 32, 24, 1);
+			lives1.add(s);
+			getScoreBox().getChildren().add(lives1.get(i));
+			posX += 40;
+			setLivesCount(getLivesCount() + 1);
+		}
 
-	private static void populateEnemies() {
+	}
+
+	public  void populateEnemies() {
 		int posX = 5;
-		int posY = -180;
+		int posY = -352;
 		int count = 0;
 		String sprites[] = { "enemy1", "enemy2", "enemy3", "enemy4" };
-		int X[] = {20,24,18,28};
+		int X[] = { 20, 24, 18, 28 };
 //		int Y[] = {22,25,25,22};
 		int file = 3;
 
-		for (int i = 0; i < 40; i++) {
-			if (count >= 10) {
+		for (int i = 0; i < 80; i++) {
+			if (count >= 20) {
 				posY += 50;
 				posX = 5;
 				count = 0;
@@ -215,22 +269,72 @@ public class CoOPDLC {
 		}
 
 	}
-	
-	
-	private static List<Sprite> sprites() {
+
+	private  List<Sprite> sprites() {
 		return switchBox.getChildren().stream().map(n -> (Sprite) n).collect(Collectors.toList());
 	}
 
-	public static List<Sprite> getSprites() {
+	public  List<Sprite> getSprites() {
 		return sprites();
 	}
-	
-	
 
-	private static AnimationTimer timer = new AnimationTimer() {
-		@Override
-		public void handle(long now) {
-			
-		}
-	};
+	public  ArrayList<Sprite> getLives() {
+		return lives1;
+	}
+
+	public  void setLives(ArrayList<Sprite> lives) {
+		this.lives1 = lives;
+	}
+	public  void removeLife() {
+		getScoreBox().getChildren().remove(lives1.remove(lives1.size()-1));
+		setLivesCount(getLivesCount() - 1);
+	}
+
+	public  boolean isBeenRan() {
+		return beenRan;
+	}
+
+	public  void setBeenRan(boolean beenRan) {
+		this.beenRan = beenRan;
+	}
+
+	public  int getLivesCount() {
+		return livesCount;
+	}
+
+	public  Sprite getPlayer1Sprite() {
+		return player1Sprite;
+	}
+	
+	public  Sprite getPlayer2Sprite() {
+		return player2Sprite;
+	}
+
+	public  void setPlayerSprite(Sprite playerSprite) {
+		this.player1Sprite = playerSprite;
+	}
+
+	public  VBox getScoreBox() {
+		return scoreBox;
+	}
+
+	public  void setScoreBox(VBox scoreBox) {
+		this.scoreBox = scoreBox;
+	}
+
+	public  Text getScoreText() {
+		return scoreText;
+	}
+
+	public  void setScoreText(Text scoreText) {
+		this.scoreText = scoreText;
+	}
+
+	public  void setLivesCount(int livesCount) {
+		this.livesCount = livesCount;
+	}
+
+
+
+
 }
