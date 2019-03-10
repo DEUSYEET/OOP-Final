@@ -55,25 +55,25 @@ public class SpaceInvaders {
 						s.updateHowLongBeenOofed();
 					}
 
-//					if (s.getType().equals("enemy")) {
-//						int rand = rng.nextInt(100) % 10;
-//
-//						if (rand == 0) {
-//
-//							if (SinglePlayer.getEnemies().size() > 20) {
-//								if (rng.nextInt() % 100 == 0) {
-//
-//									shoot(s);
-//								}
-//							} else {
-//								if (rng.nextInt() % 1000 == 0) {
-//
-//									shoot(s);
-//								}
-//							}
-//
-//						}
-//					}
+					if (s.getType().equals("enemy")) {
+						int rand = rng.nextInt(100) % 10;
+
+						if (rand == 0) {
+
+							if (SinglePlayer.getEnemies().size() > 20) {
+								if (rng.nextInt() % 100 == 0) {
+
+									shoot(s);
+								}
+							} else {
+								if (rng.nextInt() % 1000 == 0) {
+
+									shoot(s);
+								}
+							}
+
+						}
+					}
 
 					if (s.getHLBO() < 1 || (!s.isOofed())) {
 
