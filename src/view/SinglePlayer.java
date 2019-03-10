@@ -137,7 +137,7 @@ public class SinglePlayer {
 	
 	public static void addScore(int addScore) {
 		score += addScore;
-		scoreText.setText("Score: "+Integer.toString(score));
+		getScoreText().setText("Score: "+Integer.toString(score));
 	}
 	public static int getScore() {
 		return score;
@@ -146,14 +146,14 @@ public class SinglePlayer {
 
 	public static void initStage(Stage whoIs) {
 		mainStage = whoIs;
-		whoIs.setResizable(false);
+//		whoIs.setResizable(false);
 		root.setAlignment(Pos.CENTER);
 		VBox testRoot = new VBox();
 		Scene scene = new Scene(testRoot, 600, 600);
 		switchBox = new VBox();
 		switchBox.setMinHeight(600);
 
-		switchBox.getChildren().add(playerSprite);
+		switchBox.getChildren().add(getPlayerSprite());
 		populateShields();
 		populateEnemies();
 
@@ -161,20 +161,20 @@ public class SinglePlayer {
 		switchBox.setBackground(new Background(back));
 		root.getChildren().addAll(switchBox);
 
-		scoreBox = new VBox();
-		scoreBox.setMinHeight(50);
-		scoreBox.getChildren().add(scoreText);
-		scoreText.setFill(Color.WHITE);
+		setScoreBox(new VBox());
+		getScoreBox().setMinHeight(50);
+		getScoreBox().getChildren().add(getScoreText());
+		getScoreText().setFill(Color.WHITE);
 		try {
 			InputStream is = new FileInputStream("src/assets/pixel.ttf");
-			scoreText.setFont(Font.loadFont(is, 23));
+			getScoreText().setFont(Font.loadFont(is, 23));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		scoreBox.setBackground(new Background(back));
+		getScoreBox().setBackground(new Background(back));
 		populateLives();
 
-		root.getChildren().add(scoreBox);
+		root.getChildren().add(getScoreBox());
 
 		timer.start();
 		isInited = true;
@@ -201,9 +201,9 @@ public class SinglePlayer {
 		for (int i = 0; i < player.getLives(); i++) {
 			Sprite s = new Sprite(posX, posY - i * 24, "live", "idle", 32, 24, 1);
 			lives.add(s);
-			scoreBox.getChildren().add(lives.get(i));
+			getScoreBox().getChildren().add(lives.get(i));
 			posX += 40;
-			livesCount++;
+			setLivesCount(getLivesCount() + 1);
 		}
 
 	}
@@ -249,8 +249,8 @@ public class SinglePlayer {
 		SinglePlayer.lives = lives;
 	}
 	public static void removeLife() {
-		scoreBox.getChildren().remove(lives.remove(lives.size()-1));
-		livesCount--;
+		getScoreBox().getChildren().remove(lives.remove(lives.size()-1));
+		setLivesCount(getLivesCount() - 1);
 	}
 	
 	private static AnimationTimer timer = new AnimationTimer() {
@@ -264,7 +264,7 @@ public class SinglePlayer {
 		//perfectly balanced, as all things should be
 			root.getChildren().removeAll(root.getChildren());
 
-			score = 0;
+			//score = 0;
 		int perserve = SpaceInvaders.timesSnapped;
 		SinglePlayer.getEnemies().clear();
 		root.getChildren().removeAll(root.getChildren());
@@ -283,6 +283,34 @@ public class SinglePlayer {
 
 	public static int getLivesCount() {
 		return livesCount;
+	}
+
+	public static Sprite getPlayerSprite() {
+		return playerSprite;
+	}
+
+	public static void setPlayerSprite(Sprite playerSprite) {
+		SinglePlayer.playerSprite = playerSprite;
+	}
+
+	public static VBox getScoreBox() {
+		return scoreBox;
+	}
+
+	public static void setScoreBox(VBox scoreBox) {
+		SinglePlayer.scoreBox = scoreBox;
+	}
+
+	public static Text getScoreText() {
+		return scoreText;
+	}
+
+	public static void setScoreText(Text scoreText) {
+		SinglePlayer.scoreText = scoreText;
+	}
+
+	public static void setLivesCount(int livesCount) {
+		SinglePlayer.livesCount = livesCount;
 	}
 
 
