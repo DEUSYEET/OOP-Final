@@ -17,7 +17,8 @@ public class Main extends Application {
 			
 			Scene mainMenu = MainMenu.getScene(primaryStage);
 			primaryStage.setScene(mainMenu);
-			primaryStage.setResizable(false);
+
+			primaryStage.setResizable(true);
 			primaryStage.setTitle("Space Invaders Battle");
 			primaryStage.show();
 			

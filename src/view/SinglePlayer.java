@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import application.Sprite;
-import controllers.SpaceInvaders;
-import javafx.animation.AnimationTimer;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.Background;
@@ -24,131 +22,124 @@ import models.Player;
 
 public class SinglePlayer {
 	
-	private static boolean beenRan = false;
-	private static VBox root = new VBox();
-	private static Scene scene = new Scene(root, 600, 600);
-	private static Stage mainStage;
-	private static boolean isInited = false;
-	private static Player player = new Player(1);
-	private static Sprite playerSprite = player.getSprite();
-	private static ArrayList<Sprite> enemies = new ArrayList<>();
-	private static ArrayList<Sprite> shields = new ArrayList<>();
-	private static ArrayList<Sprite> lives = new ArrayList<>();
-	private static VBox switchBox;
-	private static VBox scoreBox;
-	private static int t;
-	private static int score = 0;
-	private static int livesCount;
+	private  boolean beenRan = false;
+	private  VBox root = new VBox();
+	private  Scene scene = new Scene(root, 600, 600);
+	private  Stage mainStage;
+	private  boolean isInited = false;
+	private  Player player = new Player(1);
+	private  Sprite playerSprite = player.getSprite();
+	private  ArrayList<Sprite> enemies = new ArrayList<>();
+	private  ArrayList<Sprite> shields = new ArrayList<>();
+	private  ArrayList<Sprite> lives = new ArrayList<>();
+	private  VBox switchBox;
+	private  VBox scoreBox;
+	private  int t;
+	private  int score = 0;
+	private  int livesCount;
+	private  ArrayList<Sprite> motherShips = new ArrayList<Sprite>();
 	
-	private static Text scoreText = new Text(0, 0, "Score: " + Integer.toString(score));
-
-	public static Scene getScene(Stage whoIs) {
-		
-		setBeenRan(true);
-		
-		if (!isInited) {
-			initStage(whoIs);
-		}
-
-		return scene;
+	private  Text scoreText = new Text(0, 0, "Score: " + Integer.toString(score));
+	
+	public SinglePlayer() {
+		initStage();
 	}
 
-	public static VBox getRoot() {
+	public SinglePlayer(ArrayList<Sprite> shields2, int score2, ArrayList<Sprite> lives2) {
+		
+		initNextLevel(shields2, score2, lives2);
+		
+	}
+
+	public  ArrayList<Sprite> getMotherShips(){
+		return motherShips;
+	}
+	
+	public  VBox getRoot() {
 		return root;
 	}
 
-	public static void setRoot(VBox root) {
-		SinglePlayer.root = root;
+	public  void setRoot(VBox root) {
+		this.root = root;
 	}
 
-	public static Scene getScene() {
+	public  Scene getScene() {
 		return scene;
 	}
 
-	public static void setScene(Scene scene) {
-		SinglePlayer.scene = scene;
+	public  void setScene(Scene scene) {
+		this.scene = scene;
 	}
 
-	public static Stage getMainStage() {
+	public  Stage getMainStage() {
 		return mainStage;
 	}
 
-	public static void setMainStage(Stage mainStage) {
-		SinglePlayer.mainStage = mainStage;
+	public  void setMainStage(Stage mainStage) {
+		this.mainStage = mainStage;
 	}
 
-	public static boolean isInited() {
+	public  boolean isInited() {
 		return isInited;
 	}
 
-	public static void setInited(boolean isInited) {
-		SinglePlayer.isInited = isInited;
+	public  void setInited(boolean isInited) {
+		this.isInited = isInited;
 	}
 
-	public static Player getPlayer() {
+	public  Player getPlayer() {
 		return player;
 	}
 
-	public static ArrayList<Sprite> getEnemies() {
+	public  ArrayList<Sprite> getEnemies() {
 		return enemies;
 	}
 
-	public static void setEnemies(ArrayList<Sprite> enemies) {
-		SinglePlayer.enemies = enemies;
+	public  void setEnemies(ArrayList<Sprite> enemies) {
+		this.enemies = enemies;
 	}
 
-	public static ArrayList<Sprite> getShields() {
+	public  ArrayList<Sprite> getShields() {
 		return shields;
 	}
 
-	public static void setShields(ArrayList<Sprite> shields) {
-		SinglePlayer.shields = shields;
+	public  void setShields(ArrayList<Sprite> shields) {
+		this.shields = shields;
 	}
 
-	public static VBox getSwitchBox() {
+	public  VBox getSwitchBox() {
 		return switchBox;
 	}
 
-	public static void setSwitchBox(VBox switchBox) {
-		SinglePlayer.switchBox = switchBox;
+	public  void setSwitchBox(VBox switchBox) {
+		this.switchBox = switchBox;
 	}
 
-	public static int getT() {
+	public  int getT() {
 		return t;
 	}
 
-	public static void setT(int t) {
-		SinglePlayer.t = t;
-	}
-
-	public static AnimationTimer getTimer() {
-		return timer;
-	}
-
-	public static void setTimer(AnimationTimer timer) {
-		SinglePlayer.timer = timer;
+	public  void setT(int t) {
+		this.t = t;
 	}
 
 	
-	public static void addScore(int addScore) {
+	public  void addScore(int addScore) {
 		score += addScore;
-		scoreText.setText("Score: "+Integer.toString(score));
+		getScoreText().setText("Score: "+Integer.toString(score));
 	}
-	public static int getScore() {
+	public  int getScore() {
 		return score;
 	}
 
 
-	public static void initStage(Stage whoIs) {
-		mainStage = whoIs;
-		whoIs.setResizable(false);
+	public  void initStage() {
+//		whoIs.setResizable(false);
 		root.setAlignment(Pos.CENTER);
-		VBox testRoot = new VBox();
-		Scene scene = new Scene(testRoot, 600, 600);
 		switchBox = new VBox();
 		switchBox.setMinHeight(600);
 
-		switchBox.getChildren().add(playerSprite);
+		switchBox.getChildren().add(getPlayerSprite());
 		populateShields();
 		populateEnemies();
 
@@ -156,27 +147,62 @@ public class SinglePlayer {
 		switchBox.setBackground(new Background(back));
 		root.getChildren().addAll(switchBox);
 
-		scoreBox = new VBox();
-		scoreBox.setMinHeight(50);
-		scoreBox.getChildren().add(scoreText);
-		scoreText.setFill(Color.WHITE);
+		setScoreBox(new VBox());
+		getScoreBox().setMinHeight(50);
+		getScoreBox().getChildren().add(getScoreText());
+		getScoreText().setFill(Color.WHITE);
 		try {
 			InputStream is = new FileInputStream("src/assets/pixel.ttf");
-			scoreText.setFont(Font.loadFont(is, 23));
+			getScoreText().setFont(Font.loadFont(is, 23));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		scoreBox.setBackground(new Background(back));
+		getScoreBox().setBackground(new Background(back));
 		populateLives();
 
-		root.getChildren().add(scoreBox);
+		root.getChildren().add(getScoreBox());
 
-		timer.start();
 		isInited = true;
 
 	}
+	
+	public  void initNextLevel(ArrayList<Sprite> shields2, int score2, ArrayList<Sprite> lives2) {
+//		whoIs.setResizable(false);
+		root.setAlignment(Pos.CENTER);
+		switchBox = new VBox();
+		switchBox.setMinHeight(600);
+		score = score2;
+		scoreText = new Text(0, 0, "Score: " + Integer.toString(score));
 
-	private static void populateShields() {
+		switchBox.getChildren().add(getPlayerSprite());
+		shields = shields2;
+		switchBox.getChildren().addAll(shields);
+		populateEnemies();
+
+		BackgroundFill back = new BackgroundFill(Color.BLACK, new CornerRadii(1), null);
+		switchBox.setBackground(new Background(back));
+		root.getChildren().addAll(switchBox);
+
+		setScoreBox(new VBox());
+		getScoreBox().setMinHeight(50);
+		getScoreBox().getChildren().add(getScoreText());
+		getScoreText().setFill(Color.WHITE);
+		try {
+			InputStream is = new FileInputStream("src/assets/pixel.ttf");
+			getScoreText().setFont(Font.loadFont(is, 23));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		getScoreBox().setBackground(new Background(back));
+		lives = lives2;
+		setLivesCount(lives.size());
+		getScoreBox().getChildren().addAll(lives);
+
+		root.getChildren().add(getScoreBox());
+
+	}
+
+	private  void populateShields() {
 		int posX = 50;
 		int posY = 400;
 
@@ -189,21 +215,21 @@ public class SinglePlayer {
 
 	}
 	
-	private static void populateLives() {
+	private  void populateLives() {
 		int posX = 400;
 		int posY = -23;
 
 		for (int i = 0; i < player.getLives(); i++) {
 			Sprite s = new Sprite(posX, posY - i * 24, "live", "idle", 32, 24, 1);
 			lives.add(s);
-			scoreBox.getChildren().add(lives.get(i));
+			getScoreBox().getChildren().add(lives.get(i));
 			posX += 40;
-			livesCount++;
+			setLivesCount(getLivesCount() + 1);
 		}
 
 	}
 
-	public static void populateEnemies() {
+	public  void populateEnemies() {
 		int posX = 5;
 		int posY = -160;
 		int count = 0;
@@ -228,56 +254,64 @@ public class SinglePlayer {
 
 	}
 
-	private static List<Sprite> sprites() {
+	private  List<Sprite> sprites() {
 		return switchBox.getChildren().stream().map(n -> (Sprite) n).collect(Collectors.toList());
 	}
 
-	public static List<Sprite> getSprites() {
+	public  List<Sprite> getSprites() {
 		return sprites();
 	}
 
-	public static ArrayList<Sprite> getLives() {
+	public  ArrayList<Sprite> getLives() {
 		return lives;
 	}
 
-	public static void setLives(ArrayList<Sprite> lives) {
-		SinglePlayer.lives = lives;
+	public  void setLives(ArrayList<Sprite> lives) {
+		this.lives = lives;
 	}
-	public static void removeLife() {
-		scoreBox.getChildren().remove(lives.remove(lives.size()-1));
-		livesCount--;
-	}
-	
-	private static AnimationTimer timer = new AnimationTimer() {
-		@Override
-		public void handle(long now) {
-				SpaceInvaders.update();
-		}
-	};
-
-	public static void snap() {
-		//perfectly balanced, as all things should be
-			root.getChildren().removeAll(root.getChildren());
-
-			score = 0;
-		int perserve = SpaceInvaders.timesSnapped;
-		SinglePlayer.getEnemies().clear();
-		root.getChildren().removeAll(root.getChildren());
-		SpaceInvaders.timesSnapped = perserve;
-		SpaceInvaders.reset();
-		
+	public  void removeLife() {
+		getScoreBox().getChildren().remove(lives.remove(lives.size()-1));
+		setLivesCount(getLivesCount() - 1);
 	}
 
-	public static boolean isBeenRan() {
+	public  boolean isBeenRan() {
 		return beenRan;
 	}
 
-	public static void setBeenRan(boolean beenRan) {
-		SinglePlayer.beenRan = beenRan;
+	public  void setBeenRan(boolean beenRan) {
+		this.beenRan = beenRan;
 	}
 
-	public static int getLivesCount() {
+	public  int getLivesCount() {
 		return livesCount;
+	}
+
+	public  Sprite getPlayerSprite() {
+		return playerSprite;
+	}
+
+	public  void setPlayerSprite(Sprite playerSprite) {
+		this.playerSprite = playerSprite;
+	}
+
+	public  VBox getScoreBox() {
+		return scoreBox;
+	}
+
+	public  void setScoreBox(VBox scoreBox) {
+		this.scoreBox = scoreBox;
+	}
+
+	public  Text getScoreText() {
+		return scoreText;
+	}
+
+	public  void setScoreText(Text scoreText) {
+		this.scoreText = scoreText;
+	}
+
+	public  void setLivesCount(int livesCount) {
+		this.livesCount = livesCount;
 	}
 
 
