@@ -219,25 +219,6 @@ public class SpaceInvaders {
 
 		countToBottom++;
 		
-		int chance = rng.nextInt(20);
-		
-		if (chance == 0 && timeSinceBonusEnemy > 2000) {
-			
-			Sprite s = new Sprite(600, -600 - howManyBonusEnemys * 32, "bonusEnemy", "motherShip", 32, 11, 8);
-			currentLevel.getMotherShips().add(s);
-			currentLevel.getSwitchBox().getChildren().add(s);
-			timeSinceBonusEnemy = 0;
-			howManyBonusEnemys++;
-			System.out.println("mother ship");
-			
-		}
-		
-		for (Sprite e : currentLevel.getMotherShips()) {
-			
-			e.moveLeft();
-			
-		}
-		
 		timeSinceBonusEnemy++;
 		frame++;
 		frameLastShot++;
@@ -251,7 +232,6 @@ public class SpaceInvaders {
 	}
 	
 	private void shoot(Sprite s) {
-		int rand = rng.nextInt(100) + 1;
 		int[] pos = { (int) s.getTranslateX(), (int) s.getTranslateY() };
 
 	
