@@ -23,7 +23,9 @@ import javafx.stage.Stage;
 import models.Player;
 
 
+
 public class CoOP {
+
 
 	private  boolean beenRan = false;
 	private  VBox root = new VBox();
@@ -332,8 +334,6 @@ public class CoOP {
 	public  void setLivesCount(int livesCount) {
 		this.livesCount = livesCount;
 	}
-
-
 
 
 
