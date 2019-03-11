@@ -9,6 +9,7 @@ import application.Sprite;
 import enums.LaserType;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import models.Laser;
 import models.Player;
 import view.BattleOverMenu;
@@ -76,7 +77,7 @@ public class BattleController {
 							s.setOofed(false);
 							s.setHLBO(-1);
 							s.update();
-							System.out.println(s.getSpriteFile());
+						//	System.out.println(s.getSpriteFile());
 							continue;
 						} else if (s.getType().equals("player2")) {
 							s.setH(24);
@@ -85,7 +86,7 @@ public class BattleController {
 							s.setOofed(false);
 							s.setHLBO(-1);
 							s.update();
-							System.out.println(s.getSpriteFile());
+						//	System.out.println(s.getSpriteFile());
 							continue;
 						}
 
@@ -95,10 +96,10 @@ public class BattleController {
 					} else {
 						 if (s.getType().equals("player1")) {
 								s.setSpriteFile("playerHit");
-								System.out.println(s.getHLBO());
+							//	System.out.println(s.getHLBO());
 							} else if (s.getType().equals("player2")) {
 								s.setSpriteFile("playerHit2");
-								System.out.println(s.getHLBO());
+							//	System.out.println(s.getHLBO());
 							}
 						 else if (!s.getType().equals("player1")||!s.getType().equals("player2")) {
 								//System.out.println(s.getType());
@@ -124,6 +125,8 @@ public class BattleController {
 				gameRunning = false;
 				gameOver = true;
 				setWinner(BattleGame.getPlayer(2));
+
+				
 				} else if (BattleGame.getLivesCount(2) == 0 &&BattleGame.getScore(1)>BattleGame.getScore(2)) {
 					gameRunning = false;
 					gameOver = true;
@@ -162,7 +165,7 @@ public class BattleController {
 			//	BattleGame.getPlayer().getSprite().setTranslateX(X);
 				if (!e.isOofed() && (X < 0 || X > 570)) {
 					moveRight = !moveRight;
-					System.out.println(moveRight);
+			//		System.out.println(moveRight);
 					if (e.getTranslateX() < 0) {
 						for (Sprite es : BattleGame.getEnemies()) {
 							
@@ -216,10 +219,12 @@ public class BattleController {
 		}
 		if (gameOver) {
 			System.out.println("GAME OVER");
+			//System.out.println(getWinner().getSprite().getType());
 			gameOver = false;
 			BattleGame.snap();
 			reset();
-			MainMenu.getStage().setScene(BattleOverMenu.getScene(MainMenu.getStage()));
+			BattleOverMenu go = new BattleOverMenu(new Text(0, 0, "Player "+getWinner().getSprite().getType()+"Wins"));
+			MainMenu.getStage().setScene(go.getScene(MainMenu.getStage()));
 		}
 	}
 
@@ -234,7 +239,7 @@ public class BattleController {
 	private static void shoot(Sprite s) {
 		int rand = rng.nextInt(100) + 1;
 		int[] pos = { (int) s.getTranslateX(), (int) s.getTranslateY() };
-		System.out.println(pos[1]);
+	//	System.out.println(pos[1]);
 		//System.out.println(flip);
 		if (flip) {
 			Laser laser = new Laser(1, LaserType.ALIEN, new Sprite(pos[0] + 14, 0, "elaser1", "EnemyLaser", 4, 32, 8));
@@ -261,7 +266,7 @@ public class BattleController {
 		for (Laser l : lasers) {
 			if (l.getTimeAlive()>300) {
 				offed.add(l);
-				System.out.println("Removed Laser");
+			//	System.out.println("Removed Laser");
 			}
 			for (Sprite s : BattleGame.getSprites()) {
 				if (s.getType().equals("enemy") && l.getType() == LaserType.ALIEN
@@ -330,7 +335,7 @@ public class BattleController {
 
 	private static void controls(Scene scene) {
 		scene.setOnKeyPressed(e -> {
-			System.out.println(e.getCode());
+	//		System.out.println(e.getCode());
 			switch (e.getCode()) {
 			
 			
@@ -355,7 +360,7 @@ public class BattleController {
 					playerShots++;
 					frameLastShot = 0;
 				}
-				System.out.println(frameLastShot+"----------------");
+			//	System.out.println(frameLastShot+"----------------");
 				break;
 				
 				
@@ -380,7 +385,7 @@ public class BattleController {
 					playerShots++;
 					frameLastShot2 = 0;
 				}
-				System.out.println(frameLastShot2+"----------------");
+		//		System.out.println(frameLastShot2+"----------------");
 				break;
 				
 				
@@ -446,17 +451,22 @@ public class BattleController {
 		enemySpeed = 10;
 		playerMoving = false;
 		moveRight = true;
-		shootRow=-1280;
+		shootRow=-1800;
 		playerShots = 0;
 		frameLastShot = 120;
 		frameLastShot2 = 120;
 		howFarOffScreen = 0;
 		gameOver=false;
+		//winner = null;
 
 	}
 
 	public static Player getWinner() {
-		return winner;
+		Player win = winner;
+	//	System.out.println(win.getSprite().getType());
+		BattleController.setWinner(null);
+		
+		return win;
 	}
 
 	public static void setWinner(Player winner) {

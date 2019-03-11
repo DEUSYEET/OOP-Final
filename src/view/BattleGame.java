@@ -141,7 +141,7 @@ public class BattleGame {
 
 	
 	public static void addScore(int addScore, int player) {
-		System.out.println("Player");
+		//System.out.println("Player");
 		if (player==1) {
 		score += addScore;
 		scoreText.setText("Score: "+Integer.toString(score));
@@ -335,14 +335,13 @@ public class BattleGame {
 	public static void snap() {
 		//perfectly balanced, as all things should be
 			root.getChildren().removeAll(root.getChildren());
-
 			//score = 0;
 			if (score >0) {
 				addScore(-score, 1);
 			}
 			if (score2 >0) {
 				addScore(-score2, 2);
-				System.out.println(score2);
+				//System.out.println(score2);
 			}
 			if (livesCount>0) {
 				do {
