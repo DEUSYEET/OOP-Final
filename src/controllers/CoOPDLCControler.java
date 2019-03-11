@@ -10,11 +10,14 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import models.Laser;
+import view.CoOPDLC;
 import view.GameOverMenu;
 import view.MainMenu;
-import view.SinglePlayer;
 
-public class SpaceInvaders {
+public class CoOPDLCControler {
+	
+
+	
 
 	public   int countToBottom = 0;
 	public   boolean gameRunning = true, gameOver = false;
@@ -26,19 +29,20 @@ public class SpaceInvaders {
 	private  ArrayList<Laser> lasers = new ArrayList<Laser>();
 	private  int playerShots = 0;
 	private  int frameLastShot = 120;
+	private  int frameLastShot2 = 120;
 	private  Random rng = new Random();
 	private  int shootRow=-1280;
 	public   int timesSnapped = 0;
 	public   int timeSinceBonusEnemy = 0;
 	public   int howManyBonusEnemys = 0;
-	private SinglePlayer currentLevel;
+	private CoOPDLC currentLevel;
 	
-	public SinglePlayer getLevel() {
+	public CoOPDLC getLevel() {
 		return currentLevel;
 	}
 	
 	public void start() {
-		currentLevel = new SinglePlayer();
+		currentLevel = new CoOPDLC();
 		timer.start();
 	}
 	
@@ -69,13 +73,12 @@ public class SpaceInvaders {
 
 								shoot(s);
 							}
-
 						} else {
 							if (rng.nextInt() % 10 == 0) {
+
 								shoot(s);
 							}
 						}
-
 
 					}
 				}
@@ -96,11 +99,10 @@ public class SpaceInvaders {
 						s.update();
 						System.out.println(s.getSpriteFile());
 						continue;
-					} else if (s.getType().equals("player2")) {
-
+					} else if (s.getType().equals("player3")) {
 						s.setH(24);
 						s.setW(32);
-						s.setSpriteFile("idle2");
+						s.setSpriteFile("idle3");
 						s.setOofed(false);
 						s.setHLBO(-1);
 						s.update();
@@ -115,18 +117,17 @@ public class SpaceInvaders {
 					 if (s.getType().equals("player1")) {
 							s.setSpriteFile("playerHit");
 							System.out.println(s.getHLBO());
-						} else if (s.getType().equals("player2")) {
+						} else if (s.getType().equals("player3")) {
 							s.setSpriteFile("playerHit2");
 							System.out.println(s.getHLBO());
 						}
-					 else if (!s.getType().equals("player1")||!s.getType().equals("player2")) {
+					 else if (!s.getType().equals("player1")||!s.getType().equals("player3")) {
 							//System.out.println(s.getType());
 							s.setH(32);
 							s.setW(16);
 							s.setSpriteFile("explosion");
 							currentLevel.addScore(10);
 						}
-
 				}
 
 			}
@@ -140,7 +141,11 @@ public class SpaceInvaders {
 			System.out.println("no life");
 		}
 
-		currentLevel.getPlayer().movePlayer();
+		currentLevel.getPlayer1().movePlayer();
+		currentLevel.getPlayer2().movePlayer();
+		currentLevel.getPlayer1().setRightBoundary((int)currentLevel.getPlayer2().getSprite().getTranslateX() - 32); 
+		currentLevel.getPlayer2().setLeftBoundary((int)currentLevel.getPlayer1().getSprite().getTranslateX() + 32); 
+
 		if (playerMoving) {
 			enemySpeed -= 20;
 		}
@@ -163,9 +168,10 @@ public class SpaceInvaders {
 		boolean down = true;
 		for (Sprite e : currentLevel.getEnemies()) {
 
+
 			int X = (int) e.getTranslateX();
 
-			if (!e.isOofed() && (X < 0 || X > 570)) {
+			if (!e.isOofed() && (X < 0 || X > 1170)) {
 				moveRight = !moveRight;
 				System.out.println(e.getTranslateY());
 				System.out.println(e.getTranslateX());
@@ -182,7 +188,6 @@ public class SpaceInvaders {
 						if (down) {
 							shootRow += 10;
 							down = !down;
-
 						}
 					}
 				} else {
@@ -211,7 +216,7 @@ public class SpaceInvaders {
 		
 		if(currentLevel.getEnemies().size() == 0) {
 			
-			SinglePlayer newLevel = new SinglePlayer(currentLevel.getShields(),currentLevel.getScore(),currentLevel.getLives());
+			CoOPDLC newLevel = new CoOPDLC(currentLevel.getShields(),currentLevel.getScore(),currentLevel.getLives());
 			currentLevel = newLevel;
 			
 			countToBottom = 0;
@@ -224,6 +229,7 @@ public class SpaceInvaders {
 			lasers = new ArrayList<Laser>();
 			playerShots = 0;
 			frameLastShot = 120;
+			frameLastShot2 = 120;
 			timesSnapped = 0;
 			timeSinceBonusEnemy = 0;
 			howManyBonusEnemys = 0;
@@ -239,6 +245,7 @@ public class SpaceInvaders {
 		timeSinceBonusEnemy++;
 		frame++;
 		frameLastShot++;
+		frameLastShot2++;
 	
 		if (gameOver) {
 			System.out.println("GAME OVER");
@@ -253,7 +260,7 @@ public class SpaceInvaders {
 
 	
 		Laser laser = new Laser(1, LaserType.ALIEN, new Sprite(pos[0] + 14, 0, "laser", "EnemyLaser", 4, 32, 8));
-		laser.getSprite().setTranslateY(shootRow - (playerShots * 32));
+		laser.getSprite().setTranslateY(shootRow - 1500 - (playerShots * 32));
 		lasers.add(laser);
 		currentLevel.getSwitchBox().getChildren().add(laser.getSprite());
 		playerShots++;
@@ -306,6 +313,7 @@ public class SpaceInvaders {
 						if (s.getCurrentFrame() <= 8) {
 							s.update();
 							frameLastShot = 120;
+							frameLastShot2 = 120;
 							offed.add(l);
 						} else {
 
@@ -314,6 +322,7 @@ public class SpaceInvaders {
 					} else {
 						kaboomed.add(s);
 						frameLastShot = 120;
+						frameLastShot2 = 120;
 						offed.add(l);
 					}
 
@@ -328,7 +337,7 @@ public class SpaceInvaders {
 		}
 		boolean zoomUp = false;
 		for (Sprite s : kaboomed) {
-			if (s.getType().equals("player"+1) || s.getType().equals("player"+2)) {
+			if (s.getType().equals("player"+1) || s.getType().equals("player"+3)) {
 				currentLevel.removeLife();
 				System.out.println("oof");
 			}
@@ -351,23 +360,35 @@ public class SpaceInvaders {
 			switch (e.getCode()) {
 			case A:
 				if (gameRunning) {
-					currentLevel.getPlayer().setSpeed(-5);
+					currentLevel.getPlayer1().setSpeed(-5);
 					playerMoving = true;
 				}
 				break;
 			case D:
 				if (gameRunning) {
-					currentLevel.getPlayer().setSpeed(5);
+					currentLevel.getPlayer1().setSpeed(5);
 					playerMoving = true;
 				}
 				break;
-			case SPACE:
+			case LEFT:
+				if (gameRunning) {
+					currentLevel.getPlayer2().setSpeed(-5);
+					playerMoving = true;
+				}
+				break;
+			case RIGHT:
+				if (gameRunning) {
+					currentLevel.getPlayer2().setSpeed(5);
+					playerMoving = true;
+				}
+				break;
+			case W:
 				if (gameRunning) {
 					if (frameLastShot > 110) {
-						int[] pos = { (int) currentLevel.getPlayer().getSprite().getTranslateX(), 0 };
+						int[] pos = { (int) currentLevel.getPlayer1().getSprite().getTranslateX(), 0 };
 						Laser laser = new Laser(1, LaserType.NORMAL,
 								new Sprite(pos[0] + 14, 0, "laser", "PlayerLaser", 4, 32, 8));
-						laser.getSprite().setTranslateY(-980 - (playerShots * 32) - (timesSnapped * 9000));
+						laser.getSprite().setTranslateY(-2450 - (playerShots * 32) - (timesSnapped * 9000));
 						lasers.add(laser);
 						currentLevel.getSwitchBox().getChildren().add(laser.getSprite());
 						playerShots++;
@@ -376,12 +397,25 @@ public class SpaceInvaders {
 					System.out.println(frameLastShot + "----------------");
 				}
 				break;
+			case UP:
+				if (gameRunning) {
+					if (frameLastShot2 > 110) {
+						int[] pos = { (int) currentLevel.getPlayer2().getSprite().getTranslateX(), 0 };
+						Laser laser = new Laser(1, LaserType.NORMAL,
+								new Sprite(pos[0] + 14, 0, "laser", "PlayerLaser", 4, 32, 8));
+						laser.getSprite().setTranslateY(-2450 - (playerShots * 32) - (timesSnapped * 9000));
+						lasers.add(laser);
+						currentLevel.getSwitchBox().getChildren().add(laser.getSprite());
+						playerShots++;
+						frameLastShot2 = 0;
+					}
+					System.out.println(frameLastShot + "----------------");
+				}
+				break;
 			case ESCAPE:
-
 				if(!gameOver) {
 					gameRunning = !gameRunning;
 				}
-
 				break;
 			case L:
 				if (gameRunning) {
@@ -392,7 +426,7 @@ public class SpaceInvaders {
 				break;
 			case BACK_SPACE:
 				if (gameRunning) {
-					int[] pos = { (int) currentLevel.getPlayer().getSprite().getTranslateX(), 0 };
+					int[] pos = { (int) currentLevel.getPlayer1().getSprite().getTranslateX(), 0 };
 					Laser laser = new Laser(1, LaserType.NORMAL,
 							new Sprite(pos[0] + 14, 0, "laser", "PlayerLaser", 4, 32, 8));
 					laser.getSprite().setTranslateY(-980 - (playerShots * 32) - (timesSnapped * 9000));
@@ -400,6 +434,7 @@ public class SpaceInvaders {
 					currentLevel.getSwitchBox().getChildren().add(laser.getSprite());
 					playerShots++;
 					frameLastShot = 0;
+					frameLastShot2 = 0;
 				}
 			default:
 				break;
@@ -409,14 +444,26 @@ public class SpaceInvaders {
 			switch (e.getCode()) {
 			case A:
 				if (gameRunning) {
-					currentLevel.getPlayer().setSpeed(0);
+					currentLevel.getPlayer1().setSpeed(0);
 					playerMoving = false;
 				}
 				break;
 			case D:
 				if (gameRunning) {
-					currentLevel.getPlayer().setSpeed(0);
+					currentLevel.getPlayer1().setSpeed(0);
 					playerMoving = false;
+				}
+				break;
+			case LEFT:
+				if (gameRunning) {
+					currentLevel.getPlayer2().setSpeed(0);
+					playerMoving = true;
+				}
+				break;
+			case RIGHT:
+				if (gameRunning) {
+					currentLevel.getPlayer2().setSpeed(0);
+					playerMoving = true;
 				}
 				break;
 			default:
@@ -446,7 +493,12 @@ public class SpaceInvaders {
 		moveRight = true;
 		playerShots = 0;
 		frameLastShot = 120;
+		frameLastShot2 = 120;
 		gameOver = false;
 
 	}
+
+
+
+
 }
