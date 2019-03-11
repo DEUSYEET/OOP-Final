@@ -23,6 +23,27 @@ import models.Player;
 public class CoOP {
 	
 
+
+	private static VBox root = new VBox();
+	private static Scene scene = new Scene(root, 600, 600);
+	private static Stage mainStage;
+	private static boolean isInited = false;
+	private static Player player = new Player(1);
+	private static Sprite playerSprite = player.getSprite();
+	private static ArrayList<Sprite> enemies = new ArrayList<>();
+	private static ArrayList<Sprite> shields = new ArrayList<>();
+	private static VBox switchBox;
+	private static int t;
+
+	public static Scene getScene(Stage whoIs) {
+		
+		if (!isInited) {
+			initStage(whoIs);
+		}
+
+		return scene;
+	}
+
 	
 	private  boolean beenRan = false;
 	private  VBox root = new VBox();
@@ -334,5 +355,13 @@ public class CoOP {
 
 
 
+
+
+	private static AnimationTimer timer = new AnimationTimer() {
+		@Override
+		public void handle(long now) {
+			new SpaceInvaders().update();
+		}
+	};
 
 }
