@@ -28,7 +28,7 @@ public class BattleOverMenu {
 	private static Scene scene = new Scene(root, 600, 600);
 	private static Stage mainStage;
 	private static boolean isInited = false;
-	private static Text scoreText = new Text(0, 0, "Player "+BattleController.getWinner().getSprite().getType()+"Wins");
+	private static Text scoreText = new Text(0, 0, BattleController.getWinner().getSprite().getType()+ " WINS!");
 
 	public static Scene getScene(Stage whoIs) {
 
