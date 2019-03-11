@@ -121,7 +121,7 @@ public class CoOPDLCControler {
 							s.setSpriteFile("playerHit");
 							System.out.println(s.getHLBO());
 						} else if (s.getType().equals("player3")) {
-							s.setSpriteFile("playerHit2");
+							s.setSpriteFile("playerHit3");
 							System.out.println(s.getHLBO());
 						}
 					 else if (!s.getType().equals("player1")||!s.getType().equals("player3")) {
