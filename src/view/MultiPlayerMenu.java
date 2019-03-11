@@ -5,6 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import controllers.BattleController;
+import controllers.CoOPDLCControler;
+import controllers.CoOpControler;
+import controllers.CompetetiveController;
 import controllers.SpaceInvaders;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -54,10 +57,14 @@ public class MultiPlayerMenu {
 
 			@Override
 			public void handle(ActionEvent arg0) {
+				CoOpControler newGame = new CoOpControler();
+				newGame.stage = whoIs;
+				newGame.start();
+				mainStage.setScene(newGame.getLevel().getScene());
 
-				mainStage.setScene(CoOpGame.getScene(whoIs));
 			}
 
+		
 		});
 		
 		Button battle = new Button("Battle Mode");
@@ -87,8 +94,11 @@ public class MultiPlayerMenu {
 
 			@Override
 			public void handle(ActionEvent arg0) {
+				CoOPDLCControler newGame = new CoOPDLCControler();
+				newGame.stage = whoIs;
+				newGame.start();
+				mainStage.setScene(newGame.getLevel().getScene());
 
-				mainStage.setScene(PowerUpGame.getScene(whoIs));
 			}
 
 		});
