@@ -11,7 +11,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import models.Laser;
 import view.CoOPDLC;
-import view.DLCOver;
+import view.CoOPDLCGameOver;
 import view.MainMenu;
 
 public class CoOPDLCControler {
@@ -254,7 +254,8 @@ public class CoOPDLCControler {
 			currentLevel.stopSans();
 			gameOver = false;
 			reset();
-			MainMenu.getStage().setScene(DLCOver.getScene(MainMenu.getStage()));
+			MainMenu.getStage().setScene(CoOPDLCGameOver.getScene(MainMenu.getStage()));
+
 		}
 	}
 	
