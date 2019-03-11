@@ -38,8 +38,8 @@ public class CoOpGame {
 
 		return scene;
 	}
-	
-	
+
+
 
 	public static VBox getRoot() {
 		return root;
@@ -172,10 +172,10 @@ public class CoOpGame {
 		BackgroundFill back = new BackgroundFill(Color.BLACK, new CornerRadii(1), null);
 		switchBox.setBackground(new Background(back));
 		root.getChildren().addAll(switchBox);
-		
+
 		timer.start();
 		isInited = true;
-		
+
 	}
 
 	private static void populateShields() {
@@ -215,8 +215,8 @@ public class CoOpGame {
 		}
 
 	}
-	
-	
+
+
 	private static List<Sprite> sprites() {
 		return switchBox.getChildren().stream().map(n -> (Sprite) n).collect(Collectors.toList());
 	}
@@ -224,8 +224,8 @@ public class CoOpGame {
 	public static List<Sprite> getSprites() {
 		return sprites();
 	}
-	
-	
+
+
 
 	private static AnimationTimer timer = new AnimationTimer() {
 		@Override

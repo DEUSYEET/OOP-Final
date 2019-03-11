@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import application.Sprite;
+import controllers.SpaceInvaders;
+import javafx.animation.AnimationTimer;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.Background;
@@ -20,31 +22,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import models.Player;
 
+
 public class CoOP {
-	
 
-
-	private static VBox root = new VBox();
-	private static Scene scene = new Scene(root, 600, 600);
-	private static Stage mainStage;
-	private static boolean isInited = false;
-	private static Player player = new Player(1);
-	private static Sprite playerSprite = player.getSprite();
-	private static ArrayList<Sprite> enemies = new ArrayList<>();
-	private static ArrayList<Sprite> shields = new ArrayList<>();
-	private static VBox switchBox;
-	private static int t;
-
-	public static Scene getScene(Stage whoIs) {
-		
-		if (!isInited) {
-			initStage(whoIs);
-		}
-
-		return scene;
-	}
-
-	
 	private  boolean beenRan = false;
 	private  VBox root = new VBox();
 	private  Scene scene = new Scene(root, 1200, 600);
