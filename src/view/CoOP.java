@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import application.Sprite;
+import controllers.SpaceInvaders;
+import javafx.animation.AnimationTimer;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.Background;
@@ -20,10 +22,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import models.Player;
 
-public class CoOP {
-	
 
-	
+
+public class CoOP {
+
+
 	private  boolean beenRan = false;
 	private  VBox root = new VBox();
 	private  Scene scene = new Scene(root, 1200, 600);
@@ -334,5 +337,11 @@ public class CoOP {
 
 
 
+	private static AnimationTimer timer = new AnimationTimer() {
+		@Override
+		public void handle(long now) {
+			new SpaceInvaders().update();
+		}
+	};
 
 }
