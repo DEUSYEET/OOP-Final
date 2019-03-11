@@ -2,7 +2,6 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.Random;
-
 import application.Main;
 import application.Sprite;
 import enums.LaserType;
@@ -381,7 +380,7 @@ public class SpaceInvaders {
 				if(!gameOver) {
 					gameRunning = !gameRunning;
 				}
-
+				
 				break;
 			case L:
 				if (gameRunning) {
