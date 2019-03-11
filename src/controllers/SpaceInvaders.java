@@ -31,6 +31,7 @@ public class SpaceInvaders {
 	public   int howManyBonusEnemys = 0;
 	private SinglePlayer currentLevel;
 	
+	
 	public SinglePlayer getLevel() {
 		return currentLevel;
 	}

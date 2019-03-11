@@ -20,6 +20,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import models.Player;
 
+
 public class SinglePlayer {
 	
 	private  boolean beenRan = false;
