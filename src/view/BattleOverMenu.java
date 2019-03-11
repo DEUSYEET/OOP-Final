@@ -24,13 +24,25 @@ import javafx.stage.Stage;
 
 public class BattleOverMenu {
 
-	private static VBox root = new VBox();
-	private static Scene scene = new Scene(root, 600, 600);
-	private static Stage mainStage;
-	private static boolean isInited = false;
-	private static Text scoreText = new Text(0, 0, "Player "+BattleController.getWinner().getSprite().getType()+"Wins");
+	private  VBox root = new VBox();
+	private  Scene scene = new Scene(root, 600, 600);
+	private  Stage mainStage;
+	private  boolean isInited = false;
+private  Text scoreText;
+	public BattleOverMenu(Text scoreText) {
+	super();
+	this.scoreText = scoreText;
+}
 
-	public static Scene getScene(Stage whoIs) {
+	public  Text getScoreText() {
+	return scoreText;
+}
+
+public  void setScoreText(Text scoreText) {
+	this.scoreText = scoreText;
+}
+
+	public  Scene getScene(Stage whoIs) {
 
 		
 		if (!isInited) {
@@ -40,12 +52,13 @@ public class BattleOverMenu {
 		return scene;
 	}
 
-	public static Stage getStage() {
+	public  Stage getStage() {
 		return mainStage;
 	}
 
 
-	private static void initGameOverMenu(Stage whoIs) {
+	private  void initGameOverMenu(Stage whoIs) {
+		//scoreText = new Text(0, 0, "Player "+BattleController.getWinner().getSprite().getType()+"Wins");
 		mainStage = whoIs;
 		root.setAlignment(Pos.CENTER);
 
@@ -106,7 +119,7 @@ public class BattleOverMenu {
 		optionsBox.setMinHeight(100000000);
 
 		root.getChildren().addAll(optionsBox);
-
+		
 		isInited = true;
 
 	}
