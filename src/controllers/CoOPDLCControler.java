@@ -8,6 +8,7 @@ import application.Sprite;
 import enums.LaserType;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
+import javafx.scene.paint.Stop;
 import javafx.stage.Stage;
 import models.Laser;
 import view.CoOPDLC;
@@ -57,6 +58,8 @@ public class CoOPDLCControler {
 	};
 	
 	public void update() {
+		currentLevel.playSans();
+	
 		currentLevel.setT(currentLevel.getT() + 1);
 		if (currentLevel.getT() > 2) {
 			for (Sprite s : currentLevel.getSprites()) {
@@ -249,6 +252,7 @@ public class CoOPDLCControler {
 	
 		if (gameOver) {
 			System.out.println("GAME OVER");
+			currentLevel.stopSans();
 			gameOver = false;
 			reset();
 			MainMenu.getStage().setScene(GameOverMenu.getScene(MainMenu.getStage()));
@@ -321,9 +325,11 @@ public class CoOPDLCControler {
 
 					} else {
 						kaboomed.add(s);
+						currentLevel.playHit();
 						frameLastShot = 120;
 						frameLastShot2 = 120;
 						offed.add(l);
+						//currentLevel.stopHit();
 					}
 
 				}

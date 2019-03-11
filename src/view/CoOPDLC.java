@@ -1,5 +1,6 @@
 package view;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -16,6 +17,9 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -44,7 +48,8 @@ public class CoOPDLC {
 	private  int score1 = 0;
 	private  int livesCount;
 	private  ArrayList<Sprite> motherShips = new ArrayList<Sprite>();
-	
+	private MediaPlayer mediaPlayer;
+	private AudioClip hitSound;
 	private  Text scoreText = new Text(0, 0, "Score: " + Integer.toString(score1));
 	
 	public CoOPDLC() {
@@ -145,6 +150,13 @@ public class CoOPDLC {
 
 	public  void initStage() {
 //		whoIs.setResizable(false);
+		
+		
+		sans();
+		hit();
+		
+		
+		
 		root.setAlignment(Pos.CENTER);
 		switchBox = new VBox();
 		switchBox.setMinHeight(600);
@@ -179,6 +191,32 @@ public class CoOPDLC {
 
 	}
 	
+	private void hit() {
+		File sans = new File("src/assets/kScream.wav");
+		hitSound = new AudioClip(sans.toURI().toString());
+		
+	}
+
+	private void sans() {
+		File sans = new File("src/assets/sans.wav");
+		Media sound = new Media(sans.toURI().toString());
+		mediaPlayer = new MediaPlayer(sound);
+	}
+	public void playSans() {
+		mediaPlayer.play();
+	}
+	public void stopSans() {
+		//no one can truly stop him
+		mediaPlayer.stop();
+	}
+	public void playHit() {
+		//hitSound.play();
+		hitSound.play(100);
+	}
+	public void stopHit() {
+		hitSound.stop();
+	}
+
 	public  void initNextLevel(ArrayList<Sprite> shields2, int score2, ArrayList<Sprite> lives2) {
 //		whoIs.setResizable(false);
 		root.setAlignment(Pos.CENTER);
@@ -221,7 +259,7 @@ public class CoOPDLC {
 		int posY = 400;
 
 		for (int i = 0; i < 8; i++) {
-			Sprite s = new Sprite(posX, posY - i * 41, "shield", "Shield", 64, 41, 10);
+			Sprite s = new Sprite(posX, posY - i * 41, "shield", "SpaceInvadersDLC/no_u", 61, 41, 10);
 			shields.add(s);
 			switchBox.getChildren().add(s);
 			posX += 140;
@@ -249,8 +287,8 @@ public class CoOPDLC {
 		int posX = 5;
 		int posY = -352;
 		int count = 0;
-		String sprites[] = { "enemy1", "enemy2", "enemy3", "enemy4" };
-		int X[] = { 20, 24, 18, 28 };
+		String sprites[] = { "SpaceInvadersDLC/cursed1", "SpaceInvadersDLC/cursed2", "SpaceInvadersDLC/cursed3", "SpaceInvadersDLC/cursed4" };
+		int X[] = { 32, 57, 24, 20 };
 //		int Y[] = {22,25,25,22};
 		int file = 3;
 
