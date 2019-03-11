@@ -31,7 +31,7 @@ public class CoOP {
 	private static int t;
 
 	public static Scene getScene(Stage whoIs) {
-
+		
 		if (!isInited) {
 			initStage(whoIs);
 		}
@@ -230,7 +230,7 @@ public class CoOP {
 	private static AnimationTimer timer = new AnimationTimer() {
 		@Override
 		public void handle(long now) {
-			SpaceInvaders.update();
+			new SpaceInvaders().update();
 		}
 	};
 }

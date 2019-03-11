@@ -237,7 +237,6 @@ public class SinglePlayer {
 		int X[] = { 20, 24, 18, 28 };
 //		int Y[] = {22,25,25,22};
 		int file = 3;
-
 		for (int i = 0; i < 40; i++) {
 			if (count >= 10) {
 				posY += 50;

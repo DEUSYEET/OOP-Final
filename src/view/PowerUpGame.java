@@ -228,7 +228,7 @@ public class PowerUpGame {
 	private static AnimationTimer timer = new AnimationTimer() {
 		@Override
 		public void handle(long now) {
-			SpaceInvaders.update();
+			new SpaceInvaders().update();
 		}
 	};
 }

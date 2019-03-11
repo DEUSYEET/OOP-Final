@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.Random;
+
 import application.Main;
 import application.Sprite;
 import enums.LaserType;
@@ -11,7 +12,6 @@ import javafx.stage.Stage;
 import models.Laser;
 import view.GameOverMenu;
 import view.MainMenu;
-import view.Pause;
 import view.SinglePlayer;
 
 public class SpaceInvaders {

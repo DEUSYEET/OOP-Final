@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -63,10 +64,27 @@ public class MainMenu {
 			}
 
 		});
+		
+		Button quit = new Button("Quit");
+		quit.setOnAction(new EventHandler<ActionEvent>() {
 
+			@Override
+			public void handle(ActionEvent arg0) {
+				System.exit(0);
+			}
+			
+		});
+		Button gameover = new Button("1");
+		gameover.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				mainStage.setScene(GameOverMenu.getScene(whoIs));			}
+			
+		});
+		
 		BackgroundFill background = new BackgroundFill(Color.BLACK, new CornerRadii(1), null);
 		VBox optionsBox = new VBox(20);
-
 		optionsBox.setAlignment(Pos.CENTER);
 		optionsBox.setPadding(new Insets(20, 80, 20, 80));
 		singlePlayer.setMinHeight(32);
@@ -75,8 +93,15 @@ public class MainMenu {
 		multiPlayer.setMinHeight(32);
 		multiPlayer.setMinWidth(100);
 		optionsBox.getChildren().add(multiPlayer);
+		quit.setMinHeight(32);
+		quit.setMinWidth(100);
+		optionsBox.getChildren().add(quit);
+		gameover.setMinHeight(32);
+		gameover.setMinWidth(100);
+		optionsBox.getChildren().add(gameover);
 		optionsBox.setBackground(new Background(background));
 		optionsBox.setMinHeight(100000000);
+		
 
 		root.getChildren().addAll(optionsBox);
 
