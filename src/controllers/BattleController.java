@@ -349,7 +349,7 @@ public class BattleController {
 					int[] pos = { (int) BattleGame.getPlayer(1).getSprite().getTranslateX(), 0 };
 					Laser laser = new Laser(1, LaserType.NORMAL,
 							new Sprite(pos[0] + 14, 0, "laser", "PlayerLaser", 4, 32, 8));
-					laser.getSprite().setTranslateY(-1450 - (playerShots * 32) - (timesSnapped * 9000));
+					laser.getSprite().setTranslateY(-1600 - (playerShots * 32) - (timesSnapped * 9000));
 					lasers.add(laser);
 					BattleGame.getSwitchBox().getChildren().add(laser.getSprite());
 					playerShots++;
@@ -374,7 +374,7 @@ public class BattleController {
 					int[] pos = { (int) BattleGame.getPlayer(2).getSprite().getTranslateX(), 0 };
 					Laser laser = new Laser(1, LaserType.NORMAL,
 							new Sprite(pos[0] + 14, 0, "laser2", "PlayerLaser", 4, 32, 8));
-					laser.getSprite().setTranslateY(-2120 - (playerShots * 32) - (timesSnapped * 9000));
+					laser.getSprite().setTranslateY(-2300 - (playerShots * 32) - (timesSnapped * 9000));
 					lasers.add(laser);
 					BattleGame.getSwitchBox().getChildren().add(laser.getSprite());
 					playerShots++;
