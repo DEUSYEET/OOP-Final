@@ -14,8 +14,13 @@ import controllers.SpaceInvaders;
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
@@ -148,6 +153,14 @@ public class CoOPDLC {
 
 	public void initStage() {
 //		whoIs.setResizable(false);
+		Image image = new Image("/assets/SpaceInvadersDLC/pk copy.png");
+		BackgroundSize backgroundSize = new BackgroundSize(1200, 600, false, false, false, false);
+		BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT,
+				BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
+
+		
+		
+		
 
 		sans();
 		hit();
@@ -164,7 +177,7 @@ public class CoOPDLC {
 		populateEnemies();
 
 		BackgroundFill back = new BackgroundFill(Color.BLACK, new CornerRadii(1), null);
-		switchBox.setBackground(new Background(back));
+		switchBox.setBackground(new Background(backgroundImage));
 		root.getChildren().addAll(switchBox);
 
 		setScoreBox(new VBox());
@@ -194,7 +207,7 @@ public class CoOPDLC {
 
 	private void sans() {
 		Random rng = new Random();
-		int rand = rng.nextInt(2);
+		int rand = rng.nextInt(3);
 		File sans= null;
 		switch (rand) {
 		case 0:

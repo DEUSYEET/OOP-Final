@@ -8,11 +8,10 @@ import application.Sprite;
 import enums.LaserType;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
-import javafx.scene.paint.Stop;
 import javafx.stage.Stage;
 import models.Laser;
 import view.CoOPDLC;
-import view.GameOverMenu;
+import view.DLCOver;
 import view.MainMenu;
 
 public class CoOPDLCControler {
@@ -255,7 +254,7 @@ public class CoOPDLCControler {
 			currentLevel.stopSans();
 			gameOver = false;
 			reset();
-			MainMenu.getStage().setScene(GameOverMenu.getScene(MainMenu.getStage()));
+			MainMenu.getStage().setScene(DLCOver.getScene(MainMenu.getStage()));
 		}
 	}
 	
