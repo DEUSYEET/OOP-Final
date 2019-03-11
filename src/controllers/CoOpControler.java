@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import models.Laser;
 import view.CoOP;
+import view.CoOPGameOver;
 import view.GameOverMenu;
 import view.MainMenu;
 
@@ -249,7 +250,7 @@ public class CoOpControler {
 			System.out.println("GAME OVER");
 			gameOver = false;
 			reset();
-			MainMenu.getStage().setScene(GameOverMenu.getScene(MainMenu.getStage()));
+			MainMenu.getStage().setScene(CoOPGameOver.getScene(MainMenu.getStage()));
 		}
 	}
 	
