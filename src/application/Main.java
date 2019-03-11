@@ -14,15 +14,15 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			
+
 			Scene mainMenu = MainMenu.getScene(primaryStage);
 			primaryStage.setScene(mainMenu);
 
 			primaryStage.setResizable(false);
 			primaryStage.setTitle("Space Invaders Battle");
 			primaryStage.show();
-			
-			
+
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

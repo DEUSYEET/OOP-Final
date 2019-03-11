@@ -7,8 +7,6 @@ import java.io.InputStream;
 import controllers.BattleController;
 import controllers.CoOPDLCControler;
 import controllers.CoOpControler;
-import controllers.CompetetiveController;
-import controllers.SpaceInvaders;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -25,7 +23,6 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -64,9 +61,9 @@ public class MultiPlayerMenu {
 
 			}
 
-		
+
 		});
-		
+
 		Button battle = new Button("Battle Mode");
 		battle.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -83,12 +80,12 @@ public class MultiPlayerMenu {
 						}
 					}
 						BattleController.gameRunning = true;
-					
+
 				}
 				mainStage.setScene(BattleGame.getScene(whoIs));
 			}
 		});
-		
+
 		Button dlc = new Button("Teletubbies Co-Op");
 		dlc.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -102,7 +99,7 @@ public class MultiPlayerMenu {
 			}
 
 		});
-		
+
 		Button back = new Button("Return To Main Menu");
 		back.setOnAction(new EventHandler<ActionEvent>() {
 

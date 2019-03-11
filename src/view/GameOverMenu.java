@@ -34,7 +34,7 @@ public class GameOverMenu {
 	private static Stage mainStage;
 	private static boolean isInited = false;
 	private static AudioClip deathSound = new AudioClip("file:src/assets/death.mp3");
-	
+
 	public static Scene getScene(Stage whoIs) {
 		deathSound.play(1);
 		if (!isInited) {
@@ -50,20 +50,20 @@ public class GameOverMenu {
 
 	private static String playAgainText = "Play Again";
 	private static String mainMenuText = "Main Menu";
-	
+
 	public static String getPlayAgainText() {
 		return playAgainText;
 	}
-	
+
 	public static String getMainMenuText() {
 		return mainMenuText;
 	}
-	
+
 	private static void initGameOverMenu(Stage whoIs) {
 		mainStage = whoIs;
 		root.setAlignment(Pos.CENTER);
-		
-		
+
+
 		Button playAgain = new Button(getPlayAgainText());
 		playAgain.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -120,7 +120,7 @@ public class GameOverMenu {
 		mainMenu.setMinHeight(32);
 		mainMenu.setMinWidth(100);
 		optionsBox.getChildren().add(mainMenu);
-			
+
 		root.getChildren().addAll(optionsBox);
 
 		isInited = true;
