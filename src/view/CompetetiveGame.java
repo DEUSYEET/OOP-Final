@@ -28,7 +28,7 @@ public class CompetetiveGame {
 	private static Player player2 = new Player(3);
 	private static boolean beenRan = false;
 	private static VBox root = new VBox();
-	private static Scene scene = new Scene(root, 1200, 600);
+	private static Scene scene = new Scene(root, 1200, 700);
 	private static Stage mainStage;
 	private static boolean isInited = false;
 	private static Sprite player1Sprite = player1.getSprite();
@@ -45,9 +45,13 @@ public class CompetetiveGame {
 	private static int score2 = 0;
 	private static int livesCount;
 	private static int livesCount2;
+	private static int eCount;
+	private static int eCount2;
+	
+	
 	
 	private static Text scoreText = new Text(0, 0, "Score: " + Integer.toString(score));
-	private static Text scoreText2 = new Text(0, 0, "Score: " + Integer.toString(score2));
+	private static Text scoreText2 = new Text(1000, 0, "Score: " + Integer.toString(score2));
 
 	public static Scene getScene(Stage whoIs) {
 		
@@ -142,7 +146,7 @@ public class CompetetiveGame {
 
 	
 	public static void addScore(int addScore, int player) {
-		System.out.println("Player");
+		System.out.println(player);
 		if (player==1) {
 		score += addScore;
 		scoreText.setText("Score: "+Integer.toString(score));
@@ -166,26 +170,10 @@ public class CompetetiveGame {
 		mainStage = whoIs;
 		whoIs.setResizable(false);
 		root.setAlignment(Pos.CENTER);
-		VBox testRoot = new VBox();
-		Scene scene = new Scene(testRoot, 1200, 600);
 		switchBox = new VBox();
 		switchBox.setMinHeight(600);
 		switchBox.setMaxHeight(1200);
-
-		scoreBox2 = new VBox();
-		scoreBox2.setMinHeight(50);
-		scoreBox2.getChildren().add(scoreText2);
-		scoreText2.setFill(Color.WHITE);
-		try {
-			InputStream is = new FileInputStream("src/assets/pixel.ttf");
-			scoreText2.setFont(Font.loadFont(is, 23));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		scoreBox2.setBackground(new Background(back));
-		
-		root.getChildren().add(scoreBox2);
-		
+	
 		
 		
 		switchBox.getChildren().add(player1Sprite);
@@ -194,7 +182,8 @@ public class CompetetiveGame {
 		player2Sprite.setTranslateY(476);
 		player2Sprite.setTranslateX(700);
 		populateShields();
-	//	populateEnemies();
+		populateEnemies(-900);
+		populateEnemies2(-1220);
 
 		switchBox.setBackground(new Background(back));
 		root.getChildren().addAll(switchBox);
@@ -206,6 +195,16 @@ public class CompetetiveGame {
 		try {
 			InputStream is = new FileInputStream("src/assets/pixel.ttf");
 			scoreText.setFont(Font.loadFont(is, 23));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		scoreBox.getChildren().add(scoreText2);
+		scoreText2.setFill(Color.WHITE);
+		scoreText2.setTranslateX(700);
+		scoreText2.setTranslateY(-23);
+		try {
+			InputStream is = new FileInputStream("src/assets/pixel.ttf");
+			scoreText2.setFont(Font.loadFont(is, 23));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -232,12 +231,15 @@ public class CompetetiveGame {
 			switchBox.getChildren().add(s);
 			posX += 140;
 		}
+		Sprite s = new Sprite(600, -400, "barrier", "barrier", 5, 600, 1);
+		switchBox.getChildren().add(s);
+		
 
 	}
 	
 	private static void populateLives() {
 		int posX = 400;
-		int posY = -23;
+		int posY = -46;
 
 		for (int i = 0; i < player1.getLives(); i++) {
 			Sprite s = new Sprite(posX, posY - i * 24, "live", "idle1", 32, 24, 1);
@@ -246,21 +248,20 @@ public class CompetetiveGame {
 			posX += 40;
 			livesCount++;
 		}
-		 posX = 400;
-		 posY = -23;
+		 posX = 1050;
+		 posY = -122;
 		for (int i = 0; i < player1.getLives(); i++) {
-			Sprite s = new Sprite(posX, posY - i * 24, "live", "idle2", 32, 24, 1);
+			Sprite s = new Sprite(posX, posY - i * 24, "live", "idle3", 32, 24, 1);
 			lives2.add(s);
-			scoreBox2.getChildren().add(lives2.get(i));
+			scoreBox.getChildren().add(lives2.get(i));
 			posX += 40;
 			livesCount2++;
 		}
 
 	}
 
-	public static void populateEnemies() {
+	public static void populateEnemies(int posY) {
 		int posX = 5;
-		int posY = -200;
 		int count = 0;
 		String sprites[] = { "enemy1", "enemy2", "enemy3", "enemy4" };
 		int X[] = { 20, 24, 18, 28 };
@@ -273,6 +274,25 @@ public class CompetetiveGame {
 			switchBox.getChildren().add(s);
 			posX += 40;
 			count++;
+			seteCount(geteCount() + 1);
+		}
+
+	}
+	public static void populateEnemies2(int posY) {
+		int posX = 605;
+		int count = 0;
+		String sprites[] = { "enemy1", "enemy2", "enemy3", "enemy4" };
+		int X[] = { 20, 24, 18, 28 };
+//		int Y[] = {22,25,25,22};
+		int file = 3;
+
+		for (int i = 0; i < 10; i++) {
+			Sprite s = new Sprite(posX, posY - i * 32, "enemy2", sprites[file], X[file], 32, 8);
+			enemies.add(s);
+			switchBox.getChildren().add(s);
+			posX += 40;
+			count++;
+			seteCount2(geteCount2() + 1);
 		}
 
 	}
@@ -305,7 +325,7 @@ public class CompetetiveGame {
 		scoreBox.getChildren().remove(lives.remove(lives.size()-1));
 		livesCount--;
 		} else {
-			scoreBox2.getChildren().remove(lives2.remove(lives2.size()-1));
+			scoreBox.getChildren().remove(lives2.remove(lives2.size()-1));
 			livesCount2--;
 		}
 	}
@@ -344,6 +364,22 @@ public class CompetetiveGame {
 			} else {
 				return livesCount2;
 			}
+	}
+
+	public static int geteCount() {
+		return eCount;
+	}
+
+	public static void seteCount(int eCount) {
+		CompetetiveGame.eCount = eCount;
+	}
+
+	public static int geteCount2() {
+		return eCount2;
+	}
+
+	public static void seteCount2(int eCount2) {
+		CompetetiveGame.eCount2 = eCount2;
 	}
 
 

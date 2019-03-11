@@ -32,7 +32,7 @@ public class Player {
 			setLeftBoundary(600);
 		}
 		else {
-			setRightBoundary(600);
+			setRightBoundary(550);
 			setLeftBoundary(0);
 		}
 
