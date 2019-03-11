@@ -74,14 +74,6 @@ public class MainMenu {
 			}
 			
 		});
-		Button gameover = new Button("1");
-		gameover.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent arg0) {
-				mainStage.setScene(GameOverMenu.getScene(whoIs));			}
-			
-		});
 		
 		BackgroundFill background = new BackgroundFill(Color.BLACK, new CornerRadii(1), null);
 		VBox optionsBox = new VBox(20);
@@ -96,9 +88,6 @@ public class MainMenu {
 		quit.setMinHeight(32);
 		quit.setMinWidth(100);
 		optionsBox.getChildren().add(quit);
-		gameover.setMinHeight(32);
-		gameover.setMinWidth(100);
-		optionsBox.getChildren().add(gameover);
 		optionsBox.setBackground(new Background(background));
 		optionsBox.setMinHeight(100000000);
 		
