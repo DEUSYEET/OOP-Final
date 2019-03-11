@@ -11,7 +11,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import models.Laser;
 import view.CoOPDLC;
-import view.GameOverMenu;
+import view.CoOPDLCGameOver;
 import view.MainMenu;
 
 public class CoOPDLCControler {
@@ -251,7 +251,7 @@ public class CoOPDLCControler {
 			System.out.println("GAME OVER");
 			gameOver = false;
 			reset();
-			MainMenu.getStage().setScene(GameOverMenu.getScene(MainMenu.getStage()));
+			MainMenu.getStage().setScene(CoOPDLCGameOver.getScene(MainMenu.getStage()));
 		}
 	}
 	
