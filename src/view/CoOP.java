@@ -22,8 +22,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import models.Player;
 
+
+
 public class CoOP {
-	
+
+
 	private  boolean beenRan = false;
 	private  VBox root = new VBox();
 	private  Scene scene = new Scene(root, 1200, 600);
