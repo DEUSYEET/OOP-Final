@@ -10,7 +10,8 @@ import enums.LaserType;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import models.Laser;
-import view.GameOverMenu;
+import models.Player;
+import view.BattleOverMenu;
 import view.MainMenu;
 import view.BattleGame;
 
@@ -30,7 +31,8 @@ public class BattleController {
 	private static int shootRow=-1800;
 	private static Random rng = new Random();
 	public static int timesSnapped = 0;
-	
+	private static Player winner;
+
 
 	public static void update() {
 		if (gameRunning) {
@@ -121,9 +123,11 @@ public class BattleController {
 				if (BattleGame.getLivesCount(1) == 0 &&BattleGame.getScore(2)>BattleGame.getScore(1)) {
 				gameRunning = false;
 				gameOver = true;
+				setWinner(BattleGame.getPlayer(2));
 				} else if (BattleGame.getLivesCount(2) == 0 &&BattleGame.getScore(1)>BattleGame.getScore(2)) {
 					gameRunning = false;
 					gameOver = true;
+					setWinner(BattleGame.getPlayer(1));
 				}
 			}
 
@@ -215,7 +219,7 @@ public class BattleController {
 			gameOver = false;
 			BattleGame.snap();
 			reset();
-			MainMenu.getStage().setScene(GameOverMenu.getScene(MainMenu.getStage()));
+			MainMenu.getStage().setScene(BattleOverMenu.getScene(MainMenu.getStage()));
 		}
 	}
 
@@ -345,7 +349,7 @@ public class BattleController {
 					int[] pos = { (int) BattleGame.getPlayer(1).getSprite().getTranslateX(), 0 };
 					Laser laser = new Laser(1, LaserType.NORMAL,
 							new Sprite(pos[0] + 14, 0, "laser", "PlayerLaser", 4, 32, 8));
-					laser.getSprite().setTranslateY(-1450 - (playerShots * 32) - (timesSnapped * 9000));
+					laser.getSprite().setTranslateY(-1600 - (playerShots * 32) - (timesSnapped * 9000));
 					lasers.add(laser);
 					BattleGame.getSwitchBox().getChildren().add(laser.getSprite());
 					playerShots++;
@@ -370,7 +374,7 @@ public class BattleController {
 					int[] pos = { (int) BattleGame.getPlayer(2).getSprite().getTranslateX(), 0 };
 					Laser laser = new Laser(1, LaserType.NORMAL,
 							new Sprite(pos[0] + 14, 0, "laser2", "PlayerLaser", 4, 32, 8));
-					laser.getSprite().setTranslateY(-2120 - (playerShots * 32) - (timesSnapped * 9000));
+					laser.getSprite().setTranslateY(-2300 - (playerShots * 32) - (timesSnapped * 9000));
 					lasers.add(laser);
 					BattleGame.getSwitchBox().getChildren().add(laser.getSprite());
 					playerShots++;
@@ -449,5 +453,13 @@ public class BattleController {
 		howFarOffScreen = 0;
 		gameOver=false;
 
+	}
+
+	public static Player getWinner() {
+		return winner;
+	}
+
+	public static void setWinner(Player winner) {
+		BattleController.winner = winner;
 	}
 }

@@ -99,7 +99,6 @@ public class MultiPlayerMenu {
 			}
 
 		});
-
 		Button back = new Button("Return To Main Menu");
 		back.setOnAction(new EventHandler<ActionEvent>() {
 

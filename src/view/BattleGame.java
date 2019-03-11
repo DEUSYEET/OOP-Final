@@ -27,7 +27,7 @@ public class BattleGame {
 	private static Player player2 = new Player(2);
 	private static boolean beenRan = false;
 	private static VBox root = new VBox();
-	private static Scene scene = new Scene(root, 600, 1000);
+	private static Scene scene = new Scene(root, 600, 900);
 	private static Stage mainStage;
 	private static boolean isInited = false;
 	private static Player player1 = new Player(1);
@@ -45,7 +45,6 @@ public class BattleGame {
 	private static int score2 = 0;
 	private static int livesCount;
 	private static int livesCount2;
-	
 	private static Text scoreText = new Text(0, 0, "Score: " + Integer.toString(score));
 	private static Text scoreText2 = new Text(0, 0, "Score: " + Integer.toString(score2));
 
@@ -190,8 +189,8 @@ public class BattleGame {
 		
 		switchBox.getChildren().add(player1Sprite);
 		switchBox.getChildren().add(player2Sprite);
-		player1Sprite.setTranslateY(880);
-		player2Sprite.setTranslateY(100);
+		player1Sprite.setTranslateY(730);
+		player2Sprite.setTranslateY(-50);
 		populateShields();
 		populateEnemies();
 
@@ -223,7 +222,7 @@ public class BattleGame {
 
 	private static void populateShields() {
 		int posX = 50;
-		int posY = 770;
+		int posY = 600;
 
 		for (int i = 0; i < 4; i++) {
 			Sprite s = new Sprite(posX, posY - i * 41, "shield", "Shield", 64, 41, 10);
@@ -232,7 +231,7 @@ public class BattleGame {
 			posX += 140;
 		}
 		posX=50;
-		posY=-20;
+		posY=-170;
 		for (int i = 0; i < 4; i++) {
 			Sprite s = new Sprite(posX, posY - i * 41, "shield", "Shield2", 64, 41, 10);
 			shields.add(s);
@@ -267,7 +266,7 @@ public class BattleGame {
 
 	public static void populateEnemies() {
 		int posX = 5;
-		int posY = 0;
+		int posY = -160;
 		int count = 0;
 		String sprites[] = { "enemy1", "enemy2", "enemy3", "enemy4" };
 		int X[] = { 20, 24, 18, 28 };
@@ -338,6 +337,23 @@ public class BattleGame {
 			root.getChildren().removeAll(root.getChildren());
 
 			//score = 0;
+			if (score >0) {
+				addScore(-score, 1);
+			}
+			if (score2 >0) {
+				addScore(-score2, 2);
+				System.out.println(score2);
+			}
+			if (livesCount>0) {
+				do {
+					removeLife(1);
+				}while(livesCount>0); 
+			}
+			if (livesCount2>0) {
+				do {
+					removeLife(2);
+				}while(livesCount2>0); 
+			}
 		int perserve = BattleController.timesSnapped;
 		BattleGame.getEnemies().clear();
 		root.getChildren().removeAll(root.getChildren());

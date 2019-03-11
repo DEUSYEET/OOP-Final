@@ -57,6 +57,8 @@ public class CoOPDLCControler {
 	};
 	
 	public void update() {
+		currentLevel.playSans();
+	
 		currentLevel.setT(currentLevel.getT() + 1);
 		if (currentLevel.getT() > 2) {
 			for (Sprite s : currentLevel.getSprites()) {
@@ -118,7 +120,7 @@ public class CoOPDLCControler {
 							s.setSpriteFile("playerHit");
 							System.out.println(s.getHLBO());
 						} else if (s.getType().equals("player3")) {
-							s.setSpriteFile("playerHit2");
+							s.setSpriteFile("playerHit3");
 							System.out.println(s.getHLBO());
 						}
 					 else if (!s.getType().equals("player1")||!s.getType().equals("player3")) {
@@ -249,9 +251,11 @@ public class CoOPDLCControler {
 	
 		if (gameOver) {
 			System.out.println("GAME OVER");
+			currentLevel.stopSans();
 			gameOver = false;
 			reset();
 			MainMenu.getStage().setScene(CoOPDLCGameOver.getScene(MainMenu.getStage()));
+
 		}
 	}
 	
@@ -321,9 +325,11 @@ public class CoOPDLCControler {
 
 					} else {
 						kaboomed.add(s);
+						currentLevel.playHit();
 						frameLastShot = 120;
 						frameLastShot2 = 120;
 						offed.add(l);
+						//currentLevel.stopHit();
 					}
 
 				}
