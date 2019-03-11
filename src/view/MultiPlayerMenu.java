@@ -1,5 +1,9 @@
 package view;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 import controllers.BattleController;
 import controllers.CoOPDLCControler;
 import controllers.CoOpControler;
@@ -11,11 +15,20 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class MultiPlayerMenu {
@@ -54,18 +67,7 @@ public class MultiPlayerMenu {
 		
 		});
 		
-		Button powerUp = new Button("Powered-Up Invaders");
-		powerUp.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent arg0) {
-
-				mainStage.setScene(PowerUpGame.getScene(whoIs));
-			}
-
-		});
-		
-		Button battle = new Button("Battle");
+		Button battle = new Button("Battle Mode");
 		battle.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -101,28 +103,6 @@ public class MultiPlayerMenu {
 
 		});
 		
-		Button competitive = new Button("Competitive");
-		competitive.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent arg0) {
-				CompetetiveController.gameRunning = true;
-				if (CompetetiveGame.isBeenRan()) {
-					CompetetiveController.setEnemySpeed(100);
-					CompetetiveGame.snap();
-					CompetetiveGame.setInited(false);
-					if (CompetetiveGame.getLives(1).size()>0) {
-						for (int i = 0; i <CompetetiveGame.getLives(1).size(); i++) {
-							CompetetiveGame.removeLife(1);
-						}
-					}
-					CompetetiveController.gameRunning = true;
-					
-				}
-				mainStage.setScene(CompetetiveGame.getScene(whoIs));
-			}
-
-		});
 		Button back = new Button("Return To Main Menu");
 		back.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -134,30 +114,132 @@ public class MultiPlayerMenu {
 
 		});
 
-		BackgroundFill background = new BackgroundFill(Color.BLACK, new CornerRadii(1), null);
-		VBox optionsBox = new VBox(20);
+		DropShadow shadow = new DropShadow();
+		Image image = new Image("assets/side aliens.png");
+		BackgroundSize backgroundSize = new BackgroundSize(675, 600, false, false, false, false);
+		BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT,
+				BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
+
+		BackgroundFill buttons = new BackgroundFill(Color.TRANSPARENT, new CornerRadii(1), null);
+		VBox optionsBox = new VBox();
+
 
 		optionsBox.setAlignment(Pos.CENTER);
 		optionsBox.setPadding(new Insets(20, 80, 20, 80));
-		competitive.setMinHeight(32);
-		competitive.setMinWidth(200);
-		optionsBox.getChildren().add(competitive);
 		coOp.setMinHeight(32);
 		coOp.setMinWidth(200);
+		coOp.setBackground(new Background(buttons));
+		try {
+			InputStream is = new FileInputStream("src/assets/pixel.ttf");
+			coOp.setFont(Font.loadFont(is, 40));
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		coOp.setTextFill(Color.BLUE);
+		coOp.addEventHandler(MouseEvent.MOUSE_ENTERED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		            coOp.setEffect(shadow);
+		            coOp.setTextFill(Color.WHITE);
+		          }
+		        });
+		coOp.addEventHandler(MouseEvent.MOUSE_EXITED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		            coOp.setEffect(null);
+		            coOp.setTextFill(Color.BLUE);
+		          }
+		        });
 		optionsBox.getChildren().add(coOp);
 		dlc.setMinHeight(32);
 		dlc.setMinWidth(200);
+		dlc.setBackground(new Background(buttons));
+		try {
+			InputStream is = new FileInputStream("src/assets/pixel.ttf");
+			dlc.setFont(Font.loadFont(is, 40));
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		dlc.setTextFill(Color.RED);
+		dlc.addEventHandler(MouseEvent.MOUSE_ENTERED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		            dlc.setEffect(shadow);
+		            dlc.setTextFill(Color.WHITE);
+		          }
+		        });
+		dlc.addEventHandler(MouseEvent.MOUSE_EXITED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		            dlc.setEffect(null);
+		            dlc.setTextFill(Color.RED);
+		          }
+		        });
 		optionsBox.getChildren().add(dlc);
-		powerUp.setMinHeight(32);
-		powerUp.setMinWidth(200);
-		optionsBox.getChildren().add(powerUp);
 		battle.setMinHeight(32);
 		battle.setMinWidth(200);
+		battle.setBackground(new Background(buttons));
+		try {
+			InputStream is = new FileInputStream("src/assets/pixel.ttf");
+			battle.setFont(Font.loadFont(is, 40));
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		battle.setTextFill(Color.YELLOW);
+		battle.addEventHandler(MouseEvent.MOUSE_ENTERED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		            battle.setEffect(shadow);
+		            battle.setTextFill(Color.WHITE);
+		          }
+		        });
+		battle.addEventHandler(MouseEvent.MOUSE_EXITED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		            battle.setEffect(null);
+		            battle.setTextFill(Color.YELLOW);
+		          }
+		        });
 		optionsBox.getChildren().add(battle);
 		back.setMinHeight(32);
 		back.setMinWidth(200);
+		back.setAlignment(Pos.CENTER);
+		back.setBackground(new Background(buttons));
+		try {
+			InputStream is = new FileInputStream("src/assets/pixel.ttf");
+			back.setFont(Font.loadFont(is, 40));
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		back.setTextFill(Color.PURPLE);
+		back.addEventHandler(MouseEvent.MOUSE_ENTERED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		            back.setEffect(shadow);
+		            back.setTextFill(Color.WHITE);
+		          }
+		        });
+		back.addEventHandler(MouseEvent.MOUSE_EXITED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		            back.setEffect(null);
+		            back.setTextFill(Color.PURPLE);
+		          }
+		        });
 		optionsBox.getChildren().add(back);
-		optionsBox.setBackground(new Background(background));
+		optionsBox.setBackground(new Background(backgroundImage));
 		optionsBox.setMinHeight(100000000);
 
 		root.getChildren().addAll(optionsBox);
