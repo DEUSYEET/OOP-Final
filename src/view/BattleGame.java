@@ -45,7 +45,6 @@ public class BattleGame {
 	private static int score2 = 0;
 	private static int livesCount;
 	private static int livesCount2;
-	
 	private static Text scoreText = new Text(0, 0, "Score: " + Integer.toString(score));
 	private static Text scoreText2 = new Text(0, 0, "Score: " + Integer.toString(score2));
 
@@ -338,6 +337,23 @@ public class BattleGame {
 			root.getChildren().removeAll(root.getChildren());
 
 			//score = 0;
+			if (score >0) {
+				addScore(-score, 1);
+			}
+			if (score2 >0) {
+				addScore(-score2, 2);
+				System.out.println(score2);
+			}
+			if (livesCount>0) {
+				do {
+					removeLife(1);
+				}while(livesCount>0); 
+			}
+			if (livesCount2>0) {
+				do {
+					removeLife(2);
+				}while(livesCount2>0); 
+			}
 		int perserve = BattleController.timesSnapped;
 		BattleGame.getEnemies().clear();
 		root.getChildren().removeAll(root.getChildren());

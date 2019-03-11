@@ -30,10 +30,21 @@ public class CompetetiveController {
 	private static int shootRow=-1800;
 	private static Random rng = new Random();
 	public static int timesSnapped = 0;
+	private static int waves = 1;
 	
 
 	public static void update() {
+		frameLastShot=121;
 		if (gameRunning) {
+			if (CompetetiveGame.geteCount()==0) {
+				CompetetiveGame.populateEnemies2(-1220-(320*waves));
+				System.out.println("_____________=================");
+				waves++;
+				CompetetiveGame.populateEnemies(-900-(320*waves));
+				waves++;
+			}
+			
+			
 			CompetetiveGame.setT(CompetetiveGame.getT() + 1);
 			if (CompetetiveGame.getT() > 2) {
 				for (Sprite s : CompetetiveGame.getSprites()) {
@@ -76,7 +87,7 @@ public class CompetetiveController {
 							s.update();
 							System.out.println(s.getSpriteFile());
 							continue;
-						} else if (s.getType().equals("player2")) {
+						} else if (s.getType().equals("player3")) {
 							s.setH(24);
 							s.setW(32);
 							s.setSpriteFile("idle3");
@@ -94,11 +105,11 @@ public class CompetetiveController {
 						 if (s.getType().equals("player1")) {
 								s.setSpriteFile("playerHit");
 								System.out.println(s.getHLBO());
-							} else if (s.getType().equals("player2")) {
+							} else if (s.getType().equals("player3")) {
 								s.setSpriteFile("playerHit2");
 								System.out.println(s.getHLBO());
 							}
-						 else if (!s.getType().equals("player1")||!s.getType().equals("player2")) {
+						 else if (!s.getType().equals("player1")||!s.getType().equals("player3")) {
 								//System.out.println(s.getType());
 								s.setH(32);
 								s.setW(16);
@@ -127,7 +138,6 @@ public class CompetetiveController {
 				}
 			}
 
-
 			controls(CompetetiveGame.getScene());
 			CompetetiveGame.getPlayer(1).movePlayer();
 			CompetetiveGame.getPlayer(2).movePlayer();
@@ -152,7 +162,7 @@ public class CompetetiveController {
 			}
 			boolean down = true;
 			for (Sprite e : CompetetiveGame.getEnemies()) {
-
+			//	System.out.println(e.getType());
 				if (e.getType().equals("enemy1")){
 				int X = (int) e.getTranslateX();
 
@@ -187,16 +197,48 @@ public class CompetetiveController {
 				}
 				down = true;
 			}
+				if (e.getType().equals("enemy2")){
+					int X = (int) e.getTranslateX();
+
+					if (!e.isOofed() && (X < 600 || X > 1170)) {
+						moveRight = !moveRight;
+						System.out.println(e.getTranslateY());
+						System.out.println(e.getTranslateX());
+						System.out.println("count: " + countToBottom);
+						if (countToBottom <= 275000 && countToBottom >= 17817) {
+							gameOver = true;
+							System.out.println("bottom");
+							setEnemySpeed(Integer.MAX_VALUE - 1);
+						}
+						if (e.getTranslateX() < 600) {
+							for (Sprite es : CompetetiveGame.getEnemies()) {
+								es.moveDown();
+								es.moveRight();
+								if (down) {
+									shootRow += 10;
+									down = !down;
+								}
+							}
+						} else {
+							for (Sprite es : CompetetiveGame.getEnemies()) {
+
+								es.moveDown();
+								es.moveLeft();
+
+							}
+						}
+						break;
+					}
+					down = true;
+				}
 			}
 			for (Laser l : lasers) {
 				l.setTimeAlive(+1);
 				
 				if (frame % l.getSpeed() == 0 && l.getType().equals(LaserType.NORMAL)) {
-					if (l.getSprite().getType().equals("laser")) {
+				
 					l.getSprite().moveUp();
-					} else {
-						l.getSprite().moveDown();
-					}
+				
 				} else if (frame % l.getSpeed() == 0 && l.getType().equals(LaserType.ALIEN)) {
 				 if (l.getSprite().getType().equals("elaser1")) {
 					l.getSprite().moveDown();
@@ -207,10 +249,6 @@ public class CompetetiveController {
 			}
 
 			checkIfLaserTouchesAnything();
-
-			if (CompetetiveGame.getEnemies().isEmpty()) {
-				CompetetiveGame.populateEnemies();
-			}
 
 			frame++;
 			frameLastShot++;
@@ -290,8 +328,11 @@ public class CompetetiveController {
 						frameLastShot2 = 120;
 						if (l.getSprite().getType().equals("laser")) {
 							CompetetiveGame.addScore(100,1);
+							CompetetiveGame.seteCount(CompetetiveGame.geteCount() - 1);
+							System.out.println(CompetetiveGame.geteCount());
 						} else if (l.getSprite().getType().equals("laser2")) {
 							CompetetiveGame.addScore(100,2);
+							CompetetiveGame.seteCount2(CompetetiveGame.geteCount2() - 1);
 						}
 						offed.add(l);
 						howFarOffScreen++;
@@ -311,7 +352,7 @@ public class CompetetiveController {
 		for (Sprite s : kaboomed) {
 			if (s.getType().equals("player1")) {
 				CompetetiveGame.removeLife(1);
-			} else if (s.getType().equals("player2")) {
+			} else if (s.getType().equals("player3")) {
 				CompetetiveGame.removeLife(2);
 			}
 			s.setOofed(true);
@@ -335,9 +376,6 @@ public class CompetetiveController {
 			System.out.println(e.getCode());
 			switch (e.getCode()) {
 			
-			
-			
-			
 			case A:
 				CompetetiveGame.getPlayer(1).setSpeed(-5);
 				playerMoving = true;
@@ -351,7 +389,7 @@ public class CompetetiveController {
 					int[] pos = { (int) CompetetiveGame.getPlayer(1).getSprite().getTranslateX(), 0 };
 					Laser laser = new Laser(1, LaserType.NORMAL,
 							new Sprite(pos[0] + 14, 0, "laser", "PlayerLaser", 4, 32, 8));
-					laser.getSprite().setTranslateY(-1450 - (playerShots * 32) - (timesSnapped * 9000));
+					laser.getSprite().setTranslateY(-1150 - (playerShots * 32) - (timesSnapped * 9000));
 					lasers.add(laser);
 					CompetetiveGame.getSwitchBox().getChildren().add(laser.getSprite());
 					playerShots++;
@@ -372,11 +410,13 @@ public class CompetetiveController {
 				playerMoving = true;
 				break;
 			case UP:
+//				CompetetiveGame.getPlayer(3).getSprite().moveUp();
+//				System.out.println(CompetetiveGame.getPlayer(3).getSprite().getTranslateY());
 				if (frameLastShot2 > 110) {
 					int[] pos = { (int) CompetetiveGame.getPlayer(2).getSprite().getTranslateX(), 0 };
 					Laser laser = new Laser(1, LaserType.NORMAL,
 							new Sprite(pos[0] + 14, 0, "laser2", "PlayerLaser", 4, 32, 8));
-					laser.getSprite().setTranslateY(-2120 - (playerShots * 32) - (timesSnapped * 9000));
+					laser.getSprite().setTranslateY(-1150-(2820*waves) - (playerShots * 32) - (timesSnapped * 9000));
 					lasers.add(laser);
 					CompetetiveGame.getSwitchBox().getChildren().add(laser.getSprite());
 					playerShots++;
@@ -385,7 +425,10 @@ public class CompetetiveController {
 				System.out.println(frameLastShot2+"----------------");
 				break;
 				
-				
+			case E:
+				CompetetiveGame.populateEnemies2(-1220-(320*waves));
+				waves++;
+				break;
 				
 				
 				
