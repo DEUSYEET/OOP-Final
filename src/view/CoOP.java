@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import application.Sprite;
+import controllers.SpaceInvaders;
+import javafx.animation.AnimationTimer;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.Background;
@@ -329,8 +331,6 @@ public class CoOP {
 	public  void setLivesCount(int livesCount) {
 		this.livesCount = livesCount;
 	}
-
-
 
 
 
